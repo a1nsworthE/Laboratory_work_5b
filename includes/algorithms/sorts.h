@@ -9,13 +9,13 @@
 
 #include "array.h"
 
-void selectionSort(int *a, size_t n);
+void selectionSort(int *a, size_t n, int (*conditionForSort)(int, int));
 
-void insertionSort(int *a, size_t n);
+void insertionSort(int *a, size_t n, int (*conditionForSort)(int, int));
 
-void bubbleSort(int *a, size_t n);
+void bubbleSort(int *a, size_t n, int (*conditionForSort)(int, int));
 
-void combSort(int *a, size_t n);
+void combSort(int *a, size_t n, int (*conditionForSort)(int, int));
 
 void qSort(int *a, size_t n);
 

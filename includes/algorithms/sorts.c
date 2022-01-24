@@ -1,7 +1,7 @@
 #include "sorts.h"
 
 // Сортировка Выбором >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void selectionSort(int *const a, const size_t n) {
+void selectionSort(int *const a, const size_t n, int (*conditionForSort)(int, int)) {
     for (size_t i = 0; i < n; ++i) {
         size_t indexSwap = i;
         for (size_t j = i + 1; j < n; ++j)
@@ -13,7 +13,7 @@ void selectionSort(int *const a, const size_t n) {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Сортировка Вставками >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void insertionSort(int *const a, const size_t n) {
+void insertionSort(int *const a, const size_t n, int (*conditionForSort)(int, int)) {
     for (size_t i = 1; i < n; ++i) {
         int t = a[i];
         size_t j = i;
@@ -27,7 +27,7 @@ void insertionSort(int *const a, const size_t n) {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Соритровка Пузырьком >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void bubbleSort(int *const a, const size_t n) {
+void bubbleSort(int *const a, const size_t n, int (*conditionForSort)(int, int)) {
     for (size_t i = 0; i < n - 1; ++i)
         for (size_t j = n - 1; j > i; j--)
             if (a[j] < a[j - 1])
@@ -35,7 +35,7 @@ void bubbleSort(int *const a, const size_t n) {
 }
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-void combSort(int *const a, const size_t n) {
+void combSort(int *const a, const size_t n, int (*conditionForSort)(int, int)) {
     size_t step = n;
     bool swapped = true;
     while (step > 1 || swapped) {
