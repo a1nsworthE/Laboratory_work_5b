@@ -136,5 +136,31 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int))
 }
 
 void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int)) {
+    int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
+    assert(arrayForSort != NULL);
+
+    // Получение вспомогательного массива и массива со значением в столбцах
+    int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
+    assert(arrayColumn != NULL);
+
+    for (register size_t i = 0; i < m.nCols; ++i) {
+        for (register size_t j = 0; j < m.nRows; ++j)
+            arrayColumn[j] = m.values[i][j];
+        arrayForSort[i] = criteria(arrayColumn, m.nRows);
+    }
+    free(arrayColumn);
+
+    for (size_t i = 0; i < m.nCols; ++i) {
+        int tArray = arrayForSort[i];
+        size_t j = i;
+        while (j > 0 && arrayForSort[j - 1] < tArray) {
+            arrayForSort[j] = arrayForSort[j - 1];
+            swapColumns(m, j, j - 1);
+            --j;
+        }
+        arrayForSort[j] = tArray;
+        swapColumns(m, j, i);
+    }
+    free(arrayForSort);
 
 }
