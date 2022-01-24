@@ -7,8 +7,7 @@
 #include <assert.h>
 
 #include "../structs/matrix.c"
-
-void swap(int *a, int *b);
+#include "array.h"
 
 matrix getMemMatrix(int nRows, int nCols);
 

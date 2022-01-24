@@ -100,12 +100,6 @@ void swapRows(const matrix m, const int i1, const int i2) {
     m.values[i2] = f;
 }
 
-void swap(int *const a, int *const b) {
-    const int t = *a;
-    *a = *b;
-    *b = t;
-}
-
 void swapColumns(matrix m, const int j1, const int j2) {
     assert(j1 >= 0 && j2 >= 0);
 

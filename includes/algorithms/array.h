@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 
-void swap(int *const a, int *const b);
+void swap(int *a, int *b);
 
-void inputArray(int *a, const size_t n);
+void inputArray(int *a, size_t n);
 
-void outputArray(int *a, const size_t n);
+void outputArray(int *a, size_t n);
 
 void append(int *a, size_t *n, int x);
 

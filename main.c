@@ -4,14 +4,14 @@
 #include "includes/algorithms/matrix.h"
 
 int main() {
-    matrix a = getMemMatrix(2, 2);
-    inputMatrix(a);
+    matrix array = getMemMatrix(2, 2);
+    inputMatrix(array);
 
-    swapRows(a, 0, 1);
+    swapRows(array, 0, 1);
 
-    outputMatrix(a);
+    outputMatrix(array);
 
-    freeMemMatrix(a);
+    freeMemMatrix(array);
 
     return 0;
 }

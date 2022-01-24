@@ -3,11 +3,11 @@
 // Сортировка Выбором >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void selectionSort(int *const a, const size_t n) {
     for (size_t i = 0; i < n; ++i) {
-        size_t indexMin = i;
+        size_t indexSwap = i;
         for (size_t j = i + 1; j < n; ++j)
-            if (a[j] < a[indexMin])
-                indexMin = j;
-        swap(&a[i], &a[indexMin]);
+            if (a[j] < a[indexSwap])
+                indexSwap = j;
+        swap(&a[i], &a[indexSwap]);
     }
 }
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

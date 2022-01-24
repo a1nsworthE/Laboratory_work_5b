@@ -1,2 +1,4 @@
 add_library(algorithms
-        matrix.c)
+        matrix.c
+        array.c
+        sorts.c)
