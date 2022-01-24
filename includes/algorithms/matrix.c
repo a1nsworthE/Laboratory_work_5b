@@ -106,3 +106,26 @@ void swapColumns(matrix m, const int j1, const int j2) {
     for (size_t i = 0; i < m.nRows; ++i)
         swap(&(m.values[i][j1]), &(m.values[i][j2]));
 }
+
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int)) {
+    int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
+    assert(arrayForSort != NULL);
+
+    for (size_t i = 0; i < m.nRows; ++i)
+        arrayForSort[i] = criteria(m.values[i], m.nCols);
+
+    for (size_t i = 1; i < m.nRows; ++i) {
+        int tArray = arrayForSort[i];
+        size_t j = i;
+        while (j > 0 && arrayForSort[j - 1] < tArray) {
+            arrayForSort[j] = arrayForSort[j - 1];
+            m.values[j] = m.values[j - 1];
+            --j;
+        }
+        arrayForSort[j] = tArray;
+        swapRows(m, i, j);
+    }
+
+    free(arrayForSort);
+}
+
