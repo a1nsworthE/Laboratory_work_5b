@@ -106,6 +106,11 @@ void swapRows(const matrix m, const int i1, const int i2) {
     m.values[i2] = f;
 }
 
+
+///
+/// \param m
+/// \param j1
+/// \param j2
 void swapColumns(matrix m, const int j1, const int j2) {
     assert(j1 >= 0 && j2 >= 0);
 
@@ -113,6 +118,9 @@ void swapColumns(matrix m, const int j1, const int j2) {
         swap(&(m.values[i][j1]), &(m.values[i][j2]));
 }
 
+///
+/// \param m
+/// \param criteria
 void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int)) {
     int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
     assert(arrayForSort != NULL);
@@ -135,6 +143,9 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int))
     free(arrayForSort);
 }
 
+///
+/// \param m
+/// \param criteria
 void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
     assert(arrayForSort != NULL);
@@ -162,4 +173,11 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int))
         swapColumns(m, j, i);
     }
     free(arrayForSort);
+}
+
+///
+/// \param m
+/// \return
+bool isSquareMatrix(matrix m) {
+    return m.nRows == m.nCols ? true : false;
 }

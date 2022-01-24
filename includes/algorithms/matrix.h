@@ -5,6 +5,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #include "../structs/matrix.c"
 #include "array.h"
