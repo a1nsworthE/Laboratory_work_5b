@@ -8,8 +8,12 @@ matrix getMemMatrix(const int nRows, const int nCols) {
     assert(nRows > 0 && nCols > 0);
 
     int **values = (int **) malloc(nRows * sizeof(int *));
-    for (size_t i = 0; i < nRows; ++i)
+    assert(values != NULL);
+
+    for (size_t i = 0; i < nRows; ++i) {
         values[i] = (int *) malloc(nCols * sizeof(int));
+        assert(values[i] != NULL);
+    }
     return (matrix) {values, nRows, nCols};
 }
 
@@ -22,6 +26,8 @@ matrix *getMemArrayOfMatrices(const int nMatrices, const int nRows, const int nC
     assert(nMatrices > 0);
 
     matrix *ms = (matrix *) malloc(nMatrices * sizeof(matrix));
+    assert(ms != NULL);
+
     for (size_t i = 0; i < nMatrices; ++i)
         ms[i] = getMemMatrix(nRows, nCols);
     return ms;
@@ -57,7 +63,7 @@ void inputMatrix(matrix m) {
 ///
 /// \param ms
 /// \param nMatrices
-void inputMatrices(matrix *ms, const size_t nMatrices) {
+void inputMatrices(matrix *ms, const int nMatrices) {
     for (size_t i = 0; i < nMatrices; ++i)
         inputMatrix(ms[i]);
 }
@@ -76,7 +82,7 @@ void outputMatrix(matrix m) {
 ///
 /// \param ms
 /// \param nMatrices
-void outputMatrices(matrix *ms, const size_t nMatrices) {
+void outputMatrices(matrix *ms, const int nMatrices) {
     assert(nMatrices > 0);
 
     for (size_t i = 0; i < nMatrices; ++i) {
@@ -129,3 +135,6 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int))
     free(arrayForSort);
 }
 
+void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int)) {
+
+}
