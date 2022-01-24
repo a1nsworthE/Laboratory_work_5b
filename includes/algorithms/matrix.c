@@ -162,5 +162,4 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int))
         swapColumns(m, j, i);
     }
     free(arrayForSort);
-
 }
