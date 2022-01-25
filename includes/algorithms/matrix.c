@@ -223,10 +223,12 @@ bool isSymmetricMatrix(const matrix m) {
     if (isSquareMatrix(m) && m.nRows == 1)
         return true;
     if (isSquareMatrix(m)) {
-        for (size_t i = 0; i < m.nRows; ++i)
-            for (size_t j = 0; j < m.nCols; ++j)
-                if (!(i != j && m.values[i][j] == m.values[j][i]))
-                    return false;
+        for (register size_t i = 0; i < m.nRows; ++i)
+            for (register size_t j = 0; j < m.nCols; ++j)
+                if (i != j) {
+                    if (m.values[i][j] != m.values[j][i])
+                        return false;
+                }
     } else
         return false;
 
