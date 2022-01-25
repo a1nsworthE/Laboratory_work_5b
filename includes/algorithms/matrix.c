@@ -129,13 +129,12 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
     for (size_t i = 1; i < m.nRows; ++i) {
         int tArray = arrayForSort[i];
         size_t j = i;
-        while (j > 0 && arrayForSort[j - 1] < tArray) {
+        while (j > 0 && arrayForSort[j - 1] > tArray) {
             arrayForSort[j] = arrayForSort[j - 1];
-            m.values[j] = m.values[j - 1];
+            swapRows(m, j, j - 1);
             --j;
         }
         arrayForSort[j] = tArray;
-        swapRows(m, i, j);
     }
 
     free(arrayForSort);
@@ -168,7 +167,6 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *,
             --j;
         }
         arrayForSort[j] = tArray;
-        swapColumns(m, j, i);
     }
     free(arrayForSort);
 }
