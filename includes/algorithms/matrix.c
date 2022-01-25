@@ -184,6 +184,8 @@ bool isSquareMatrix(const matrix m) {
 /// \param m2 - вторая матрица
 /// \return Возращает true, если матрицы m1 и m2, иначе false
 bool twoMatricesEqual(const matrix m1, const matrix m2) {
+    if(m1.nRows != m2.nRows || m1.nCols != m2.nCols)
+        return false;
     if (m1.nRows == m2.nRows && m1.nCols == m2.nCols) {
         for (size_t i = 0; i < m1.nRows; ++i)
             for (size_t j = 0; j < m2.nCols; ++j)
