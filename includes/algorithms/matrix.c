@@ -10,7 +10,7 @@ matrix getMemMatrix(const int nRows, const int nCols) {
     int **values = (int **) malloc(nRows * sizeof(int *));
     assert(values != NULL);
 
-    for (size_t i = 0; i < nRows; ++i) {
+    for (register size_t i = 0; i < nRows; ++i) {
         values[i] = (int *) malloc(nCols * sizeof(int));
         assert(values[i] != NULL);
     }
@@ -28,7 +28,7 @@ matrix *getMemArrayOfMatrices(const int nMatrices, const int nRows, const int nC
     matrix *ms = (matrix *) malloc(nMatrices * sizeof(matrix));
     assert(ms != NULL);
 
-    for (size_t i = 0; i < nMatrices; ++i)
+    for (register size_t i = 0; i < nMatrices; ++i)
         ms[i] = getMemMatrix(nRows, nCols);
     return ms;
 }
@@ -36,7 +36,7 @@ matrix *getMemArrayOfMatrices(const int nMatrices, const int nRows, const int nC
 /// Освобождает память выделеную под хранение матрицу
 /// \param m - матрица
 void freeMemMatrix(matrix m) {
-    for (size_t i = 0; i < m.nRows; ++i)
+    for (register size_t i = 0; i < m.nRows; ++i)
         free(m.values[i]);
     free(m.values);
 }
@@ -47,7 +47,7 @@ void freeMemMatrix(matrix m) {
 void freeMemMatrices(matrix *ms, const int nMatrices) {
     assert(nMatrices > 0);
 
-    for (size_t i = 0; i < nMatrices; ++i)
+    for (register size_t i = 0; i < nMatrices; ++i)
         freeMemMatrix(ms[i]);
     free(ms);
 }
@@ -55,8 +55,8 @@ void freeMemMatrices(matrix *ms, const int nMatrices) {
 /// Ввод матрицы
 /// \param m - матрица
 void inputMatrix(matrix m) {
-    for (size_t i = 0; i < m.nRows; ++i)
-        for (size_t j = 0; j < m.nCols; ++j)
+    for (register size_t i = 0; i < m.nRows; ++i)
+        for (register size_t j = 0; j < m.nCols; ++j)
             scanf("%d", &(m.values[i][j]));
 }
 
@@ -64,16 +64,16 @@ void inputMatrix(matrix m) {
 /// \param ms - указатель на массив матриц
 /// \param nMatrices - размер массива матриц
 void inputMatrices(matrix *ms, const int nMatrices) {
-    for (size_t i = 0; i < nMatrices; ++i)
+    for (register size_t i = 0; i < nMatrices; ++i)
         inputMatrix(ms[i]);
 }
 
 /// Вывод матрицы
 /// \param m - матрица
 void outputMatrix(matrix m) {
-    for (size_t i = 0; i < m.nRows; ++i) {
+    for (register size_t i = 0; i < m.nRows; ++i) {
         printf("|");
-        for (size_t j = 0; j < m.nCols; ++j)
+        for (register size_t j = 0; j < m.nCols; ++j)
             printf("%d ", m.values[i][j]);
         printf("\b| \n");
     }
@@ -85,7 +85,7 @@ void outputMatrix(matrix m) {
 void outputMatrices(matrix *ms, const int nMatrices) {
     assert(nMatrices > 0);
 
-    for (size_t i = 0; i < nMatrices; ++i) {
+    for (register size_t i = 0; i < nMatrices; ++i) {
         outputMatrix(ms[i]);
         printf(", ");
     }
@@ -112,7 +112,7 @@ void swapRows(const matrix m, const int i1, const int i2) {
 void swapColumns(matrix m, const int j1, const int j2) {
     assert(j1 >= 0 && j2 >= 0);
 
-    for (size_t i = 0; i < m.nRows; ++i)
+    for (register size_t i = 0; i < m.nRows; ++i)
         swap(&(m.values[i][j1]), &(m.values[i][j2]));
 }
 
@@ -128,7 +128,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 
     for (size_t i = 1; i < m.nRows; ++i) {
         int tArray = arrayForSort[i];
-        size_t j = i;
+        register size_t j = i;
         while (j > 0 && arrayForSort[j - 1] > tArray) {
             arrayForSort[j] = arrayForSort[j - 1];
             swapRows(m, j, j - 1);
@@ -153,21 +153,22 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *,
 
     for (register size_t i = 0; i < m.nCols; ++i) {
         for (register size_t j = 0; j < m.nRows; ++j)
-            arrayColumn[j] = m.values[i][j];
+            arrayColumn[j] = m.values[j][i];
         arrayForSort[i] = criteria(arrayColumn, m.nRows);
     }
     free(arrayColumn);
 
     for (size_t i = 0; i < m.nCols; ++i) {
         int tArray = arrayForSort[i];
-        size_t j = i;
-        while (j > 0 && arrayForSort[j - 1] < tArray) {
+        register size_t j = i;
+        while (j > 0 && arrayForSort[j - 1] > tArray) {
             arrayForSort[j] = arrayForSort[j - 1];
             swapColumns(m, j, j - 1);
             --j;
         }
         arrayForSort[j] = tArray;
     }
+
     free(arrayForSort);
 }
 
@@ -199,14 +200,16 @@ bool twoMatricesEqual(const matrix m1, const matrix m2) {
 /// \return - возвращает true, если матрица еденичная, иначе false
 bool isEMatrix(const matrix m) {
     if (isSquareMatrix(m)) {
-        for (size_t i = 0; i < m.nRows; ++i) {
-            for (size_t j = 0; j < m.nCols; ++j) {
-                if (!(i == j && m.values[i][j] == 1))
-                    return false;
-                else if (!(i != j && m.values[i][j] == 0))
-                    return false;
+        for (register size_t i = 0; i < m.nRows; ++i)
+            for (register size_t j = i; j < m.nCols; ++j) {
+                if (i == j) {
+                    if (m.values[i][j] != 1)
+                        return false;
+                } else if (i != j) {
+                    if (m.values[i][j] != 0)
+                        return false;
+                }
             }
-        }
     } else
         return false;
 
