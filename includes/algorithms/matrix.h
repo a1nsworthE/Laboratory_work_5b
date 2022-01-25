@@ -36,4 +36,12 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int))
 
 bool isSquareMatrix(matrix m);
 
+bool isSquareMatrix(matrix m);
+
+bool twoMatricesEqual(matrix m1, matrix m2);
+
+bool isEMatrix(matrix m);
+
+bool isSymmetricMatrix(matrix m);
+
 #endif //INC_5B_MATRIX_H
