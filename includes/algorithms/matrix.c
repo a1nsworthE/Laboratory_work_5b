@@ -178,6 +178,56 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int))
 ///
 /// \param m
 /// \return
-bool isSquareMatrix(matrix m) {
+bool isSquareMatrix(const matrix m) {
     return m.nRows == m.nCols ? true : false;
+}
+
+///
+/// \param m1
+/// \param m2
+/// \return
+bool twoMatricesEqual(const matrix m1, const matrix m2) {
+    if (m1.nRows == m2.nRows && m1.nCols == m2.nCols) {
+        for (size_t i = 0; i < m1.nRows; ++i)
+            for (size_t j = 0; j < m2.nCols; ++j)
+                if (m1.values[i][j] != m2.values[i][j])
+                    return false;
+    } else
+        return false;
+
+    return true;
+}
+
+///
+/// \param m
+/// \return
+bool isEMatrix(const matrix m) {
+    if (isSquareMatrix(m)) {
+        for (size_t i = 0; i < m.nRows; ++i) {
+            for (size_t j = 0; j < m.nCols; ++j) {
+                if (!(i == j && m.values[i][j] == 1))
+                    return false;
+                else if (!(i != j && m.values[i][j] == 0))
+                    return false;
+            }
+        }
+    } else
+        return false;
+
+    return true;
+}
+
+///
+/// \param m
+/// \return
+bool isSymmetricMatrix(const matrix m) {
+    if (isSquareMatrix(m)) {
+        for (size_t i = 0; i < m.nRows; ++i)
+            for (size_t j = 0; j < m.nCols; ++j)
+                if (!(i != j && m.values[i][j] == m.values[j][i]))
+                    return false;
+    } else
+        return false;
+
+    return true;
 }
