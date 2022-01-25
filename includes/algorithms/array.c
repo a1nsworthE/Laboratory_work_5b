@@ -39,3 +39,10 @@ int getMaxElemArray(const int *const a, const size_t n) {
 
     return elemMax;
 }
+
+bool isEqualArray(const int *a, const size_t sizeA, const int *b, const size_t sizeB) {
+    if (sizeA == sizeB) {
+        return memcmp(a, b, sizeof(int) * sizeA) == 0;
+    } else
+        return false;
+}

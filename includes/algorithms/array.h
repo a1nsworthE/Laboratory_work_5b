@@ -2,6 +2,8 @@
 #define INC_5B_ARRAY_H
 
 #include <stdio.h>
+#include <stdbool.h>
+#include <memory.h>
 
 void swap(int *a, int *b);
 
@@ -14,5 +16,7 @@ void append(int *a, size_t *n, int x);
 int getMinElemArray(const int *a, size_t n);
 
 int getMaxElemArray(const int *a, size_t n);
+
+bool isEqualArray(const int *a, size_t sizeA, const int *b, size_t sizeB);
 
 #endif //INC_5B_ARRAY_H
