@@ -44,4 +44,14 @@ bool isEMatrix(matrix m);
 
 bool isSymmetricMatrix(matrix m);
 
+void transposeSquareMatrix(matrix m);
+
+position getMinValuePos(matrix m);
+
+position getMaxValuePos(matrix m);
+
+matrix createMatrixFromArray(const int *a, int nRows, int nCols);
+
+matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols);
+
 #endif //INC_5B_MATRIX_H

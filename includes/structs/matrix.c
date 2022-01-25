@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 typedef struct matrix {
     int **values;  // элементы матриц
     int nRows;     // кол - во строк
@@ -5,6 +7,6 @@ typedef struct matrix {
 } matrix;
 
 typedef struct position {
-    int rowIndex;
-    int colIndex;
+    size_t rowIndex;
+    size_t colIndex;
 } position;
