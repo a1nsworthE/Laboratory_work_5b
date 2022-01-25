@@ -19,4 +19,6 @@ int getMaxElemArray(const int *a, size_t n);
 
 bool isEqualArray(const int *a, size_t sizeA, const int *b, size_t sizeB);
 
+int getSumArray(const int *a, size_t n);
+
 #endif //INC_5B_ARRAY_H

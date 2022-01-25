@@ -46,3 +46,10 @@ bool isEqualArray(const int *a, const size_t sizeA, const int *b, const size_t s
     } else
         return false;
 }
+
+int getSumArray(const int *a, size_t n) {
+    int sum = 0;
+    for (size_t i = 0; i < n; ++i)
+        sum += a[i];
+    return sum;
+}

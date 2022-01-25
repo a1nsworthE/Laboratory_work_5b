@@ -36,7 +36,7 @@ matrix *getMemArrayOfMatrices(const int nMatrices, const int nRows, const int nC
 /// Освобождает память выделеную под хранение матрицу
 /// \param m - матрица
 void freeMemMatrix(matrix m) {
-    for (size_t i = 0; i < m.nCols; ++i)
+    for (size_t i = 0; i < m.nRows; ++i)
         free(m.values[i]);
     free(m.values);
 }
@@ -100,7 +100,7 @@ void outputMatrices(matrix *ms, const int nMatrices) {
 void swapRows(const matrix m, const int i1, const int i2) {
     assert(i1 >= 0 && i2 >= 0 && i1 <= m.nRows - 1 && i2 <= m.nRows - 1);
 
-    int *const f = m.values[i1];
+    int *f = m.values[i1];
     m.values[i1] = m.values[i2];
     m.values[i2] = f;
 }
@@ -119,7 +119,7 @@ void swapColumns(matrix m, const int j1, const int j2) {
 /// Сортирует строки матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int)) {
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
     assert(arrayForSort != NULL);
 
@@ -144,7 +144,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int))
 /// Сортирует столбцы матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int)) {
+void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
     assert(arrayForSort != NULL);
 
@@ -219,6 +219,8 @@ bool isEMatrix(const matrix m) {
 /// \param m - матрица
 /// \return Возвращает true, если матрица симметрична, иначе false
 bool isSymmetricMatrix(const matrix m) {
+    if (isSquareMatrix(m) && m.nRows == 1)
+        return true;
     if (isSquareMatrix(m)) {
         for (size_t i = 0; i < m.nRows; ++i)
             for (size_t j = 0; j < m.nCols; ++j)
