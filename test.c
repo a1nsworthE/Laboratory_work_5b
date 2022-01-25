@@ -2,86 +2,6 @@
 #include <stdbool.h>
 #include "includes/algorithms/matrix.h"
 
-/* void test_matrix_swapRows_() {
-    matrix m = createMatrixFromArray(
-            (int[]) {
-
-            },
-
-
-    );
-
-    swapRows(m, ,);
-
-    assert(
-            isEqualArray((int[]) {}, , m.values[],)
-            &&
-            isEqualArray((int[]) {}, , m.values[],)
-    );
-} */
-
-/* void test_matrix_swapColumns_() {
-    matrix m = createMatrixFromArray(
-            (int[]) {
-
-            },
-
-
-    );
-
-    swapColumns(m, ,);
-
-    assert(
-            isEqualArray((int[]) {}, , m.values[],)
-            &&
-            isEqualArray((int[]) {}, , m.values[],)
-    );
-} */
-
-/* void test_insertionSortRowsMatrixByRowCriteria() {
-    matrix m = createMatrixFromArray(
-            (int[]) {
-                    , , ,
-                    , , ,
-                    , , ,
-            }, ,
-    );
-
-    insertionSortRowsMatrixByRowCriteria(m, getSumArray);
-
-    assert(
-            isEqualArray((int[]) {, ,}, 3, m.values[0], 3)
-            &&
-            isEqualArray((int[]) {, ,}, 3, m.values[1], 3)
-            &&
-            isEqualArray((int[]) {, ,}, 3, m.values[2], 3)
-    );
-
-    freeMemMatrix(m);
-} */
-
-/* void insertionSortColsMatrixByColCriteria() {
-    matrix m = createMatrixFromArray(
-            (int[]) {
-                    , , ,
-                    , , ,
-                    , , ,
-            }, ,
-    );
-
-    insertionSortRowsMatrixByRowCriteria(m, getSumArray);
-
-    assert(
-            isEqualArray((int[]) {, ,}, 3, m.values[0], 3)
-            &&
-            isEqualArray((int[]) {, ,}, 3, m.values[1], 3)
-            &&
-            isEqualArray((int[]) {, ,}, 3, m.values[2], 3)
-    );
-
-    freeMemMatrix(m);
-} */
-
 void test_swapRows1() {
     matrix m = createMatrixFromArray(
             (int[]) {
@@ -739,7 +659,7 @@ void test_transposeSquareMatrix1() {
                     1, 3,
                     6, 2,
             },
-            3, 2
+            2, 2
     );
 
     transposeSquareMatrix(m);
@@ -865,8 +785,8 @@ void test_getMaxValuePos1() {
             2, 2
     );
 
-    position minPos = getMaxValuePos(m);
-    assert(minPos.rowIndex == 1 && minPos.colIndex == 1);
+    position maxPos = getMaxValuePos(m);
+    assert(maxPos.rowIndex == 1 && maxPos.colIndex == 1);
 
     freeMemMatrix(m);
 }
@@ -880,8 +800,8 @@ void test_getMaxValuePos2() {
             2, 2
     );
 
-    position minPos = getMaxValuePos(m);
-    assert(minPos.rowIndex == 0 && minPos.colIndex == 0);
+    position maxPos = getMaxValuePos(m);
+    assert(maxPos.rowIndex == 0 && maxPos.colIndex == 0);
 
     freeMemMatrix(m);
 }
@@ -896,8 +816,8 @@ void test_getMaxValuePos3() {
             3, 3
     );
 
-    position minPos = getMaxValuePos(m);
-    assert(minPos.rowIndex == 1 && minPos.colIndex == 1);
+    position maxPos = getMaxValuePos(m);
+    assert(maxPos.rowIndex == 1 && maxPos.colIndex == 1);
 
     freeMemMatrix(m);
 }
@@ -913,8 +833,8 @@ void test_getMaxValuePos4() {
             4, 4
     );
 
-    position minPos = getMaxValuePos(m);
-    assert(minPos.rowIndex == 2 && minPos.colIndex == 3);
+    position maxPos = getMaxValuePos(m);
+    assert(maxPos.rowIndex == 2 && maxPos.colIndex == 3);
 
     freeMemMatrix(m);
 }
@@ -1007,6 +927,7 @@ void test_matrix_function() {
     test_twoMatricesEqual();
     test_isEMatrix();
     test_isSymmetricMatrix();
+    test_transposeSquareMatrix();
     test_getMinValuePos();
     test_getMaxValuePos();
 }
