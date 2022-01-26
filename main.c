@@ -39,6 +39,47 @@ bool isMutuallyInverseMatrices(const matrix m1, const matrix m2) {
         return false;
 }
 
+long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
+    assert(m.nRows != 0 || m.nCols != 0);
+
+    // Массив максимумов из псевдогоналей матрицы
+    int *arrayMaxElemsPseudoDiagonal = (int *) malloc((m.nRows + m.nCols - 2) * sizeof(int));
+    size_t sizeArrayMaxElemsPseudoDiagonal = 0;
+
+    // Поиск максимальных значений на псевдогоналях слева и справа от главной диагонали
+    position leftI = {1, 0};
+    position rightI = {0, 1};
+    while (leftI.rowIndex < m.nRows && leftI.colIndex < 1 ||
+           rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
+
+        // Поиск слева
+        if (leftI.rowIndex < m.nRows && leftI.colIndex < 1) {
+            int maxElemLeft = m.values[leftI.rowIndex][leftI.colIndex];
+            for (size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
+                if (m.values[i][j] > maxElemLeft)
+                    maxElemLeft = m.values[i][j];
+            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemLeft);
+            leftI.rowIndex++;
+        }
+
+        // Поиск справа
+        if (rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
+            int maxElemRight = m.values[rightI.rowIndex][rightI.colIndex];
+            for (size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
+                if (m.values[i][j] > maxElemRight)
+                    maxElemRight = m.values[i][j];
+            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemRight);
+            rightI.colIndex++;
+        }
+    }
+
+    long long sum = getSumArray(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
+
+    free(arrayMaxElemsPseudoDiagonal);
+
+    return sum;
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -146,55 +187,54 @@ int main() {
 }
 */
 
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
+// 7 задача>>>
+/*
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+    printf("%d \n", findSumOfMaxesOfPseudoDiagonal(matrix1));
+
+    outputMatrix(matrix1);
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+
+// 8 задача>>>
 /**/
 
-long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
-    assert(m.nRows != 0 || m.nCols != 0);
+// 9 задача>>>
+/**/
 
-    // Массив максимумов из псевдогоналей матрицы
-    int *arrayMaxElemsPseudoDiagonal = (int *) malloc((m.nRows + m.nCols - 2) * sizeof(int));
-    size_t sizeArrayMaxElemsPseudoDiagonal = 0;
+// 10 задача>>>
+/**/
 
-    // Поиск максимальных значений на псевдогоналях слева и справа от главной диагонали
-    position leftI = {1, 0};
-    position rightI = {0, 1};
-    while (leftI.rowIndex < m.nRows && leftI.colIndex < 1 ||
-           rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
+// 11 задача>>>
+/**/
 
-        // Поиск слева
-        if (leftI.rowIndex < m.nRows && leftI.colIndex < 1) {
-            int maxElemLeft = m.values[leftI.rowIndex][leftI.colIndex];
-            for (size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
-                if (m.values[i][j] > maxElemLeft)
-                    maxElemLeft = m.values[i][j];
-            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemLeft);
-            leftI.rowIndex++;
-        }
+// 12 задача>>>
+/**/
 
-        // Поиск справа
-        if (rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
-            int maxElemRight = m.values[rightI.rowIndex][rightI.colIndex];
-            for (size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
-                if (m.values[i][j] > maxElemRight)
-                    maxElemRight = m.values[i][j];
-            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemRight);
-            rightI.colIndex++;
-        }
-    }
+// 13 задача>>>
+/**/
 
-    long long sum = getSumArray(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
+// 14 задача>>>
+/**/
 
-    free(arrayMaxElemsPseudoDiagonal);
+// 15 задача>>>
+/**/
 
-    return sum;
+int getMinInArea(const matrix m) {
+    position maxElemPos = getMaxValuePos(m);
+    int minElem = m.values[maxElemPos.rowIndex][maxElemPos.colIndex];
+
+    for (int i = maxElemPos.rowIndex; i >= 0; --i)
+        for (size_t j = 0; j <= ; ++j)
+            if (m.values[i][j] < minElem)
+                minElem = m.values[i][j];
 }
 
 int main() {
