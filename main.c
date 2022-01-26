@@ -4,14 +4,17 @@
 #include "includes/algorithms/matrix.h"
 
 int main() {
-    matrix array = getMemMatrix(2, 2);
-    inputMatrix(array);
+    size_t n;
+    scanf("%zd", &n);
 
-    swapRows(array, 0, 1);
+    matrix m = getMemMatrix(n, n);
+    inputMatrix(m);
 
-    outputMatrix(array);
+    size_t indexMin = getMinValuePos(m).rowIndex;
+    size_t indexMax = getMaxValuePos(m).rowIndex;
+    swapRows(m, indexMin, indexMax);
 
-    freeMemMatrix(array);
+    outputMatrix(m);
 
     return 0;
 }
