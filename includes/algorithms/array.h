@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <memory.h>
 
+int max(int a, int b);
+
 void swap(int *a, int *b);
 
 void inputArray(int *a, size_t n);
@@ -26,7 +28,5 @@ int getMaxElement(const int *a, size_t n);
 int getMinElement(const int *a, size_t n);
 
 bool isUniqueArrayElements(const long long *a, size_t n);
-
-int max(int a, int b);
 
 #endif //INC_5B_ARRAY_H
