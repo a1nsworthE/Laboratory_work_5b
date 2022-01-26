@@ -10,8 +10,16 @@ void sortRowsByMinElement(matrix m) {
 void sortColsByMinElement(matrix m) {
     insertionSortColsMatrixByColCriteria(m, getMinElemArray);
 }
+
+void getSquareOfMatrixIfSymmetric(matrix *m) {
+    if (isSymmetricMatrix(*m))
+        *m = mulMatrices(*m, *m);
+}
+
 // 1 задача>>>
-/*  size_t n;
+/*
+int main() {
+    size_t n;
     scanf("%zd", &n);
 
     matrix m = getMemMatrix(n, n);
@@ -24,10 +32,13 @@ void sortColsByMinElement(matrix m) {
     freeMemMatrix(matrix1);
 
     return 0;
+}
 */
 
 // 2 задача>>>
-/*  size_t n, m;
+/*
+int main() {
+    size_t n, m;
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
@@ -37,10 +48,13 @@ void sortColsByMinElement(matrix m) {
     freeMemMatrix(matrix1);
 
     return 0;
+}
 */
 
 // 3 задача>>>
-/*  size_t n, m;
+/*
+int maint() {
+    size_t n, m;
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
@@ -50,26 +64,53 @@ void sortColsByMinElement(matrix m) {
     freeMemMatrix(matrix1);
 
     return 0;
+}
 */
 
 // 4 задача>>>
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
+/*
 int main() {
-    size_t n, m;
-    scanf("%zd %zd", &n, &m);
-    matrix matrix1 = getMemMatrix(n, m);
+    size_t n;
+    scanf("%zd", &n);
+    matrix matrix1 = getMemMatrix(n, n);
     inputMatrix(matrix1);
+    getSquareOfMatrixIfSymmetric(&matrix1);
+
+    outputMatrix(matrix1);
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+
+void transposeIfMatrixHasEqualSumOfRows(matrix m) {
+    long long *arraySum = (long long *) calloc(m.nRows, sizeof(long long));
+    for (size_t i = 0; i < m.nRows; ++i)
+        arraySum[i] += getSumArray(m.values[i], m.nCols);
+
+    if (isUniqueArrayElements(arraySum, m.nRows))
+        transposeSquareMatrix(m);
+
+    free(arraySum);
+}
+
+int main() {
+    size_t n;
+    scanf("%zd", &n);
+    matrix matrix1 = getMemMatrix(n, n);
+    inputMatrix(matrix1);
+    getSquareOfMatrixIfSymmetric(&matrix1);
 
     outputMatrix(matrix1);
     freeMemMatrix(matrix1);
