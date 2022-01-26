@@ -105,8 +105,47 @@ int main() {
     return 0;
 }
 */
-/**/
-/**/
+
+// 5 задача>>>
+/*
+int main() {
+    size_t n;
+    scanf("%zd", &n);
+    matrix matrix1 = getMemMatrix(n, n);
+    inputMatrix(matrix1);
+    transposeIfMatrixHasEqualSumOfRows(matrix1);
+
+    outputMatrix(matrix1);
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+
+// 6 задача>>>
+/*
+int main() {
+    size_t n;
+    scanf("%zd", &n);
+    matrix matrix1 = getMemMatrix(n, n);
+    inputMatrix(matrix1);
+
+    size_t n2;
+    scanf("%zd", &n2);
+    matrix matrix2 = getMemMatrix(n2, n2);
+    inputMatrix(matrix2);
+
+    isMutuallyInverseMatrices(matrix1, matrix2);
+
+    outputMatrix(matrix1);
+    outputMatrix(matrix2);
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+
+    return 0;
+}
+ */
+
 /**/
 /**/
 /**/
