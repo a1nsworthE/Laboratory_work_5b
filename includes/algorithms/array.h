@@ -19,11 +19,11 @@ int getMaxElemArray(const int *a, size_t n);
 
 bool isEqualArray(const int *a, size_t sizeA, const int *b, size_t sizeB);
 
-int getSumArray(const int *a, size_t n);
+long long getSumArray(const int *a, size_t n);
 
 int getMaxElement(const int *a, size_t n);
 
-long long getMinElement(const int *a, size_t n);
+int getMinElement(const int *a, size_t n);
 
 bool isUniqueArrayElements(const long long *a, size_t n);
 

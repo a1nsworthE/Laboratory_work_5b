@@ -47,8 +47,8 @@ bool isEqualArray(const int *a, const size_t sizeA, const int *b, const size_t s
         return false;
 }
 
-int getSumArray(const int *a, size_t n) {
-    int sum = 0;
+long long getSumArray(const int *a, size_t n) {
+    long long sum = 0;
     for (size_t i = 0; i < n; ++i)
         sum += a[i];
     return sum;
@@ -63,7 +63,7 @@ int getMaxElement(const int *a, const size_t n) {
     return maxElement;
 }
 
-long long getMinElement(const int *a, const size_t n) {
+int getMinElement(const int *a, const size_t n) {
     int minElement = a[0];
     for (size_t i = 1; i < n; ++i)
         if (a[i] < minElement)
