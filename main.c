@@ -156,24 +156,56 @@ int main() {
 /**/
 /**/
 
+long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
+    assert(m.nRows != 0 || m.nCols != 0);
+
+    // Массив максимумов из псевдогоналей матрицы
+    int *arrayMaxElemsPseudoDiagonal = (int *) malloc((m.nRows + m.nCols - 2) * sizeof(int));
+    size_t sizeArrayMaxElemsPseudoDiagonal = 0;
+
+    // Поиск максимальных значений на псевдогоналях слева и справа от главной диагонали
+    position leftI = {1, 0};
+    position rightI = {0, 1};
+    while (leftI.rowIndex < m.nRows && leftI.colIndex < m.nCols ||
+           rightI.colIndex < m.nCols && rightI.rowIndex < m.nRows) {
+
+        // Поиск слева
+        if (leftI.rowIndex < m.nRows && leftI.colIndex < m.nCols) {
+            int maxElemLeft = m.values[leftI.rowIndex][leftI.colIndex];
+            for (size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
+                if (m.values[i][j] > maxElemLeft)
+                    maxElemLeft = m.values[i][j];
+            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemLeft);
+            leftI.rowIndex++;
+        }
+
+        // Поиск справа
+        if (rightI.colIndex < m.nCols && rightI.rowIndex < m.nRows) {
+            int maxElemRight = m.values[rightI.rowIndex][rightI.colIndex];
+            for (size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
+                if (m.values[i][j] > maxElemRight)
+                    maxElemRight = m.values[i][j];
+            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemRight);
+            rightI.colIndex++;
+        }
+    }
+
+    long long sum = getSumArray(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
+
+    free(arrayMaxElemsPseudoDiagonal);
+
+    return sum;
+}
 
 int main() {
-    size_t n;
-    scanf("%zd", &n);
-    matrix matrix1 = getMemMatrix(n, n);
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
-
-    size_t n2;
-    scanf("%zd", &n2);
-    matrix matrix2 = getMemMatrix(n2, n2);
-    inputMatrix(matrix2);
-
-    isMutuallyInverseMatrices(matrix1, matrix2);
+    printf("%d \n", findSumOfMaxesOfPseudoDiagonal(matrix1));
 
     outputMatrix(matrix1);
-    outputMatrix(matrix2);
     freeMemMatrix(matrix1);
-    freeMemMatrix(matrix2);
 
     return 0;
 }
