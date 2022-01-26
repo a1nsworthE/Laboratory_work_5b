@@ -27,6 +27,18 @@ void transposeIfMatrixHasEqualSumOfRows(matrix m) {
     free(arraySum);
 }
 
+bool isMutuallyInverseMatrices(const matrix m1, const matrix m2) {
+    if (m1.nCols != m2.nRows)
+        return false;
+
+    const matrix m3 = mulMatrices(m1, m2);
+
+    if (isEMatrix(m3))
+        return true;
+    else
+        return false;
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -111,10 +123,18 @@ int main() {
     scanf("%zd", &n);
     matrix matrix1 = getMemMatrix(n, n);
     inputMatrix(matrix1);
-    transposeIfMatrixHasEqualSumOfRows(matrix1);
+
+    size_t n2;
+    scanf("%zd", &n2);
+    matrix matrix2 = getMemMatrix(n2, n2);
+    inputMatrix(matrix2);
+
+    isMutuallyInverseMatrices(matrix1, matrix2);
 
     outputMatrix(matrix1);
+    outputMatrix(matrix2);
     freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
 
     return 0;
 }
