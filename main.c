@@ -16,7 +16,15 @@
     outputMatrix(m);
     freeMemMatrix(matrix1);
 */
-/**/
+/* size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+    insertionSortRowsMatrixByRowCriteria(matrix1, getMaxElemArray);
+
+    outputMatrix(matrix1);
+    freeMemMatrix(matrix1);
+ * */
 /**/
 /**/
 /**/
@@ -35,7 +43,7 @@ int main() {
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
-    insertionSortRowsMatrixByRowCriteria(matrix1, getMaxElemArray);
+    insertionSortColsMatrixByColCriteria(matrix1, getMinElemArray);
 
     outputMatrix(matrix1);
     freeMemMatrix(matrix1);
