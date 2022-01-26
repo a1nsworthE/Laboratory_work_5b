@@ -166,11 +166,11 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
     // Поиск максимальных значений на псевдогоналях слева и справа от главной диагонали
     position leftI = {1, 0};
     position rightI = {0, 1};
-    while (leftI.rowIndex < m.nRows && leftI.colIndex < m.nCols ||
-           rightI.colIndex < m.nCols && rightI.rowIndex < m.nRows) {
+    while (leftI.rowIndex < m.nRows && leftI.colIndex < 1 ||
+           rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
 
         // Поиск слева
-        if (leftI.rowIndex < m.nRows && leftI.colIndex < m.nCols) {
+        if (leftI.rowIndex < m.nRows && leftI.colIndex < 1) {
             int maxElemLeft = m.values[leftI.rowIndex][leftI.colIndex];
             for (size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
                 if (m.values[i][j] > maxElemLeft)
@@ -180,7 +180,7 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
         }
 
         // Поиск справа
-        if (rightI.colIndex < m.nCols && rightI.rowIndex < m.nRows) {
+        if (rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
             int maxElemRight = m.values[rightI.rowIndex][rightI.colIndex];
             for (size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
                 if (m.values[i][j] > maxElemRight)
