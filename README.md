@@ -12,6 +12,6 @@ __Проверили:__:mortar_board:\
 Черников Сергей Викторович
 ---
 ***Требования:***
-+Решение задач:white_check_mark:
-+Ссылка на открытый репозиторий:white_check_mark:
-+История коммитов:white_check_mark:
++ Решение задач:white_check_mark:
++ Ссылка на открытый репозиторий:white_check_mark:
++ История коммитов:white_check_mark:
