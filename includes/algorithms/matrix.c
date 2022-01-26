@@ -313,3 +313,17 @@ createArrayOfMatrixFromArray(const int *values, const size_t nMatrices, const si
 
     return ms;
 }
+
+matrix mulMatrices(const matrix m1, const matrix m2) {
+    assert(m1.nCols == m2.nRows);
+
+    matrix mulM1M2 = getMemMatrix(m1.nRows, m2.nCols);
+    for (size_t i = 0; i < m2.nCols; ++i) {
+        for (size_t j = 0; j < m1.nRows; ++j) {
+            for (size_t k = 0; k < m2.nCols; ++k) {
+
+            }
+        }
+    }
+
+}
