@@ -16,6 +16,17 @@ void getSquareOfMatrixIfSymmetric(matrix *m) {
         *m = mulMatrices(*m, *m);
 }
 
+void transposeIfMatrixHasEqualSumOfRows(matrix m) {
+    long long *arraySum = (long long *) calloc(m.nRows, sizeof(long long));
+    for (size_t i = 0; i < m.nRows; ++i)
+        arraySum[i] += getSumArray(m.values[i], m.nCols);
+
+    if (isUniqueArrayElements(arraySum, m.nRows))
+        transposeSquareMatrix(m);
+
+    free(arraySum);
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -94,23 +105,13 @@ int main() {
 /**/
 /**/
 
-void transposeIfMatrixHasEqualSumOfRows(matrix m) {
-    long long *arraySum = (long long *) calloc(m.nRows, sizeof(long long));
-    for (size_t i = 0; i < m.nRows; ++i)
-        arraySum[i] += getSumArray(m.values[i], m.nCols);
-
-    if (isUniqueArrayElements(arraySum, m.nRows))
-        transposeSquareMatrix(m);
-
-    free(arraySum);
-}
 
 int main() {
     size_t n;
     scanf("%zd", &n);
     matrix matrix1 = getMemMatrix(n, n);
     inputMatrix(matrix1);
-    getSquareOfMatrixIfSymmetric(&matrix1);
+    transposeIfMatrixHasEqualSumOfRows(matrix1);
 
     outputMatrix(matrix1);
     freeMemMatrix(matrix1);
