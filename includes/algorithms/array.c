@@ -1,5 +1,9 @@
 #include "array.h"
 
+int max(const int a, const int b) {
+    return a > b ? a : b;
+}
+
 void swap(int *const a, int *const b) {
     const int t = *a;
     *a = *b;

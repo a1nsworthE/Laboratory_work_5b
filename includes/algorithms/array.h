@@ -27,4 +27,6 @@ int getMinElement(const int *a, size_t n);
 
 bool isUniqueArrayElements(const long long *a, size_t n);
 
+int max(int a, int b);
+
 #endif //INC_5B_ARRAY_H
