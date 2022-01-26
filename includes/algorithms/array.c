@@ -63,11 +63,19 @@ int getMaxElement(const int *a, const size_t n) {
     return maxElement;
 }
 
-int getMinElement(const int *a, const size_t n) {
+long long getMinElement(const int *a, const size_t n) {
     int minElement = a[0];
     for (size_t i = 1; i < n; ++i)
         if (a[i] < minElement)
             minElement = a[i];
 
     return minElement;
+}
+
+bool isUniqueArrayElements(const long long *a, const size_t n) {
+    for (size_t i = 0; i < n - 1; ++i)
+        for (size_t j = i + 1; j < n; ++j)
+            if (a[i] == a[j])
+                return false;
+    return true;
 }

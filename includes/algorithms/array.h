@@ -23,6 +23,8 @@ int getSumArray(const int *a, size_t n);
 
 int getMaxElement(const int *a, size_t n);
 
-int getMinElement(const int *a, size_t n);
+long long getMinElement(const int *a, size_t n);
+
+bool isUniqueArrayElements(const long long *a, size_t n);
 
 #endif //INC_5B_ARRAY_H
