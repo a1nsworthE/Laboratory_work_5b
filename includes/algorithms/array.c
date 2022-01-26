@@ -55,6 +55,15 @@ int getSumArray(const int *a, size_t n) {
 }
 
 int getMaxElement(const int *a, const size_t n) {
+    int maxElement = a[0];
+    for (size_t i = 1; i < n; ++i)
+        if (a[i] > maxElement)
+            maxElement = a[i];
+
+    return maxElement;
+}
+
+int getMinElement(const int *a, const size_t n) {
     int minElement = a[0];
     for (size_t i = 1; i < n; ++i)
         if (a[i] < minElement)
