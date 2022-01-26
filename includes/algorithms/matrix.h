@@ -52,4 +52,6 @@ matrix createMatrixFromArray(const int *a, int nRows, int nCols);
 
 matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols);
 
+matrix mulMatrices(matrix m1, matrix m2);
+
 #endif //INC_5B_MATRIX_H

@@ -184,7 +184,7 @@ bool isSquareMatrix(const matrix m) {
 /// \param m2 - вторая матрица
 /// \return Возращает true, если матрицы m1 и m2, иначе false
 bool twoMatricesEqual(const matrix m1, const matrix m2) {
-    if(m1.nRows != m2.nRows || m1.nCols != m2.nCols)
+    if (m1.nRows != m2.nRows || m1.nCols != m2.nCols)
         return false;
     if (m1.nRows == m2.nRows && m1.nCols == m2.nCols) {
         for (size_t i = 0; i < m1.nRows; ++i)
@@ -314,16 +314,21 @@ createArrayOfMatrixFromArray(const int *values, const size_t nMatrices, const si
     return ms;
 }
 
+///
+/// \param m1
+/// \param m2
+/// \return
 matrix mulMatrices(const matrix m1, const matrix m2) {
     assert(m1.nCols == m2.nRows);
 
     matrix mulM1M2 = getMemMatrix(m1.nRows, m2.nCols);
-    for (size_t i = 0; i < m2.nCols; ++i) {
-        for (size_t j = 0; j < m1.nRows; ++j) {
-            for (size_t k = 0; k < m2.nCols; ++k) {
-
-            }
+    for (size_t i = 0; i < m1.nRows; ++i)
+        for (size_t j = 0; j < m2.nCols; ++j) {
+            mulM1M2.values[i][j] = 0;
+            for (size_t k = 0; k < m1.nCols; ++k)
+                mulM1M2.values[i][j] += m1.values[i][k] * m2.values[k][j];
         }
-    }
 
+    return mulM1M2;
 }
+
