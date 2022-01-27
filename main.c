@@ -18,7 +18,7 @@ void getSquareOfMatrixIfSymmetric(matrix *m) {
 
 void transposeIfMatrixHasEqualSumOfRows(matrix m) {
     long long *arraySum = (long long *) calloc(m.nRows, sizeof(long long));
-    for (size_t i = 0; i < m.nRows; ++i)
+    for (register size_t i = 0; i < m.nRows; ++i)
         arraySum[i] += getSumArray(m.values[i], m.nCols);
 
     if (isUniqueArrayElements(arraySum, m.nRows))
@@ -55,7 +55,7 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
         // Поиск слева
         if (leftI.rowIndex < m.nRows && leftI.colIndex < 1) {
             int maxElemLeft = m.values[leftI.rowIndex][leftI.colIndex];
-            for (size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
+            for (register size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
                 if (m.values[i][j] > maxElemLeft)
                     maxElemLeft = m.values[i][j];
             append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemLeft);
@@ -65,7 +65,7 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
         // Поиск справа
         if (rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
             int maxElemRight = m.values[rightI.rowIndex][rightI.colIndex];
-            for (size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
+            for (register size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
                 if (m.values[i][j] > maxElemRight)
                     maxElemRight = m.values[i][j];
             append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemRight);
@@ -231,10 +231,19 @@ int getMinInArea(const matrix m) {
     position maxElemPos = getMaxValuePos(m);
     int minElem = m.values[maxElemPos.rowIndex][maxElemPos.colIndex];
 
-    for (int i = maxElemPos.rowIndex; i >= 0; --i)
-        for (size_t j = 0; j <= ; ++j)
+    // будем уменьшать i пока <= 0
+    // j будем передвигать вправо пока != maxElemPos.colIndex
+    int left = maxElemPos.colIndex;
+    int right = left;
+    for (register int i = maxElemPos.rowIndex; i >= 0; --i) {
+        for (register size_t j = left; j <= right; ++j)
             if (m.values[i][j] < minElem)
                 minElem = m.values[i][j];
+        left = left > 0 ? left - 1 : left;
+        right = right < m.nRows ? right + 1 : right;
+    }
+
+    return minElem;
 }
 
 int main() {
@@ -242,7 +251,7 @@ int main() {
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
-    printf("%d \n", findSumOfMaxesOfPseudoDiagonal(matrix1));
+    printf("%d \n", getMinInArea(matrix1));
 
     outputMatrix(matrix1);
     freeMemMatrix(matrix1);
