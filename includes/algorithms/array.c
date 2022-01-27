@@ -83,3 +83,10 @@ bool isUniqueArrayElements(const long long *a, const size_t n) {
                 return false;
     return true;
 }
+
+double getDistance(const int *a, const size_t n) {
+    long long sum = 0;
+    for (register size_t i = 0; i < n; ++i)
+        sum += (a[i] * a[i]);
+    return sqrt(sum);
+}

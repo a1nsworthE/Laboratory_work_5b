@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <memory.h>
+#include <math.h>
 
 int max(int a, int b);
 
@@ -28,5 +29,7 @@ int getMaxElement(const int *a, size_t n);
 int getMinElement(const int *a, size_t n);
 
 bool isUniqueArrayElements(const long long *a, size_t n);
+
+double getDistance(const int *a, size_t n);
 
 #endif //INC_5B_ARRAY_H
