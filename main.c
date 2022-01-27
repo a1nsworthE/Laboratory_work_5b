@@ -274,13 +274,25 @@ int main() {
 // 15 задача>>>
 /**/
 
+unsigned countEqClassesByRowsSum(matrix m) {
+    long long *arraySumsRows = (long long *) malloc(m.nRows * sizeof(long long));
+    assert(arraySumsRows != NULL);
+
+    for (register size_t i = 0; i < m.nRows; ++i)
+        arraySumsRows[i] = getSumArray(m.values[i], m.nCols);
+
+    unsigned counterEqualRows = getCounterEqualElementsArray(arraySumsRows, m.nRows);
+    free(arraySumsRows);
+
+    return counterEqualRows;
+}
 
 int main() {
     size_t n, m;
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
-    sortByDistancesByNonDecreasing(matrix1);
+    printf("%u \n", countEqClassesByRowsSum(matrix1));
 
     outputMatrix(matrix1);
     freeMemMatrix(matrix1);
