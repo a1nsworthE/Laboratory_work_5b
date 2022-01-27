@@ -80,6 +80,23 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
     return sum;
 }
 
+int getMinInArea(const matrix m) {
+    position maxElemPos = getMaxValuePos(m);
+    int minElem = m.values[maxElemPos.rowIndex][maxElemPos.colIndex];
+
+    int left = maxElemPos.colIndex;
+    int right = left;
+    for (register int i = maxElemPos.rowIndex; i >= 0; --i) {
+        for (register size_t j = left; j <= right; ++j)
+            if (m.values[i][j] < minElem)
+                minElem = m.values[i][j];
+        left = left > 0 ? left - 1 : left;
+        right = right < m.nRows ? right + 1 : right;
+    }
+
+    return minElem;
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -204,7 +221,20 @@ int main() {
 */
 
 // 8 задача>>>
-/**/
+/*
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+    printf("%d \n", getMinInArea(matrix1));
+
+    outputMatrix(matrix1);
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
 
 // 9 задача>>>
 /**/
@@ -227,24 +257,6 @@ int main() {
 // 15 задача>>>
 /**/
 
-int getMinInArea(const matrix m) {
-    position maxElemPos = getMaxValuePos(m);
-    int minElem = m.values[maxElemPos.rowIndex][maxElemPos.colIndex];
-
-    // будем уменьшать i пока <= 0
-    // j будем передвигать вправо пока != maxElemPos.colIndex
-    int left = maxElemPos.colIndex;
-    int right = left;
-    for (register int i = maxElemPos.rowIndex; i >= 0; --i) {
-        for (register size_t j = left; j <= right; ++j)
-            if (m.values[i][j] < minElem)
-                minElem = m.values[i][j];
-        left = left > 0 ? left - 1 : left;
-        right = right < m.nRows ? right + 1 : right;
-    }
-
-    return minElem;
-}
 
 int main() {
     size_t n, m;
