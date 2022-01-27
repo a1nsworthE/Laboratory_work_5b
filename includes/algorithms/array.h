@@ -32,4 +32,6 @@ bool isUniqueArrayElements(const long long *a, size_t n);
 
 double getDistance(const int *a, size_t n);
 
+unsigned getCounterEqualElementsArray(const int *a, size_t n);
+
 #endif //INC_5B_ARRAY_H

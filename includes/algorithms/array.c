@@ -90,3 +90,12 @@ double getDistance(const int *a, const size_t n) {
         sum += (a[i] * a[i]);
     return sqrt(sum);
 }
+
+unsigned getCounterEqualElementsArray(const int *a, const size_t n) {
+    unsigned counterEquals = 0;
+    for (register size_t i = 0; i < n - 1; ++i)
+        for (register size_t j = i + 1; j < n; ++j)
+            if (a[i] == a[j])
+                counterEquals++;
+    return counterEquals;
+}
