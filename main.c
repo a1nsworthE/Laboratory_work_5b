@@ -258,12 +258,23 @@ int main() {
 /**/
 
 
+double getDistance(const int *a, const size_t n) {
+    long long sum = 0;
+    for (register size_t i = 0; i < n; ++i)
+        sum += (a[i] * a[i]);
+    return sqrt(sum);
+}
+
+void sortByDistancesByNonDecreasing(matrix m) {
+    insertionSortRowsMatrixByRowCriteriaD(m, getDistance);
+}
+
 int main() {
     size_t n, m;
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
-    printf("%d \n", getMinInArea(matrix1));
+    sortByDistancesByNonDecreasing(matrix1);
 
     outputMatrix(matrix1);
     freeMemMatrix(matrix1);
