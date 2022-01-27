@@ -126,7 +126,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
     for (size_t i = 0; i < m.nRows; ++i)
         arrayForSort[i] = criteria(m.values[i], m.nCols);
 
-    for (size_t i = 1; i < m.nRows; ++i) {
+    for (register size_t i = 1; i < m.nRows; ++i) {
         int tArray = arrayForSort[i];
         register size_t j = i;
         while (j > 0 && arrayForSort[j - 1] > tArray) {
@@ -139,6 +139,31 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 
     free(arrayForSort);
 }
+
+/// Сортирует строки матрицы по неубыванию по критерию
+/// \param m - матрица
+/// \param criteria - критерий для сортировки
+void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t)) {
+    double *arrayForSort = (double *) malloc(m.nRows * sizeof(double ));
+    assert(arrayForSort != NULL);
+
+    for (size_t i = 0; i < m.nRows; ++i)
+        arrayForSort[i] = criteria(m.values[i], m.nCols);
+
+    for (register size_t i = 1; i < m.nRows; ++i) {
+        double tArray = arrayForSort[i];
+        register size_t j = i;
+        while (j > 0 && arrayForSort[j - 1] > tArray) {
+            arrayForSort[j] = arrayForSort[j - 1];
+            swapRows(m, j, j - 1);
+            --j;
+        }
+        arrayForSort[j] = tArray;
+    }
+
+    free(arrayForSort);
+}
+
 
 /// Сортирует столбцы матрицы по неубыванию по критерию
 /// \param m - матрица
