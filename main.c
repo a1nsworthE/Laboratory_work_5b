@@ -97,6 +97,10 @@ int getMinInArea(const matrix m) {
     return minElem;
 }
 
+void sortByDistancesByNonDecreasing(matrix m) {
+    insertionSortRowsMatrixByRowCriteriaD(m, getDistance);
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -237,7 +241,20 @@ int main() {
 */
 
 // 9 задача>>>
-/**/
+/*
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+    sortByDistancesByNonDecreasing(matrix1);
+
+    outputMatrix(matrix1);
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
 
 // 10 задача>>>
 /**/
@@ -257,17 +274,6 @@ int main() {
 // 15 задача>>>
 /**/
 
-
-double getDistance(const int *a, const size_t n) {
-    long long sum = 0;
-    for (register size_t i = 0; i < n; ++i)
-        sum += (a[i] * a[i]);
-    return sqrt(sum);
-}
-
-void sortByDistancesByNonDecreasing(matrix m) {
-    insertionSortRowsMatrixByRowCriteriaD(m, getDistance);
-}
 
 int main() {
     size_t n, m;
