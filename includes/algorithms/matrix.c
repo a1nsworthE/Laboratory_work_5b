@@ -384,3 +384,92 @@ unsigned getCounterZeroRows(const matrix m) {
 
     return counterZeroRows;
 }
+
+/// Выделение памяти под матрицу nRows x nCols
+/// \param nRows - кол-во строк
+/// \param nCols - кол-во столбцов
+/// \return возвращает {values, nRows, nCols} ; values - указатель на матрицу
+matrixD getMemMatrixD(const int nRows, const int nCols) {
+    assert(nRows > 0 && nCols > 0);
+
+    double **values = (double **) malloc(nRows * sizeof(double *));
+    assert(values != NULL);
+
+    for (register size_t i = 0; i < nRows; ++i) {
+        values[i] = (double *) malloc(nCols * sizeof(double));
+        assert(values[i] != NULL);
+    }
+    return (matrixD) {values, nRows, nCols};
+}
+
+/// Выделение памяти под матрицу матриц, в котором содержатся матрицы размера nRows x nCols
+/// \param nMatrices - размер массива матриц
+/// \param nRows - кол-во строк
+/// \param nCols - кол-во столбцов
+/// \return Возвращает указатель на массив матриц
+matrixD *getMemArrayOfMatricesD(const int nMatrices, const int nRows, const int nCols) {
+    assert(nMatrices > 0);
+
+    matrixD *ms = (matrixD *) malloc(nMatrices * sizeof(matrixD));
+    assert(ms != NULL);
+
+    for (register size_t i = 0; i < nMatrices; ++i)
+        ms[i] = getMemMatrixD(nRows, nCols);
+    return ms;
+}
+
+/// Освобождает память выделеную под хранение матрицу
+/// \param m - матрица
+void freeMemMatrixD(matrixD m) {
+    for (register size_t i = 0; i < m.nRows; ++i)
+        free(m.values[i]);
+    free(m.values);
+}
+
+/// Освобождает память выделеную под хранение матрицы матриц
+/// \param ms - указатель на массив матриц
+/// \param nMatrices - размер массива матриц (кол-во матриц)
+void freeMemMatricesD(matrixD *ms, const int nMatrices) {
+    assert(nMatrices > 0);
+
+    for (register size_t i = 0; i < nMatrices; ++i)
+        freeMemMatrixD(ms[i]);
+    free(ms);
+}
+
+/// Ввод матрицы
+/// \param m - матрица
+void inputMatrixD(matrixD m) {
+    for (register size_t i = 0; i < m.nRows; ++i)
+        for (register size_t j = 0; j < m.nCols; ++j)
+            scanf("%f", &(m.values[i][j]));
+}
+
+/// Ввод матрицы матриц матриц
+/// \param ms - указатель на массив матриц
+/// \param nMatrices - размер массива матриц
+void inputMatricesD(matrixD *ms, const int nMatrices) {
+    for (register size_t i = 0; i < nMatrices; ++i)
+        inputMatrixD(ms[i]);
+}
+
+/// Вывод матрицы
+/// \param m - матрица
+void outputMatrixD(matrixD m) {
+    for (register size_t i = 0; i < m.nRows; ++i) {
+        printf("|");
+        for (register size_t j = 0; j < m.nCols; ++j)
+            printf("%f ", m.values[i][j]);
+        printf("\b| \n");
+    }
+}
+
+/// Вывод матрицы матриц
+/// \param ms - адрес нулевой матрицы матриц
+/// \param nMatrices - размер массива матриц
+void outputMatricesD(matrixD *ms, const int nMatrices) {
+    assert(nMatrices > 0);
+
+    for (register size_t i = 0; i < nMatrices; ++i)
+        outputMatrixD(ms[i]);
+}

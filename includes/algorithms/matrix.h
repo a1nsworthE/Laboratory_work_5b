@@ -27,6 +27,22 @@ void outputMatrix(matrix m);
 
 void outputMatrices(matrix *ms, int nMatrices);
 
+matrixD getMemMatrixD(int nRows, int nCols);
+
+matrixD *getMemArrayOfMatricesD(int nMatrices, int nRows, int nCols);
+
+void freeMemMatrixD(matrixD m);
+
+void freeMemMatricesD(matrixD *ms, int nMatrices);
+
+void inputMatrixD(matrixD m);
+
+void inputMatricesD(matrixD *ms, int nMatrices);
+
+void outputMatrixD(matrixD m);
+
+void outputMatricesD(matrixD *ms, int nMatrices);
+
 void swapRows(matrix m, int i1, int i2);
 
 void swapColumns(matrix m, int j1, int j2);
