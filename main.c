@@ -155,7 +155,6 @@ unsigned getCounterSpecialElement(const matrix m) {
     return counterSpecial;
 }
 
-
 void swapPenultimateRow(matrix m, const size_t indexColumn) {
     assert(m.nRows > 1 && m.nCols > 0);
 
@@ -177,6 +176,19 @@ unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatri
         if (hasAllSortByRows(ms[i], isNonDecreasing))
             counterMatrix++;
     return counterMatrix;
+}
+
+void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
+    unsigned *arrayCounterZeroRows = (unsigned *) malloc(nMatrix * sizeof(unsigned));
+    for (size_t i = 0; i < nMatrix; ++i)
+        arrayCounterZeroRows[i] = getCounterZeroRows(ms[i]);
+    unsigned maxCounterZeroRows = getMaxElemArray(arrayCounterZeroRows, nMatrix);
+
+    for (size_t i = 0; i < nMatrix; ++i)
+        if (arrayCounterZeroRows[i] == maxCounterZeroRows)
+            outputMatrix(ms[i]);
+
+    free(arrayCounterZeroRows);
 }
 
 // 1 задача>>>
@@ -400,23 +412,23 @@ int main() {
 */
 
 // 14 задача>>>
-/**/
+/*
+int main() {
+    size_t nMatrics, n, m;
+    scanf("%zd %zd %zd", &nMatrics, &n, &m);
+    matrix *ms = getMemArrayOfMatrices(nMatrics, n, m);
+    inputMatrices(ms, nMatrics);
+
+    printMatrixWithMaxZeroRows(ms, nMatrics);
+
+    freeMemMatrices(ms, nMatrics);
+
+    return 0;
+}
+*/
 
 // 15 задача>>>
 /**/
-
-void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
-    unsigned *arrayCounterZeroRows = (unsigned *) malloc(nMatrix * sizeof(unsigned));
-    for (size_t i = 0; i < nMatrix; ++i)
-        arrayCounterZeroRows[i] = getCounterZeroRows(ms[i]);
-    unsigned maxCounterZeroRows = getMaxElemArray(arrayCounterZeroRows, nMatrix);
-
-    for (size_t i = 0; i < nMatrix; ++i)
-        if (arrayCounterZeroRows[i] == maxCounterZeroRows)
-            outputMatrix(ms[i]);
-
-    free(arrayCounterZeroRows);
-}
 
 int main() {
     size_t nMatrics, n, m;
