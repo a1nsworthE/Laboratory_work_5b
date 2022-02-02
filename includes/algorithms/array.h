@@ -6,6 +6,10 @@
 #include <memory.h>
 #include <math.h>
 
+bool isDecreasing(long long a, long long b);
+
+bool isIncreasing(long long a, long long b);
+
 int max(int a, int b);
 
 void swap(int *a, int *b);
@@ -33,5 +37,7 @@ bool isUniqueArrayElements(const long long *a, size_t n);
 double getDistance(const int *a, size_t n);
 
 unsigned getCounterEqualElementsArray(const int *a, size_t n);
+
+void insertionSort(long long *a, size_t n, bool(*condition)(long long, long long));
 
 #endif //INC_5B_ARRAY_H
