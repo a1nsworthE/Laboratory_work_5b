@@ -98,6 +98,36 @@ void sortByDistancesByNonDecreasing(matrix m) {
     insertionSortRowsMatrixByRowCriteriaD(m, getDistance);
 }
 
+unsigned countEqClassesByRowsSum(const matrix m) {
+    assert(m.nRows > 0 && m.nCols > 0);
+
+    long long *arraySumsRows = (long long *) malloc(m.nRows * sizeof(long long));
+    assert(arraySumsRows != NULL);
+
+    for (register size_t i = 0; i < m.nRows; ++i)
+        arraySumsRows[i] = getSumArray(m.values[i], m.nCols);
+
+    insertionSort(arraySumsRows, m.nRows, isIncreasing);
+
+    unsigned counterEqual = 0;
+    long long lastNumber = arraySumsRows[0];
+    bool isLowTwo = true;
+    for (register size_t i = 1; i < m.nRows; ++i) {
+        long long currentNumber = arraySumsRows[i];
+        if (currentNumber == lastNumber && isLowTwo) {
+            counterEqual++;
+            isLowTwo = false;
+        } else if (currentNumber != lastNumber)
+            isLowTwo = true;
+
+        lastNumber = currentNumber;
+    }
+
+    free(arraySumsRows);
+
+    return counterEqual;
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -254,7 +284,19 @@ int main() {
 */
 
 // 10 задача>>>
-/**/
+/*
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+    printf("%u \n", countEqClassesByRowsSum(matrix1));
+
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
 
 // 11 задача>>>
 /**/
@@ -270,36 +312,6 @@ int main() {
 
 // 15 задача>>>
 /**/
-
-unsigned countEqClassesByRowsSum(const matrix m) {
-    assert(m.nRows > 0 && m.nCols > 0);
-
-    long long *arraySumsRows = (long long *) malloc(m.nRows * sizeof(long long));
-    assert(arraySumsRows != NULL);
-
-    for (register size_t i = 0; i < m.nRows; ++i)
-        arraySumsRows[i] = getSumArray(m.values[i], m.nCols);
-
-    insertionSort(arraySumsRows, m.nRows, isIncreasing);
-
-    unsigned counterEqual = 0;
-    long long lastNumber = arraySumsRows[0];
-    bool isLowTwo = true;
-    for (register size_t i = 1; i < m.nRows; ++i) {
-        long long currentNumber = arraySumsRows[i];
-        if (currentNumber == lastNumber && isLowTwo) {
-            counterEqual++;
-            isLowTwo = false;
-        } else if (currentNumber != lastNumber)
-            isLowTwo = true;
-
-        lastNumber = currentNumber;
-    }
-
-    free(arraySumsRows);
-
-    return counterEqual;
-}
 
 int main() {
     size_t n, m;
