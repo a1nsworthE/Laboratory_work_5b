@@ -6,11 +6,11 @@ typedef struct matrix {
     int nCols;     // кол - во столбцов
 } matrix;
 
-typedef struct matrixF {
-    float **values; // элементы матриц
-    int nRows;      // кол - во строк
-    int nCols;      // кол - во столбцов
-} matrixF;
+typedef struct matrixD {
+    double **values;    // элементы матриц
+    int nRows;          // кол - во строк
+    int nCols;          // кол - во столбцов
+} matrixD;
 
 
 typedef struct position {
