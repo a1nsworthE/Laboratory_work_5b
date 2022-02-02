@@ -46,4 +46,6 @@ bool isSortBy(const int *a, size_t n, bool(*condition)(long long, long long));
 
 void insertionSort(long long *a, size_t n, bool(*condition)(long long, long long));
 
+unsigned getCounterElemXInArray(const int *a, size_t n, int x);
+
 #endif //INC_5B_ARRAY_H

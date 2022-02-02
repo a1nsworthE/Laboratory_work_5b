@@ -134,3 +134,12 @@ void insertionSort(long long *a, const size_t n, bool(*condition)(long long, lon
         a[j] = t;
     }
 }
+
+unsigned getCounterElemXInArray(const int *a, const size_t n, const int x) {
+    unsigned counterElemX = 0;
+    for (size_t i = 0; i < n; ++i)
+        if (a[i] == x)
+            counterElemX++;
+
+    return counterElemX;
+}
