@@ -144,7 +144,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
 void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t)) {
-    double *arrayForSort = (double *) malloc(m.nRows * sizeof(double ));
+    double *arrayForSort = (double *) malloc(m.nRows * sizeof(double));
     assert(arrayForSort != NULL);
 
     for (size_t i = 0; i < m.nRows; ++i)
@@ -357,3 +357,19 @@ matrix mulMatrices(const matrix m1, const matrix m2) {
     return mulM1M2;
 }
 
+position getLeftMinPositionElement(const matrix m) {
+    position minPos = {0, 0};
+    int minElement = m.values[0][0];
+    for (size_t i = 0; i < m.nRows; ++i) {
+        for (size_t j = 0; j < m.nCols; ++j) {
+            if (m.values[i][j] < minElement)
+                minElement = m.values[i][j];
+            else if (m.values[i][j] == minElement) {
+                if (j < minPos.colIndex)
+                    minPos.colIndex = j;
+            }
+        }
+    }
+
+    return minPos;
+}

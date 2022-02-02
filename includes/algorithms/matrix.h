@@ -57,4 +57,6 @@ matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t
 
 matrix mulMatrices(matrix m1, matrix m2);
 
+position getLeftMinPositionElement(matrix m);
+
 #endif //INC_5B_MATRIX_H
