@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <malloc.h>
-#include <stdlib.h>
 #include "includes/algorithms/matrix.h"
 
 void sortRowsByMinElement(matrix m) {
@@ -274,17 +271,34 @@ int main() {
 // 15 задача>>>
 /**/
 
-unsigned countEqClassesByRowsSum(matrix m) {
+unsigned countEqClassesByRowsSum(const matrix m) {
+    assert(m.nRows > 0 && m.nCols > 0);
+
     long long *arraySumsRows = (long long *) malloc(m.nRows * sizeof(long long));
     assert(arraySumsRows != NULL);
 
     for (register size_t i = 0; i < m.nRows; ++i)
         arraySumsRows[i] = getSumArray(m.values[i], m.nCols);
 
-    unsigned counterEqualRows = getCounterEqualElementsArray(arraySumsRows, m.nRows);
+    insertionSort(arraySumsRows, m.nRows, isIncreasing);
+
+    unsigned counterEqual = 0;
+    long long lastNumber = arraySumsRows[0];
+    bool isLowTwo = true;
+    for (register size_t i = 1; i < m.nRows; ++i) {
+        long long currentNumber = arraySumsRows[i];
+        if (currentNumber == lastNumber && isLowTwo) {
+            counterEqual++;
+            isLowTwo = false;
+        } else if (currentNumber != lastNumber)
+            isLowTwo = true;
+
+        lastNumber = currentNumber;
+    }
+
     free(arraySumsRows);
 
-    return counterEqualRows;
+    return counterEqual;
 }
 
 int main() {
@@ -294,7 +308,6 @@ int main() {
     inputMatrix(matrix1);
     printf("%u \n", countEqClassesByRowsSum(matrix1));
 
-    outputMatrix(matrix1);
     freeMemMatrix(matrix1);
 
     return 0;
