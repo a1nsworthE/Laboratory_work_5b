@@ -155,6 +155,22 @@ unsigned getCounterSpecialElement(const matrix m) {
     return counterSpecial;
 }
 
+
+void swapPenultimateRow(matrix m, const size_t indexColumn) {
+    assert(m.nRows > 1 && m.nCols > 0);
+
+    size_t RowIndexMin = m.nRows - 1;
+    const size_t swapRowIndex = m.nRows - 2;
+    size_t swapColIndex = m.nCols - 1;
+    for (size_t i = 0; i < m.nRows; ++i) {
+        m.values[swapRowIndex][swapColIndex] = m.values[RowIndexMin][indexColumn];
+        if (RowIndexMin > 0)
+            RowIndexMin--;
+        if (swapColIndex > 0)
+            swapColIndex--;
+    }
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -341,33 +357,7 @@ int main() {
 */
 
 // 12 задача>>>
-/**/
-
-// 13 задача>>>
-/**/
-
-// 14 задача>>>
-/**/
-
-// 15 задача>>>
-/**/
-
-
-void swapPenultimateRow(matrix m, const size_t indexColumn) {
-    assert(m.nRows > 1 && m.nCols > 0);
-
-    size_t RowIndexMin = m.nRows - 1;
-    const size_t swapRowIndex = m.nRows - 2;
-    size_t swapColIndex = m.nCols - 1;
-    for (size_t i = 0; i < m.nRows; ++i) {
-        m.values[swapRowIndex][swapColIndex] = m.values[RowIndexMin][indexColumn];
-        if (RowIndexMin > 0)
-            RowIndexMin--;
-        if (swapColIndex > 0)
-            swapColIndex--;
-    }
-}
-
+/*
 int main() {
     size_t n;
     scanf("%zd", &n);
@@ -378,6 +368,39 @@ int main() {
     outputMatrix(matrix1);
 
     freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+
+// 13 задача>>>
+/**/
+
+// 14 задача>>>
+/**/
+
+// 15 задача>>>
+/**/
+
+unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatrix) {
+    unsigned counterMatrix = 0;
+    for (size_t i = 0; i < nMatrix; ++i)
+        if (hasAllSortByRows(ms[i], isNonDecreasing))
+            counterMatrix++;
+    return counterMatrix;
+}
+
+int main() {
+    size_t nMatrics, n;
+    scanf("%zd %zd", &nMatrics, &n);
+    matrix *ms = getMemArrayOfMatrices(nMatrics, n, n);
+    inputMatrices(ms, nMatrics);
+
+    printf("%u \n", getCountNonDescendingRowsMatrices(ms, nMatrics));
+
+    outputMatrices(ms, nMatrics);
+
+    freeMemMatrices(ms, nMatrics);
 
     return 0;
 }
