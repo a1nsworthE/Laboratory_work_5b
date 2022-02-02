@@ -59,4 +59,6 @@ matrix mulMatrices(matrix m1, matrix m2);
 
 position getLeftMinPositionElement(matrix m);
 
+bool hasAllSortByRows(matrix m, bool(*condition)(long long, long long));
+
 #endif //INC_5B_MATRIX_H

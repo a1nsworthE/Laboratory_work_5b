@@ -85,13 +85,8 @@ void outputMatrix(matrix m) {
 void outputMatrices(matrix *ms, const int nMatrices) {
     assert(nMatrices > 0);
 
-    for (register size_t i = 0; i < nMatrices; ++i) {
+    for (register size_t i = 0; i < nMatrices; ++i)
         outputMatrix(ms[i]);
-        printf(", ");
-    }
-
-    if (nMatrices == 1)
-        printf("\b\b");
 }
 
 /// Обменивает строки матрицы
@@ -372,4 +367,11 @@ position getLeftMinPositionElement(const matrix m) {
     }
 
     return minPos;
+}
+
+bool hasAllSortByRows(const matrix m, bool(*condition)(long long, long long)) {
+    for (size_t i = 0; i < m.nRows; ++i)
+        if (!isSortBy(m.values[i], m.nCols, condition))
+            return false;
+    return true;
 }
