@@ -375,3 +375,12 @@ bool hasAllSortByRows(const matrix m, bool(*condition)(long long, long long)) {
             return false;
     return true;
 }
+
+unsigned getCounterZeroRows(const matrix m) {
+    unsigned counterZeroRows = 0;
+    for (size_t i = 0; i < m.nRows; ++i)
+        if (getCounterElemXInArray(m.values[i], m.nCols, 0) == m.nCols)
+            counterZeroRows++;
+
+    return counterZeroRows;
+}

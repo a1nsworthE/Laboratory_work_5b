@@ -61,4 +61,6 @@ position getLeftMinPositionElement(matrix m);
 
 bool hasAllSortByRows(matrix m, bool(*condition)(long long, long long));
 
+unsigned getCounterZeroRows(matrix m);
+
 #endif //INC_5B_MATRIX_H
