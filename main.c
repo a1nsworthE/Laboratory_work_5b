@@ -313,12 +313,39 @@ int main() {
 // 15 задача>>>
 /**/
 
+unsigned getCounterSpecialElement(const matrix m) {
+    assert(m.nRows > 0 && m.nCols > 0);
+
+    // Массив для хранения столбца
+    long long *arraySumColumn = (long long *) malloc(m.nCols * sizeof(long long));
+    assert(arraySumColumn != NULL);
+
+    // Массив для хранения суммы стобца
+    int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
+    assert(arrayColumn != NULL);
+
+    unsigned counterSpecial = 0;
+    for (register size_t i = 0; i < m.nCols; ++i) {
+        for (register size_t j = 0; j < m.nRows; ++j)
+            arrayColumn[j] = m.values[j][i];
+
+        arraySumColumn[i] = getSumArray(arrayColumn, m.nRows);
+        int maxElementColumn = getMaxElemArray(arrayColumn, m.nRows);
+        if (arraySumColumn[i] - maxElementColumn < maxElementColumn)
+            counterSpecial++;
+    }
+    free(arrayColumn);
+    free(arraySumColumn);
+
+    return counterSpecial;
+}
+
 int main() {
     size_t n, m;
     scanf("%zd %zd", &n, &m);
     matrix matrix1 = getMemMatrix(n, m);
     inputMatrix(matrix1);
-    printf("%u \n", countEqClassesByRowsSum(matrix1));
+    printf("%u \n", getCounterSpecialElement(matrix1));
 
     freeMemMatrix(matrix1);
 
