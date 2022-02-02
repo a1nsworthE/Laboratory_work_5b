@@ -171,6 +171,14 @@ void swapPenultimateRow(matrix m, const size_t indexColumn) {
     }
 }
 
+unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatrix) {
+    unsigned counterMatrix = 0;
+    for (size_t i = 0; i < nMatrix; ++i)
+        if (hasAllSortByRows(ms[i], isNonDecreasing))
+            counterMatrix++;
+    return counterMatrix;
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -374,21 +382,28 @@ int main() {
 */
 
 // 13 задача>>>
-/**/
+/*
+int main() {
+    size_t nMatrics, n;
+    scanf("%zd %zd", &nMatrics, &n);
+    matrix *ms = getMemArrayOfMatrices(nMatrics, n, n);
+    inputMatrices(ms, nMatrics);
+
+    printf("%u \n", getCountNonDescendingRowsMatrices(ms, nMatrics));
+
+    outputMatrices(ms, nMatrics);
+
+    freeMemMatrices(ms, nMatrics);
+
+    return 0;
+}
+*/
 
 // 14 задача>>>
 /**/
 
 // 15 задача>>>
 /**/
-
-unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatrix) {
-    unsigned counterMatrix = 0;
-    for (size_t i = 0; i < nMatrix; ++i)
-        if (hasAllSortByRows(ms[i], isNonDecreasing))
-            counterMatrix++;
-    return counterMatrix;
-}
 
 int main() {
     size_t nMatrics, n;
