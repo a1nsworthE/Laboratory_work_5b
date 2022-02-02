@@ -14,8 +14,23 @@ bool isDecreasing(const long long a, const long long b) {
     return a > b;
 }
 
+bool isNonDecreasing(const long long a, const long long b) {
+    return a <= b;
+}
+
 bool isIncreasing(const long long a, const long long b) {
     return a < b;
+}
+
+bool isNoneIncreasing(const long long a, const long long b) {
+    return a >= b;
+}
+
+bool isSortBy(const int *a, const size_t n, bool(*condition)(long long, long long)) {
+    for (size_t i = 1; i < n; ++i)
+        if (!condition(a[i - 1], a[i]))
+            return false;
+    return true;
 }
 
 void inputArray(int *const a, const size_t n) {

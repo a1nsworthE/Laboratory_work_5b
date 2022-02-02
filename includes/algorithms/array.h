@@ -8,7 +8,11 @@
 
 bool isDecreasing(long long a, long long b);
 
+bool isNonDecreasing(long long a, long long b);
+
 bool isIncreasing(long long a, long long b);
+
+bool isNoneIncreasing(long long a, long long b);
 
 int max(int a, int b);
 
@@ -37,6 +41,8 @@ bool isUniqueArrayElements(const long long *a, size_t n);
 double getDistance(const int *a, size_t n);
 
 unsigned getCounterEqualElementsArray(const int *a, size_t n);
+
+bool isSortBy(const int *a, size_t n, bool(*condition)(long long, long long));
 
 void insertionSort(long long *a, size_t n, bool(*condition)(long long, long long));
 
