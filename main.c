@@ -352,12 +352,30 @@ int main() {
 // 15 задача>>>
 /**/
 
+
+void swapPenultimateRow(matrix m, const size_t indexColumn) {
+    assert(m.nRows > 1 && m.nCols > 0);
+
+    size_t RowIndexMin = m.nRows - 1;
+    const size_t swapRowIndex = m.nRows - 2;
+    size_t swapColIndex = m.nCols - 1;
+    for (size_t i = 0; i < m.nRows; ++i) {
+        m.values[swapRowIndex][swapColIndex] = m.values[RowIndexMin][indexColumn];
+        if (RowIndexMin > 0)
+            RowIndexMin--;
+        if (swapColIndex > 0)
+            swapColIndex--;
+    }
+}
+
 int main() {
-    size_t n, m;
-    scanf("%zd %zd", &n, &m);
-    matrix matrix1 = getMemMatrix(n, m);
+    size_t n;
+    scanf("%zd", &n);
+    matrix matrix1 = getMemMatrix(n, n);
     inputMatrix(matrix1);
-    printf("%u \n", getCounterSpecialElement(matrix1));
+    swapPenultimateRow(matrix1, getLeftMinPositionElement(matrix1).colIndex);
+
+    outputMatrix(matrix1);
 
     freeMemMatrix(matrix1);
 
