@@ -1719,13 +1719,82 @@ void test_sortByDistancesByNonDecreasing() {
     test_sortByDistancesByNonDecreasing_randomRows();
 }
 
-void test_countEqClassesByRowsSum() {
+void test_countEqClassesByRowsSum_oneRowWithoutEqClasses() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 1,
+                    2, 0,
+                    3, 3
+            },
+            3, 2
+    );
 
+    assert(countEqClassesByRowsSum(matrix1) == 1);
+
+    freeMemMatrix(matrix1);
 }
 
-void test_countEqClassesByRowsSum() {
+void test_countEqClassesByRowsSum_allRowsWithoutEqClasses() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 0,
+                    2, 0,
+                    3, 3
+            },
+            3, 2
+    );
 
+    assert(countEqClassesByRowsSum(matrix1) == 0);
+
+    freeMemMatrix(matrix1);
 }
+
+void test_countEqClassesByRowsSum_allRowsEqualSum() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 0,
+                    0, 1,
+                    -1, 2
+            },
+            3, 2
+    );
+
+    assert(countEqClassesByRowsSum(matrix1) == 1);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_countEqClassesByRowsSum_largeRows() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 0,
+                    0, 1,
+                    -1, 2,
+                    5,0,
+                    0,5,
+                    10,0,
+                    9,0,
+                    2,-1,
+                    7,0,
+                    0,7
+
+            },
+            10, 2
+    );
+
+    assert(countEqClassesByRowsSum(matrix1) == 3);
+
+    freeMemMatrix(matrix1);
+}
+
+
+void test_countEqClassesByRowsSum() {
+    test_countEqClassesByRowsSum_oneRowWithoutEqClasses();
+    test_countEqClassesByRowsSum_allRowsWithoutEqClasses();
+    test_countEqClassesByRowsSum_allRowsEqualSum();
+    test_countEqClassesByRowsSum_largeRows();
+}
+
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
