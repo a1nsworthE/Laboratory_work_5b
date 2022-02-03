@@ -1,6 +1,6 @@
 #include "includes/algorithms/matrix.h"
 
-void sortRowsByMinElement(matrix m) {
+void sortRowsByMaxElement(matrix m) {
     insertionSortRowsMatrixByRowCriteria(m, getMaxElemArray);
 }
 
