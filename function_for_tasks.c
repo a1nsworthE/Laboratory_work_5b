@@ -136,7 +136,7 @@ unsigned countEqClassesByRowsSum(const matrix m) {
 unsigned getCounterSpecialElement(const matrix m) {
     assert(m.nRows > 0 && m.nCols > 0);
 
-    if(m.nRows == 1 && m.nCols == 1)
+    if (m.nRows == 1 && m.nCols == 1)
         return 0;
 
     // Массив для хранения столбца
@@ -166,15 +166,23 @@ unsigned getCounterSpecialElement(const matrix m) {
 void swapPenultimateRow(matrix m, const size_t indexColumn) {
     assert(m.nRows > 1 && m.nCols > 0);
 
-    size_t RowIndexMin = m.nRows - 1;
     const size_t swapRowIndex = m.nRows - 2;
-    size_t swapColIndex = m.nCols - 1;
-    for (size_t i = 0; i < m.nRows; ++i) {
-        m.values[swapRowIndex][swapColIndex] = m.values[RowIndexMin][indexColumn];
-        if (RowIndexMin > 0)
-            RowIndexMin--;
-        if (swapColIndex > 0)
+    int swapColIndex;
+    int rowForMinColumn = 0;
+    if (indexColumn >= m.nCols / 2) {
+        swapColIndex = 0;
+        for (size_t i = 0; i < m.nRows; ++i) {
+            m.values[swapRowIndex][swapColIndex] = m.values[rowForMinColumn][indexColumn];
+            swapColIndex++;
+            rowForMinColumn++;
+        }
+    } else {
+        swapColIndex = m.nCols - 1;
+        for (size_t i = 0; i < m.nRows; ++i) {
+            m.values[swapRowIndex][swapColIndex] = m.values[rowForMinColumn][indexColumn];
             swapColIndex--;
+            rowForMinColumn++;
+        }
     }
 }
 

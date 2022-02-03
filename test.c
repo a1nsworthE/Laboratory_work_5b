@@ -1885,6 +1885,7 @@ void test_swapPenultimateRow_minAtLeftBorder() {
             },
             3, 3
     );
+    swapPenultimateRow(matrix1, 0);
 
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
@@ -1912,6 +1913,7 @@ void test_swapPenultimateRow_minAtCenterCol() {
             },
             3, 3
     );
+    swapPenultimateRow(matrix1, 1);
 
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
@@ -1939,6 +1941,7 @@ void test_swapPenultimateRow_minAtRightBorder() {
             },
             3, 3
     );
+    swapPenultimateRow(matrix1, 2);
 
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
