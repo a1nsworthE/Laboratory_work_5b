@@ -255,14 +255,6 @@ int main() {
 
 
 int main() {
-    size_t nMatrics, n, m;
-    scanf("%zd %zd %zd", &nMatrics, &n, &m);
-    matrixD *ms = getMemArrayOfMatricesD(nMatrics, n, m);
-    inputMatricesD(ms, nMatrics);
-
-    printMinMatrixWithMaxAbsElement(ms, nMatrics);
-
-    freeMemMatricesD(ms, nMatrics);
 
     return 0;
 }
