@@ -1485,9 +1485,86 @@ void test_isMutuallyInverseMatrices() {
     test_isMutuallyInverseMatrices_withoutMistakes();
 }
 
-void test_findSumOfMaxesOfPseudoDiagonal() {
+void test_findSumOfMaxesOfPseudoDiagonal_correctnessCheck() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    3, 2, 5, 4,
+                    1, 3, 6, 3,
+                    3, 2, 1, 2
+            },
+            3, 4
+    );
 
+    assert(findSumOfMaxesOfPseudoDiagonal(matrix1) == 20);
+
+    freeMemMatrix(matrix1);
 }
+
+void test_findSumOfMaxesOfPseudoDiagonal_squareMatrix() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    7, 8, 9,
+            },
+            3, 3
+    );
+
+    assert(findSumOfMaxesOfPseudoDiagonal(matrix1) == 24);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_findSumOfMaxesOfPseudoDiagonal_matrix1x1() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1
+            },
+            1, 1
+    );
+
+    assert(findSumOfMaxesOfPseudoDiagonal(matrix1) == 0);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_findSumOfMaxesOfPseudoDiagonal_oneRow() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    3, 2, 1, 2,
+
+            },
+            1, 4
+    );
+
+    assert(findSumOfMaxesOfPseudoDiagonal(matrix1) == 5);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_findSumOfMaxesOfPseudoDiagonal_oneCol() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    3,
+                    1,
+                    4
+            },
+            3, 1
+    );
+
+    assert(findSumOfMaxesOfPseudoDiagonal(matrix1) == 5);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_findSumOfMaxesOfPseudoDiagonal() {
+    test_findSumOfMaxesOfPseudoDiagonal_correctnessCheck();
+    test_findSumOfMaxesOfPseudoDiagonal_matrix1x1();
+    test_findSumOfMaxesOfPseudoDiagonal_oneCol();
+    test_findSumOfMaxesOfPseudoDiagonal_oneRow();
+    test_findSumOfMaxesOfPseudoDiagonal_squareMatrix();
+}
+
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
