@@ -15,7 +15,6 @@ matrix getMemMatrix(const int nRows, const int nCols) {
 
     for (register size_t i = 0; i < nRows; ++i) {
         values[i] = (int *) malloc(nCols * sizeof(int));
-        assert(values[i] != NULL);
         if (values[i] == NULL){
             fprintf(stderr, "bad alloc");
             exit(1);
@@ -124,7 +123,7 @@ void swapColumns(matrix m, const int j1, const int j2) {
 /// Сортирует строки матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortRowsMatrixByRowCriteria(matrix m, long long (*criteria)(const int *, size_t)) {
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
     if (arrayForSort == NULL){
         fprintf(stderr, "bad alloc");
@@ -179,7 +178,7 @@ void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const in
 /// Сортирует столбцы матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortColsMatrixByColCriteria(matrix m, long long (*criteria)(const int *, size_t)) {
+void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
     if (arrayForSort == NULL){
         fprintf(stderr, "bad alloc");
@@ -391,7 +390,7 @@ position getLeftMinPositionElement(const matrix m) {
     return minPos;
 }
 
-bool hasAllSortByRows(const matrix m, bool(*condition)(long long, long long)) {
+bool hasAllSortByRows(const matrix m, bool(*condition)(int, int)) {
     for (register size_t i = 0; i < m.nRows; ++i)
         if (!isSortBy(m.values[i], m.nCols, condition))
             return false;

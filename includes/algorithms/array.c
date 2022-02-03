@@ -10,23 +10,23 @@ void swap(int *const a, int *const b) {
     *b = t;
 }
 
-bool isDecreasing(const long long a, const long long b) {
+bool isDecreasing(const int a, const int b) {
     return a > b;
 }
 
-bool isNonDecreasing(const long long a, const long long b) {
+bool isNonDecreasing(const int a, const int b) {
     return a <= b;
 }
 
-bool isIncreasing(const long long a, const long long b) {
+bool isIncreasing(const int a, const int b) {
     return a < b;
 }
 
-bool isNoneIncreasing(const long long a, const long long b) {
+bool isNoneIncreasing(const int a, const int b) {
     return a >= b;
 }
 
-bool isSortBy(const int *a, const size_t n, bool(*condition)(long long, long long)) {
+bool isSortBy(const int *a, const size_t n, bool(*condition)(int, int)) {
     for (size_t i = 1; i < n; ++i)
         if (!condition(a[i - 1], a[i]))
             return false;
@@ -58,7 +58,7 @@ int getMinElemArray(const int *const a, const size_t n) {
     return elemMin;
 }
 
-int getMaxElemArray(const int *const a, const size_t n) {
+int getMaxElemArray(const int *a, const size_t n) {
     int elemMax = a[0];
     for (size_t i = 1; i < n; ++i)
         if (a[i] > elemMax)
@@ -74,8 +74,8 @@ bool isEqualArray(const int *a, const size_t sizeA, const int *b, const size_t s
         return false;
 }
 
-long long getSumArrayLL(const int *a, size_t n) {
-    long long sum = 0;
+int getSumArrayLL(const int *a, size_t n) {
+    int sum = 0;
     for (size_t i = 0; i < n; ++i)
         sum += a[i];
     return sum;
@@ -99,7 +99,7 @@ int getMinElement(const int *a, const size_t n) {
     return minElement;
 }
 
-bool isUniqueArrayElements(const long long *a, const size_t n) {
+bool isUniqueArrayElements(const int *a, const size_t n) {
     for (size_t i = 0; i < n - 1; ++i)
         for (size_t j = i + 1; j < n; ++j)
             if (a[i] == a[j])
@@ -108,7 +108,7 @@ bool isUniqueArrayElements(const long long *a, const size_t n) {
 }
 
 double getDistance(const int *a, const size_t n) {
-    long long sum = 0;
+    int sum = 0;
     for (register size_t i = 0; i < n; ++i)
         sum += (a[i] * a[i]);
     return sqrt(sum);
@@ -123,10 +123,10 @@ unsigned getCounterEqualElementsArray(const int *a, const size_t n) {
     return counterEquals;
 }
 
-void insertionSort(long long *a, const size_t n, bool(*condition)(long long, long long)) {
+void insertionSort(int *a, const size_t n, bool(*condition)(int, int)) {
     for (size_t i = 1; i < n; ++i) {
-        long long t = a[i];
-        long long j = i;
+        int t = a[i];
+        int j = i;
         while (j > 0 && condition(a[j - 1], t)) {
             a[j] = a[j - 1];
             j--;

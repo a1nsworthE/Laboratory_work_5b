@@ -14,7 +14,7 @@ void getSquareOfMatrixIfSymmetric(matrix *m) {
 }
 
 void transposeIfMatrixHasEqualSumOfRows(matrix m) {
-    long long *arraySum = (long long *) calloc(m.nRows, sizeof(long long));
+    int *arraySum = (int *) calloc(m.nRows, sizeof(int));
     if (arraySum == NULL) {
         fprintf(stderr, "bad data");
         exit(1);
@@ -41,7 +41,7 @@ bool isMutuallyInverseMatrices(const matrix m1, const matrix m2) {
         return false;
 }
 
-long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
+int findSumOfMaxesOfPseudoDiagonal(const matrix m) {
     assert(m.nRows != 0 || m.nCols != 0);
 
     // Массив максимумов из псевдогоналей матрицы
@@ -75,7 +75,7 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
         }
     }
 
-    long long sum = getSumArrayLL(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
+    int sum = getSumArrayLL(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
 
     free(arrayMaxElemsPseudoDiagonal);
 
@@ -106,8 +106,11 @@ void sortByDistancesByNonDecreasing(matrix m) {
 unsigned countEqClassesByRowsSum(const matrix m) {
     assert(m.nRows > 0 && m.nCols > 0);
 
-    long long *arraySumsRows = (long long *) malloc(m.nRows * sizeof(long long));
-    assert(arraySumsRows != NULL);
+    int *arraySumsRows = (int *) malloc(m.nRows * sizeof(int));
+    if (arraySumsRows == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (register size_t i = 0; i < m.nRows; ++i)
         arraySumsRows[i] = getSumArrayLL(m.values[i], m.nCols);
@@ -115,10 +118,10 @@ unsigned countEqClassesByRowsSum(const matrix m) {
     insertionSort(arraySumsRows, m.nRows, isIncreasing);
 
     unsigned counterEqual = 0;
-    long long lastNumber = arraySumsRows[0];
+    int lastNumber = arraySumsRows[0];
     bool isLowTwo = true;
     for (register size_t i = 1; i < m.nRows; ++i) {
-        long long currentNumber = arraySumsRows[i];
+        int currentNumber = arraySumsRows[i];
         if (currentNumber == lastNumber && isLowTwo) {
             counterEqual++;
             isLowTwo = false;
@@ -140,12 +143,18 @@ unsigned getCounterSpecialElement(const matrix m) {
         return 0;
 
     // Массив для хранения столбца
-    long long *arraySumColumn = (long long *) malloc(m.nCols * sizeof(long long));
-    assert(arraySumColumn != NULL);
+    int *arraySumColumn = (int *) malloc(m.nCols * sizeof(int));
+    if (arraySumColumn == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     // Массив для хранения суммы стобца
     int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
-    assert(arrayColumn != NULL);
+    if (arrayColumn == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     unsigned counterSpecial = 0;
     for (register size_t i = 0; i < m.nCols; ++i) {
