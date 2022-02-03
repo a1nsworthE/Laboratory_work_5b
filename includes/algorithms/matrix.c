@@ -124,7 +124,7 @@ void swapColumns(matrix m, const int j1, const int j2) {
 /// Сортирует строки матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *, size_t)) {
+void insertionSortRowsMatrixByRowCriteria(matrix m, long long (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
     if (arrayForSort == NULL){
         fprintf(stderr, "bad alloc");
@@ -153,7 +153,10 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 /// \param criteria - критерий для сортировки
 void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t)) {
     double *arrayForSort = (double *) malloc(m.nRows * sizeof(double));
-    assert(arrayForSort == NULL);
+    if (arrayForSort == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (size_t i = 0; i < m.nRows; ++i)
         arrayForSort[i] = criteria(m.values[i], m.nCols);
@@ -176,7 +179,7 @@ void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const in
 /// Сортирует столбцы матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
+void insertionSortColsMatrixByColCriteria(matrix m, long long (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
     if (arrayForSort == NULL){
         fprintf(stderr, "bad alloc");
@@ -211,7 +214,7 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *,
     free(arrayForSort);
 }
 
-///  Проверка на квадратность
+/// Проверка на квадратность
 /// \param m - матрица
 /// \return Возвращает true, если матрица квадратная, иначе false
 bool isSquareMatrix(const matrix m) {

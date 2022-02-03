@@ -48,11 +48,11 @@ void swapRows(matrix m, int i1, int i2);
 
 void swapColumns(matrix m, int j1, int j2);
 
-void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *, size_t));
+void insertionSortRowsMatrixByRowCriteria(matrix m, long long (*criteria)(const int *, size_t));
 
 void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t));
 
-void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t));
+void insertionSortColsMatrixByColCriteria(matrix m, long long (*criteria)(const int *, size_t));
 
 bool isSquareMatrix(matrix m);
 
