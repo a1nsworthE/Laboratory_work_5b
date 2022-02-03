@@ -3,7 +3,7 @@ project(Laboratory_5b C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(Laboratory_5b main.c)
+add_executable(Laboratory_5b main.c function_for_tasks.c)
 add_executable(T test.c)
 
 add_subdirectory(includes)
@@ -12,4 +12,5 @@ target_link_libraries(Laboratory_5b structs)
 target_link_libraries(Laboratory_5b algorithms)
 target_link_libraries(T structs)
 target_link_libraries(T algorithms)
+
 
