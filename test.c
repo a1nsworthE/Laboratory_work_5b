@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "includes/algorithms/matrix.h"
 
-void test_swapRows_neighbourRows() {
+void test_swapRows_oneRowAtBorder1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -22,7 +22,7 @@ void test_swapRows_neighbourRows() {
     freeMemMatrix(m);
 }
 
-void test_swapRows_atBordes() {
+void test_swapRows_atBorders() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -46,7 +46,7 @@ void test_swapRows_atBordes() {
 }
 
 
-void test_swapRows_oneRowAtBorder() {
+void test_swapRows_equalRowsForSwap() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -63,7 +63,7 @@ void test_swapRows_oneRowAtBorder() {
     freeMemMatrix(m);
 }
 
-void test_swapRows4() {
+void test_swapRows_atCenter() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -912,13 +912,13 @@ void test_swapColumns() {
 
 
 void test_swapRows() {
-    test_swapRows_neighbourRows();
-    test_swapRows_atBordes();
-    test_swapRows_oneRowAtBorder();
-    test_swapRows4();
+    test_swapRows_oneRowAtBorder1();
+    test_swapRows_atBorders();
+    test_swapRows_equalRowsForSwap();
+    test_swapRows_atCenter();
 }
 
-void test_matrix_function() {
+void test_matrixFunctions() {
     test_swapRows();
     test_swapColumns();
     test_insertionSortColsMatrixByColCriteria();
@@ -933,7 +933,7 @@ void test_matrix_function() {
 }
 
 int main() {
-    test_matrix_function();
+    test_matrixFunctions();
 
     return 0;
 }
