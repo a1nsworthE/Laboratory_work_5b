@@ -1184,7 +1184,7 @@ void test_sortColsByMinElement_isNonDescending() {
             3, 4
     );
 
-    assert(twoMatricesEqual(matrix1, matrix2));
+    assert(!twoMatricesEqual(matrix1, matrix2));
 
     freeMemMatrix(matrix1);
     freeMemMatrix(matrix2);
@@ -1259,7 +1259,7 @@ void test_getSquareOfMatrixIfSymmetric3() {
 
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
-                    2
+                    4
             },
             1, 1
     );
@@ -1662,6 +1662,7 @@ void test_getMinInArea() {
     test_getMinInArea_maxAtMiddleRow();
     test_getMinInArea_minAtRightUpperCorner();
     test_getMinInArea_maxAtMiddleRow();
+    test_getMinInArea_minAtLeftUpperCorner();
 }
 
 void test_sortByDistancesByNonDecreasing_nonIncreasing() {
@@ -1674,6 +1675,7 @@ void test_sortByDistancesByNonDecreasing_nonIncreasing() {
             3, 4
     );
 
+    sortByDistancesByNonDecreasing(matrix1);
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
                     1, 1, 1, 1,
@@ -1699,6 +1701,7 @@ void test_sortByDistancesByNonDecreasing_randomRows() {
             3, 4
     );
 
+    sortByDistancesByNonDecreasing(matrix1);
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
                     1, 1, 1, 1,
@@ -1797,7 +1800,7 @@ void test_countEqClassesByRowsSum() {
 void test_getCounterSpecialElement_largeCols() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    1, 0,
+                    1000, 0,
                     0, 1,
                     -1, 2,
                     5, 0,
@@ -1805,14 +1808,14 @@ void test_getCounterSpecialElement_largeCols() {
                     10, 0,
                     9, 0,
                     2, -1,
-                    7, 0,
+                    7, 300,
                     0, 7
 
             },
             10, 2
     );
 
-    assert(countEqClassesByRowsSum(matrix1) == 10);
+    assert(getCounterSpecialElement(matrix1) == 2);
 
     freeMemMatrix(matrix1);
 
@@ -1829,7 +1832,7 @@ void test_getCounterSpecialElement_noSpecial() {
             3, 3
     );
 
-    assert(countEqClassesByRowsSum(matrix1) == 0);
+    assert(getCounterSpecialElement(matrix1) == 0);
 
     freeMemMatrix(matrix1);
 }
@@ -1837,16 +1840,16 @@ void test_getCounterSpecialElement_noSpecial() {
 void test_getCounterSpecialElement_specialAtBorders() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    1, 2, 5,
+                    100, 2, 5,
                     6, 7, 8,
                     9, 10, 11,
-                    3, 5, 10
+                    3, 5, 100
 
             },
             4, 3
     );
 
-    assert(countEqClassesByRowsSum(matrix1) == 2);
+    assert(getCounterSpecialElement(matrix1) == 2);
 
     freeMemMatrix(matrix1);
 }
@@ -1860,7 +1863,7 @@ void test_getCounterSpecialElement_matrix1x1() {
             1, 1
     );
 
-    assert(countEqClassesByRowsSum(matrix1) == 0);
+    assert(getCounterSpecialElement(matrix1) == 0);
 
     freeMemMatrix(matrix1);
 }

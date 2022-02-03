@@ -136,6 +136,9 @@ unsigned countEqClassesByRowsSum(const matrix m) {
 unsigned getCounterSpecialElement(const matrix m) {
     assert(m.nRows > 0 && m.nCols > 0);
 
+    if(m.nRows == 1 && m.nCols == 1)
+        return 0;
+
     // Массив для хранения столбца
     long long *arraySumColumn = (long long *) malloc(m.nCols * sizeof(long long));
     assert(arraySumColumn != NULL);
