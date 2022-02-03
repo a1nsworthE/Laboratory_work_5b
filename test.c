@@ -1890,7 +1890,7 @@ void test_swapPenultimateRow_minAtLeftBorder() {
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
                     1, 2, 5,
-                    1, 6, 9,
+                    9, 6, 1,
                     9, 10, 11,
 
             },
@@ -1946,7 +1946,7 @@ void test_swapPenultimateRow_minAtRightBorder() {
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
                     5, 2, 5,
-                    11, 1, 5,
+                    5, 1, 11,
                     9, 10, 11,
 
             },
@@ -1986,11 +1986,11 @@ void test_getCountNonDescendingRowsMatrices1() {
                6, 1,
                2, 2};
 
-    matrix *ms = createArrayOfMatrixFromArray(a, sizeof(a) / sizeof(int), 4, 2);
+    matrix *ms = createArrayOfMatrixFromArray(a, 4, 4, 2);
 
-    assert(getCountNonDescendingRowsMatrices(ms, sizeof(a) / sizeof(int)) == 2);
+    assert(getCountNonDescendingRowsMatrices(ms, 4) == 2);
 
-    freeMemMatrices(ms, sizeof(a) / sizeof(int));
+    freeMemMatrices(ms, 4);
 }
 
 void test_getCountNonDescendingRowsMatrices_nonDescendingRows() {
@@ -2014,11 +2014,11 @@ void test_getCountNonDescendingRowsMatrices_nonDescendingRows() {
                6, 1,
                2, 2};
 
-    matrix *ms = createArrayOfMatrixFromArray(a, sizeof(a) / sizeof(int), 4, 2);
+    matrix *ms = createArrayOfMatrixFromArray(a, 4, 4, 2);
 
-    assert(getCountNonDescendingRowsMatrices(ms, sizeof(a) / sizeof(int)) == 0);
+    assert(getCountNonDescendingRowsMatrices(ms, 4) == 0);
 
-    freeMemMatrices(ms, sizeof(a) / sizeof(int));
+    freeMemMatrices(ms, 4);
 }
 
 void test_getCountNonDescendingRowsMatrices() {
@@ -2043,6 +2043,7 @@ void test_functionsTasks() {
 
 int main() {
     test_functionsTasks();
+    test_matrixFunctions();
 
     return 0;
 }
