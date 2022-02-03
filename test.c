@@ -1787,12 +1787,89 @@ void test_countEqClassesByRowsSum_largeRows() {
     freeMemMatrix(matrix1);
 }
 
-
 void test_countEqClassesByRowsSum() {
     test_countEqClassesByRowsSum_oneRowWithoutEqClasses();
     test_countEqClassesByRowsSum_allRowsWithoutEqClasses();
     test_countEqClassesByRowsSum_allRowsEqualSum();
     test_countEqClassesByRowsSum_largeRows();
+}
+
+void test_getCounterSpecialElement_largeCols() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 0,
+                    0, 1,
+                    -1, 2,
+                    5,0,
+                    0,5,
+                    10,0,
+                    9,0,
+                    2,-1,
+                    7,0,
+                    0,7
+
+            },
+            10, 2
+    );
+
+    assert(countEqClassesByRowsSum(matrix1) == 10);
+
+    freeMemMatrix(matrix1);
+
+}
+
+void test_getCounterSpecialElement_noSpecial() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                 3,4,5,
+                 6,7,8,
+                 9,10,11
+
+            },
+            3, 3
+    );
+
+    assert(countEqClassesByRowsSum(matrix1) == 0);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCounterSpecialElement_specialAtBorders() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1,2,5,
+                    6,7,8,
+                    9,10,11,
+                    3,5,10
+
+            },
+            4, 3
+    );
+
+    assert(countEqClassesByRowsSum(matrix1) == 2);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCounterSpecialElement_matrix1x1() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1
+
+            },
+            1, 1
+    );
+
+    assert(countEqClassesByRowsSum(matrix1) == 0);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCounterSpecialElement() {
+    test_getCounterSpecialElement_largeCols();
+    test_getCounterSpecialElement_noSpecial();
+    test_getCounterSpecialElement_specialAtBorders();
+    test_getCounterSpecialElement_matrix1x1();
 }
 
 void test_functionsTasks() {
