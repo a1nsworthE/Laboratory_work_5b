@@ -473,3 +473,13 @@ void outputMatricesD(matrixD *ms, const int nMatrices) {
     for (register size_t i = 0; i < nMatrices; ++i)
         outputMatrixD(ms[i]);
 }
+
+double getMaxElementMatrixByAbsD(const matrixD m) {
+    double maxElement = fabs(m.values[0][0]);
+    for (size_t i = 0; i < m.nRows; ++i)
+        for (size_t j = 0; j < m.nCols; ++j)
+            if (fabs(m.values[i][j]) > maxElement)
+                maxElement = fabs(m.values[i][j]);
+
+    return maxElement;
+}

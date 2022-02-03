@@ -36,6 +36,8 @@ int getMaxElement(const int *a, size_t n);
 
 int getMinElement(const int *a, size_t n);
 
+double getMinElementD(const double *a, size_t n);
+
 bool isUniqueArrayElements(const long long *a, size_t n);
 
 double getDistance(const int *a, size_t n);

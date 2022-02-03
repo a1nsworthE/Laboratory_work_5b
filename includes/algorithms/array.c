@@ -143,3 +143,12 @@ unsigned getCounterElemXInArray(const int *a, const size_t n, const int x) {
 
     return counterElemX;
 }
+
+double getMinElementD(const double *a, const size_t n) {
+    double minElement = a[0];
+    for (size_t i = 1; i < n; ++i)
+        if (a[i] < minElement)
+            minElement = a[i];
+
+    return minElement;
+}
