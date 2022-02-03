@@ -1565,6 +1565,69 @@ void test_findSumOfMaxesOfPseudoDiagonal() {
     test_findSumOfMaxesOfPseudoDiagonal_squareMatrix();
 }
 
+void test_getMinInArea_maxAndMinAtBordersBottomUpper() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    10,7,5,6,
+                    3,11,8,9,
+                    4,1,12,2
+            },
+            3, 4
+    );
+
+    assert(getMinInArea(matrix1) == 5);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getMinInArea_maxAtMiddleRow() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    6,8,9,2,
+                    7,12,3,4,
+                    10,11,5,1
+            },
+            3, 4
+    );
+
+    assert(getMinInArea(matrix1) == 6);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getMinInArea_maxAtLeftCornerBottom() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    6,8,9,2,
+                    7,12,3,4,
+                    13,11,5,1
+            },
+            3, 4
+    );
+
+    assert(getMinInArea(matrix1) == 6);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getMinInArea_maxAtLeftCornerUpper() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    20,8,9,2,
+                    7,12,3,4,
+                    13,11,5,1
+            },
+            3, 4
+    );
+
+    assert(getMinInArea(matrix1) == 20);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getMinInArea() {
+
+}
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
