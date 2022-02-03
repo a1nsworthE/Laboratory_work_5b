@@ -1770,13 +1770,13 @@ void test_countEqClassesByRowsSum_largeRows() {
                     1, 0,
                     0, 1,
                     -1, 2,
-                    5,0,
-                    0,5,
-                    10,0,
-                    9,0,
-                    2,-1,
-                    7,0,
-                    0,7
+                    5, 0,
+                    0, 5,
+                    10, 0,
+                    9, 0,
+                    2, -1,
+                    7, 0,
+                    0, 7
 
             },
             10, 2
@@ -1800,13 +1800,13 @@ void test_getCounterSpecialElement_largeCols() {
                     1, 0,
                     0, 1,
                     -1, 2,
-                    5,0,
-                    0,5,
-                    10,0,
-                    9,0,
-                    2,-1,
-                    7,0,
-                    0,7
+                    5, 0,
+                    0, 5,
+                    10, 0,
+                    9, 0,
+                    2, -1,
+                    7, 0,
+                    0, 7
 
             },
             10, 2
@@ -1821,9 +1821,9 @@ void test_getCounterSpecialElement_largeCols() {
 void test_getCounterSpecialElement_noSpecial() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                 3,4,5,
-                 6,7,8,
-                 9,10,11
+                    3, 4, 5,
+                    6, 7, 8,
+                    9, 10, 11
 
             },
             3, 3
@@ -1837,10 +1837,10 @@ void test_getCounterSpecialElement_noSpecial() {
 void test_getCounterSpecialElement_specialAtBorders() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    1,2,5,
-                    6,7,8,
-                    9,10,11,
-                    3,5,10
+                    1, 2, 5,
+                    6, 7, 8,
+                    9, 10, 11,
+                    3, 5, 10
 
             },
             4, 3
@@ -1870,6 +1870,93 @@ void test_getCounterSpecialElement() {
     test_getCounterSpecialElement_noSpecial();
     test_getCounterSpecialElement_specialAtBorders();
     test_getCounterSpecialElement_matrix1x1();
+}
+
+void test_swapPenultimateRow_minAtLeftBorder() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 5,
+                    6, 7, 8,
+                    9, 10, 11,
+
+            },
+            3, 3
+    );
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 5,
+                    1, 6, 9,
+                    9, 10, 11,
+
+            },
+            3, 3
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_swapPenultimateRow_minAtCenterCol() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    5, 2, 5,
+                    6, 1, 8,
+                    9, 10, 11,
+
+            },
+            3, 3
+    );
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    5, 2, 5,
+                    2, 1, 10,
+                    9, 10, 11,
+
+            },
+            3, 3
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_swapPenultimateRow_minAtRightBorder() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    5, 2, 5,
+                    6, 2, 1,
+                    9, 10, 11,
+
+            },
+            3, 3
+    );
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    5, 2, 5,
+                    11, 1, 5,
+                    9, 10, 11,
+
+            },
+            3, 3
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_swapPenultimateRow() {
+    test_swapPenultimateRow_minAtLeftBorder();
+    test_swapPenultimateRow_minAtCenterCol();
+    test_swapPenultimateRow_minAtRightBorder();
 }
 
 void test_functionsTasks() {
