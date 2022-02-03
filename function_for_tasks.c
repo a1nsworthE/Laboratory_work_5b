@@ -15,6 +15,10 @@ void getSquareOfMatrixIfSymmetric(matrix *m) {
 
 void transposeIfMatrixHasEqualSumOfRows(matrix m) {
     long long *arraySum = (long long *) calloc(m.nRows, sizeof(long long));
+    if (arraySum == NULL) {
+        fprintf(stderr, "bad data");
+        exit(1);
+    }
     for (register size_t i = 0; i < m.nRows; ++i)
         arraySum[i] += getSumArray(m.values[i], m.nCols);
 
