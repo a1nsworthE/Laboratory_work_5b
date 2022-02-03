@@ -430,15 +430,28 @@ int main() {
 // 15 задача>>>
 /**/
 
+void printMinMatrixWithMaxAbsElement(const matrixD *ms, const size_t nMatrix) {
+    double *arrayMaxAbsElemMatrix = (double *) malloc(nMatrix * sizeof(double));
+    for (size_t i = 0; i < nMatrix; ++i)
+        arrayMaxAbsElemMatrix[i] = getMaxElementMatrixByAbsD(ms[i]);
+    double minAbsElement = getMinElementD(arrayMaxAbsElemMatrix, nMatrix);
+
+    for (size_t i = 0; i < nMatrix; ++i)
+        if ((arrayMaxAbsElemMatrix[i] - minAbsElement) < DBL_EPSILON)
+            outputMatrixD(ms[i]);
+
+    free(arrayMaxAbsElemMatrix);
+}
+
 int main() {
     size_t nMatrics, n, m;
     scanf("%zd %zd %zd", &nMatrics, &n, &m);
-    matrix *ms = getMemArrayOfMatrices(nMatrics, n, m);
-    inputMatrices(ms, nMatrics);
+    matrixD *ms = getMemArrayOfMatricesD(nMatrics, n, m);
+    inputMatricesD(ms, nMatrics);
 
-    printMatrixWithMaxZeroRows(ms, nMatrics);
+    printMinMatrixWithMaxAbsElement(ms, nMatrics);
 
-    freeMemMatrices(ms, nMatrics);
+    freeMemMatricesD(ms, nMatrics);
 
     return 0;
 }
