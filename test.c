@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "includes/algorithms/matrix.h"
+#include "function_for_tasks.c"
 
 void test_swapRows_oneRowAtBorder1() {
     matrix m = createMatrixFromArray(

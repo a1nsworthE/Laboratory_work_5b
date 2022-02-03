@@ -8,11 +8,18 @@ matrix getMemMatrix(const int nRows, const int nCols) {
     assert(nRows > 0 && nCols > 0);
 
     int **values = (int **) malloc(nRows * sizeof(int *));
-    assert(values != NULL);
+    if (values == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (register size_t i = 0; i < nRows; ++i) {
         values[i] = (int *) malloc(nCols * sizeof(int));
         assert(values[i] != NULL);
+        if (values[i] == NULL){
+            fprintf(stderr, "bad alloc");
+            exit(1);
+        }
     }
     return (matrix) {values, nRows, nCols};
 }
@@ -26,7 +33,10 @@ matrix *getMemArrayOfMatrices(const int nMatrices, const int nRows, const int nC
     assert(nMatrices > 0);
 
     matrix *ms = (matrix *) malloc(nMatrices * sizeof(matrix));
-    assert(ms != NULL);
+    if (ms == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (register size_t i = 0; i < nMatrices; ++i)
         ms[i] = getMemMatrix(nRows, nCols);
@@ -57,7 +67,7 @@ void freeMemMatrices(matrix *ms, const int nMatrices) {
 void inputMatrix(matrix m) {
     for (register size_t i = 0; i < m.nRows; ++i)
         for (register size_t j = 0; j < m.nCols; ++j)
-            scanf("%d", &(m.values[i][j]));
+            scanf("%d", &m.values[i][j]);
 }
 
 /// Ввод матрицы матриц матриц
@@ -108,7 +118,7 @@ void swapColumns(matrix m, const int j1, const int j2) {
     assert(j1 >= 0 && j2 >= 0);
 
     for (register size_t i = 0; i < m.nRows; ++i)
-        swap(&(m.values[i][j1]), &(m.values[i][j2]));
+        swap(&m.values[i][j1], &m.values[i][j2]);
 }
 
 /// Сортирует строки матрицы по неубыванию по критерию
@@ -116,9 +126,12 @@ void swapColumns(matrix m, const int j1, const int j2) {
 /// \param criteria - критерий для сортировки
 void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
-    assert(arrayForSort != NULL);
+    if (arrayForSort == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
-    for (size_t i = 0; i < m.nRows; ++i)
+    for (register size_t i = 0; i < m.nRows; ++i)
         arrayForSort[i] = criteria(m.values[i], m.nCols);
 
     for (register size_t i = 1; i < m.nRows; ++i) {
@@ -140,7 +153,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 /// \param criteria - критерий для сортировки
 void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t)) {
     double *arrayForSort = (double *) malloc(m.nRows * sizeof(double));
-    assert(arrayForSort != NULL);
+    assert(arrayForSort == NULL);
 
     for (size_t i = 0; i < m.nRows; ++i)
         arrayForSort[i] = criteria(m.values[i], m.nCols);
@@ -165,11 +178,17 @@ void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const in
 /// \param criteria - критерий для сортировки
 void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
-    assert(arrayForSort != NULL);
+    if (arrayForSort == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     // Получение вспомогательного массива и массива со значением в столбцах
     int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
-    assert(arrayColumn != NULL);
+    if (arrayColumn == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (register size_t i = 0; i < m.nCols; ++i) {
         for (register size_t j = 0; j < m.nRows; ++j)
@@ -178,7 +197,7 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *,
     }
     free(arrayColumn);
 
-    for (size_t i = 0; i < m.nCols; ++i) {
+    for (register size_t i = 1; i < m.nCols; ++i) {
         int tArray = arrayForSort[i];
         register size_t j = i;
         while (j > 0 && arrayForSort[j - 1] > tArray) {
@@ -263,7 +282,7 @@ void transposeSquareMatrix(matrix m) {
     assert(isSquareMatrix(m));
 
     for (size_t j = 1; j < m.nCols; ++j)
-        swap(&(m.values[0][j]), &(m.values[j][0]));
+        swap(&m.values[0][j], &m.values[j][0]);
 }
 
 /// Получает индекс минимального элемента
@@ -308,8 +327,8 @@ position getMaxValuePos(const matrix m) {
 matrix createMatrixFromArray(const int *a, const int nRows, const int nCols) {
     matrix m = getMemMatrix(nRows, nCols);
     size_t k = 0;
-    for (int i = 0; i < nRows; i++)
-        for (int j = 0; j < nCols; j++)
+    for (register size_t i = 0; i < nRows; i++)
+        for (register size_t j = 0; j < nCols; j++)
             m.values[i][j] = a[k++];
 
     return m;
@@ -326,9 +345,9 @@ createArrayOfMatrixFromArray(const int *values, const size_t nMatrices, const si
     matrix *ms = getMemArrayOfMatrices(nMatrices, nRows, nCols);
 
     size_t l = 0;
-    for (int k = 0; k < nMatrices; k++)
-        for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nCols; j++)
+    for (register size_t k = 0; k < nMatrices; k++)
+        for (register size_t i = 0; i < nRows; i++)
+            for (register size_t j = 0; j < nCols; j++)
                 ms[k].values[i][j] = values[l++];
 
     return ms;
@@ -342,10 +361,10 @@ matrix mulMatrices(const matrix m1, const matrix m2) {
     assert(m1.nCols == m2.nRows);
 
     matrix mulM1M2 = getMemMatrix(m1.nRows, m2.nCols);
-    for (size_t i = 0; i < m1.nRows; ++i)
-        for (size_t j = 0; j < m2.nCols; ++j) {
+    for (register size_t i = 0; i < m1.nRows; ++i)
+        for (register size_t j = 0; j < m2.nCols; ++j) {
             mulM1M2.values[i][j] = 0;
-            for (size_t k = 0; k < m1.nCols; ++k)
+            for (register size_t k = 0; k < m1.nCols; ++k)
                 mulM1M2.values[i][j] += m1.values[i][k] * m2.values[k][j];
         }
 
@@ -355,8 +374,8 @@ matrix mulMatrices(const matrix m1, const matrix m2) {
 position getLeftMinPositionElement(const matrix m) {
     position minPos = {0, 0};
     int minElement = m.values[0][0];
-    for (size_t i = 0; i < m.nRows; ++i) {
-        for (size_t j = 0; j < m.nCols; ++j) {
+    for (register size_t i = 0; i < m.nRows; ++i) {
+        for (register size_t j = 0; j < m.nCols; ++j) {
             if (m.values[i][j] < minElement)
                 minElement = m.values[i][j];
             else if (m.values[i][j] == minElement) {
@@ -370,7 +389,7 @@ position getLeftMinPositionElement(const matrix m) {
 }
 
 bool hasAllSortByRows(const matrix m, bool(*condition)(long long, long long)) {
-    for (size_t i = 0; i < m.nRows; ++i)
+    for (register size_t i = 0; i < m.nRows; ++i)
         if (!isSortBy(m.values[i], m.nCols, condition))
             return false;
     return true;
@@ -378,7 +397,7 @@ bool hasAllSortByRows(const matrix m, bool(*condition)(long long, long long)) {
 
 unsigned getCounterZeroRows(const matrix m) {
     unsigned counterZeroRows = 0;
-    for (size_t i = 0; i < m.nRows; ++i)
+    for (register size_t i = 0; i < m.nRows; ++i)
         if (getCounterElemXInArray(m.values[i], m.nCols, 0) == m.nCols)
             counterZeroRows++;
 
@@ -393,11 +412,17 @@ matrixD getMemMatrixD(const int nRows, const int nCols) {
     assert(nRows > 0 && nCols > 0);
 
     double **values = (double **) malloc(nRows * sizeof(double *));
-    assert(values != NULL);
+    if (values == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (register size_t i = 0; i < nRows; ++i) {
         values[i] = (double *) malloc(nCols * sizeof(double));
-        assert(values[i] != NULL);
+        if (values[i] == NULL){
+            fprintf(stderr, "bad alloc");
+            exit(1);
+        }
     }
     return (matrixD) {values, nRows, nCols};
 }
@@ -411,7 +436,10 @@ matrixD *getMemArrayOfMatricesD(const int nMatrices, const int nRows, const int 
     assert(nMatrices > 0);
 
     matrixD *ms = (matrixD *) malloc(nMatrices * sizeof(matrixD));
-    assert(ms != NULL);
+    if (ms == NULL){
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
 
     for (register size_t i = 0; i < nMatrices; ++i)
         ms[i] = getMemMatrixD(nRows, nCols);
@@ -476,8 +504,8 @@ void outputMatricesD(matrixD *ms, const int nMatrices) {
 
 double getMaxElementMatrixByAbsD(const matrixD m) {
     double maxElement = fabs(m.values[0][0]);
-    for (size_t i = 0; i < m.nRows; ++i)
-        for (size_t j = 0; j < m.nCols; ++j)
+    for (register size_t i = 0; i < m.nRows; ++i)
+        for (register size_t j = 0; j < m.nCols; ++j)
             if (fabs(m.values[i][j]) > maxElement)
                 maxElement = fabs(m.values[i][j]);
 
