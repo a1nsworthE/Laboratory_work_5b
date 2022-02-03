@@ -191,6 +191,19 @@ void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
     free(arrayCounterZeroRows);
 }
 
+void printMinMatrixWithMaxAbsElement(const matrixD *ms, const size_t nMatrix) {
+    double *arrayMaxAbsElemMatrix = (double *) malloc(nMatrix * sizeof(double));
+    for (size_t i = 0; i < nMatrix; ++i)
+        arrayMaxAbsElemMatrix[i] = getMaxElementMatrixByAbsD(ms[i]);
+    double minAbsElement = getMinElementD(arrayMaxAbsElemMatrix, nMatrix);
+
+    for (size_t i = 0; i < nMatrix; ++i)
+        if ((arrayMaxAbsElemMatrix[i] - minAbsElement) < DBL_EPSILON)
+            outputMatrixD(ms[i]);
+
+    free(arrayMaxAbsElemMatrix);
+}
+
 // 1 задача>>>
 /*
 int main() {
@@ -428,20 +441,21 @@ int main() {
 */
 
 // 15 задача>>>
-/**/
+/*
+int main() {
+    size_t nMatrics, n, m;
+    scanf("%zd %zd %zd", &nMatrics, &n, &m);
+    matrixD *ms = getMemArrayOfMatricesD(nMatrics, n, m);
+    inputMatricesD(ms, nMatrics);
 
-void printMinMatrixWithMaxAbsElement(const matrixD *ms, const size_t nMatrix) {
-    double *arrayMaxAbsElemMatrix = (double *) malloc(nMatrix * sizeof(double));
-    for (size_t i = 0; i < nMatrix; ++i)
-        arrayMaxAbsElemMatrix[i] = getMaxElementMatrixByAbsD(ms[i]);
-    double minAbsElement = getMinElementD(arrayMaxAbsElemMatrix, nMatrix);
+    printMinMatrixWithMaxAbsElement(ms, nMatrics);
 
-    for (size_t i = 0; i < nMatrix; ++i)
-        if ((arrayMaxAbsElemMatrix[i] - minAbsElement) < DBL_EPSILON)
-            outputMatrixD(ms[i]);
+    freeMemMatricesD(ms, nMatrics);
 
-    free(arrayMaxAbsElemMatrix);
+    return 0;
 }
+*/
+
 
 int main() {
     size_t nMatrics, n, m;
