@@ -1198,6 +1198,111 @@ void test_sortColsByMinElement() {
     test_sortColsByMinElement_isNonDescending();
 }
 
+void test_getSquareOfMatrixIfSymmetric1() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 3,
+                    3, 4
+            },
+            2, 2
+    );
+    getSquareOfMatrixIfSymmetric(&matrix1);
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    10, 15,
+                    15, 25
+            },
+            2, 2
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_getSquareOfMatrixIfSymmetric2() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    2, 3, 5,
+                    3, 5, 3
+            },
+            3, 3
+    );
+    getSquareOfMatrixIfSymmetric(&matrix1);
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    14, 23, 22,
+                    23, 38, 36,
+                    22, 36, 43
+            },
+            2, 2
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_getSquareOfMatrixIfSymmetric3() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 3,
+                    3, 4
+            },
+            2, 2
+    );
+    getSquareOfMatrixIfSymmetric(&matrix1);
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    10, 15,
+                    15, 25
+            },
+            2, 2
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_getSquareOfMatrixIfSymmetric4() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 3,
+                    3, 4
+            },
+            2, 2
+    );
+    getSquareOfMatrixIfSymmetric(&matrix1);
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    10, 15,
+                    15, 25
+            },
+            2, 2
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_getSquareOfMatrixIfSymmetric() {
+    test_getSquareOfMatrixIfSymmetric1();
+    test_getSquareOfMatrixIfSymmetric2();
+    test_getSquareOfMatrixIfSymmetric3();
+    test_getSquareOfMatrixIfSymmetric4();
+}
+
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
