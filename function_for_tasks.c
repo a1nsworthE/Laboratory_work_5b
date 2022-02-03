@@ -184,10 +184,10 @@ unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatri
 }
 
 void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
-    unsigned *arrayCounterZeroRows = (unsigned *) malloc(nMatrix * sizeof(unsigned));
+    int *arrayCounterZeroRows = (int *) malloc(nMatrix * sizeof(int));
     for (size_t i = 0; i < nMatrix; ++i)
         arrayCounterZeroRows[i] = getCounterZeroRows(ms[i]);
-    unsigned maxCounterZeroRows = getMaxElemArray(arrayCounterZeroRows, nMatrix);
+    int maxCounterZeroRows = getMaxElemArray(arrayCounterZeroRows, nMatrix);
 
     for (size_t i = 0; i < nMatrix; ++i)
         if (arrayCounterZeroRows[i] == maxCounterZeroRows)
