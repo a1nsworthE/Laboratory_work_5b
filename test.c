@@ -933,6 +933,32 @@ void test_matrixFunctions() {
     test_getMaxValuePos();
 }
 
+void test_sortRowsByMinElement() {
+    matrix m = createMatrixFromArray(
+            (int[]) {
+
+            },);
+}
+
+void test_sortRowsByMinElement() {
+
+}
+
+void test_functionsTasks() {
+    test_sortRowsByMinElement();
+    test_sortColsByMinElement();
+    test_getSquareOfMatrixIfSymmetric();
+    test_transposeIfMatrixHasEqualSumOfRows();
+    test_isMutuallyInverseMatrices();
+    test_findSumOfMaxesOfPseudoDiagonal();
+    test_getMinInArea();
+    test_sortByDistancesByNonDecreasing();
+    test_countEqClassesByRowsSum();
+    test_getCounterSpecialElement();
+    test_swapPenultimateRow();
+    test_getCountNonDescendingRowsMatrices();
+}
+
 int main() {
     test_matrixFunctions();
 
