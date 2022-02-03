@@ -442,7 +442,7 @@ void freeMemMatricesD(matrixD *ms, const int nMatrices) {
 void inputMatrixD(matrixD m) {
     for (register size_t i = 0; i < m.nRows; ++i)
         for (register size_t j = 0; j < m.nCols; ++j)
-            scanf("%f", &(m.values[i][j]));
+            scanf("%lf", &(m.values[i][j]));
 }
 
 /// Ввод матрицы матриц матриц

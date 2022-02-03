@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <math.h>
+#include <float.h>
 
 #include "../structs/matrix.c"
 #include "array.h"
