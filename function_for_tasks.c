@@ -107,7 +107,7 @@ unsigned countEqClassesByRowsSum(const matrix m) {
     assert(m.nRows > 0 && m.nCols > 0);
 
     int *arraySumsRows = (int *) malloc(m.nRows * sizeof(int));
-    if (arraySumsRows == NULL){
+    if (arraySumsRows == NULL) {
         fprintf(stderr, "bad alloc");
         exit(1);
     }
@@ -144,14 +144,14 @@ unsigned getCounterSpecialElement(const matrix m) {
 
     // Массив для хранения столбца
     int *arraySumColumn = (int *) malloc(m.nCols * sizeof(int));
-    if (arraySumColumn == NULL){
+    if (arraySumColumn == NULL) {
         fprintf(stderr, "bad alloc");
         exit(1);
     }
 
     // Массив для хранения суммы стобца
     int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
-    if (arrayColumn == NULL){
+    if (arrayColumn == NULL) {
         fprintf(stderr, "bad alloc");
         exit(1);
     }
