@@ -1568,9 +1568,9 @@ void test_findSumOfMaxesOfPseudoDiagonal() {
 void test_getMinInArea_maxAndMinAtBordersBottomUpper() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    10,7,5,6,
-                    3,11,8,9,
-                    4,1,12,2
+                    10, 7, 5, 6,
+                    3, 11, 8, 9,
+                    4, 1, 12, 2
             },
             3, 4
     );
@@ -1583,9 +1583,9 @@ void test_getMinInArea_maxAndMinAtBordersBottomUpper() {
 void test_getMinInArea_maxAtMiddleRow() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    6,8,9,2,
-                    7,12,3,4,
-                    10,11,5,1
+                    6, 8, 9, 2,
+                    7, 12, 3, 4,
+                    10, 11, 5, 1
             },
             3, 4
     );
@@ -1598,9 +1598,9 @@ void test_getMinInArea_maxAtMiddleRow() {
 void test_getMinInArea_maxAtLeftCornerBottom() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    6,8,9,2,
-                    7,12,3,4,
-                    13,11,5,1
+                    6, 8, 9, 2,
+                    7, 12, 3, 4,
+                    13, 11, 5, 1
             },
             3, 4
     );
@@ -1613,9 +1613,9 @@ void test_getMinInArea_maxAtLeftCornerBottom() {
 void test_getMinInArea_maxAtLeftCornerUpper() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    20,8,9,2,
-                    7,12,3,4,
-                    13,11,5,1
+                    20, 8, 9, 2,
+                    7, 12, 3, 4,
+                    13, 11, 5, 1
             },
             3, 4
     );
@@ -1625,7 +1625,105 @@ void test_getMinInArea_maxAtLeftCornerUpper() {
     freeMemMatrix(matrix1);
 }
 
+void test_getMinInArea_minAtLeftUpperCorner() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    -1, 8, 9, 2,
+                    7, 12, 3, 4,
+                    13, 11, 30, 1
+            },
+            3, 4
+    );
+
+    assert(getMinInArea(matrix1) == -1);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getMinInArea_minAtRightUpperCorner() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    2, 8, 9, -1,
+                    7, 12, 3, 4,
+                    13, 11, 30, 1
+            },
+            3, 4
+    );
+
+    assert(getMinInArea(matrix1) == -1);
+
+    freeMemMatrix(matrix1);
+}
+
 void test_getMinInArea() {
+    test_getMinInArea_maxAndMinAtBordersBottomUpper();
+    test_getMinInArea_maxAtLeftCornerBottom();
+    test_getMinInArea_maxAtLeftCornerUpper();
+    test_getMinInArea_maxAtMiddleRow();
+    test_getMinInArea_minAtRightUpperCorner();
+    test_getMinInArea_maxAtMiddleRow();
+}
+
+void test_sortByDistancesByNonDecreasing_nonIncreasing() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    10, 10, 10, 10,
+                    5, 5, 5, 5,
+                    1, 1, 1, 1
+            },
+            3, 4
+    );
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    1, 1, 1, 1,
+                    5, 5, 5, 5,
+                    10, 10, 10, 10
+            },
+            3, 4
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_sortByDistancesByNonDecreasing_randomRows() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    5, 5, 5, 5,
+                    10, 10, 10, 10,
+                    1, 1, 1, 1,
+            },
+            3, 4
+    );
+
+    matrix matrix2 = createMatrixFromArray(
+            (int[]) {
+                    1, 1, 1, 1,
+                    5, 5, 5, 5,
+                    10, 10, 10, 10
+            },
+            3, 4
+    );
+
+    assert(twoMatricesEqual(matrix1, matrix2));
+
+    freeMemMatrix(matrix1);
+    freeMemMatrix(matrix2);
+}
+
+void test_sortByDistancesByNonDecreasing() {
+    test_sortByDistancesByNonDecreasing_nonIncreasing();
+    test_sortByDistancesByNonDecreasing_randomRows();
+}
+
+void test_countEqClassesByRowsSum() {
+
+}
+
+void test_countEqClassesByRowsSum() {
 
 }
 void test_functionsTasks() {
