@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "includes/algorithms/matrix.h"
 
-void test_swapRows1() {
+void test_swapRows_neighbourRows() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -22,7 +22,7 @@ void test_swapRows1() {
     freeMemMatrix(m);
 }
 
-void test_swapRows2() {
+void test_swapRows_atBordes() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -46,7 +46,7 @@ void test_swapRows2() {
 }
 
 
-void test_swapRows3() {
+void test_swapRows_oneRowAtBorder() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -85,7 +85,7 @@ void test_swapRows4() {
     freeMemMatrix(m);
 }
 
-void test_swapColumns1() {
+void test_swapColumns_neighboursCols() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -105,7 +105,7 @@ void test_swapColumns1() {
     freeMemMatrix(m);
 }
 
-void test_swapColumns2() {
+void test_swapColumns_colsAtBorders() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -125,7 +125,7 @@ void test_swapColumns2() {
     freeMemMatrix(m);
 }
 
-void test_swapColumns3() {
+void test_swapColumns_oneColAtBorder() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -153,7 +153,7 @@ void test_swapColumns3() {
     freeMemMatrix(m);
 }
 
-void test_swapColumns4() {
+void test_swapColumns_largeCounterRows() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -215,7 +215,7 @@ void test_swapColumns4() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortRowsMatrixByRowCriteria1() {
+void test_insertionSortRowsMatrixByRowCriteria_allRowsDescending() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     9, 8, 7,
@@ -238,7 +238,7 @@ void test_insertionSortRowsMatrixByRowCriteria1() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortRowsMatrixByRowCriteria2() {
+void test_insertionSortRowsMatrixByRowCriteria_oneRows() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -254,7 +254,7 @@ void test_insertionSortRowsMatrixByRowCriteria2() {
 }
 
 
-void test_insertionSortRowsMatrixByRowCriteria3() {
+void test_insertionSortRowsMatrixByRowCriteria_randomPositionRows() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     11, 11, 11,
@@ -277,7 +277,7 @@ void test_insertionSortRowsMatrixByRowCriteria3() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortRowsMatrixByRowCriteria4() {
+void test_insertionSortRowsMatrixByRowCriteria_maxRowsInBottom() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     3, 3, 3,
@@ -303,7 +303,7 @@ void test_insertionSortRowsMatrixByRowCriteria4() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria1() {
+void test_insertionSortColsMatrixByColCriteria_withoutMistakes() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -326,7 +326,7 @@ void test_insertionSortColsMatrixByColCriteria1() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria2() {
+void test_insertionSortColsMatrixByColCriteria_maxColsAtBorder() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     2, 1, 3,
@@ -349,7 +349,7 @@ void test_insertionSortColsMatrixByColCriteria2() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria3() {
+void test_insertionSortColsMatrixByColCriteria_NonIncreasing() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     3, 2, 1,
@@ -372,7 +372,7 @@ void test_insertionSortColsMatrixByColCriteria3() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria4() {
+void test_insertionSortColsMatrixByColCriteria_minColAtBorder() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     3, 2, 4, 5, 1,
@@ -398,7 +398,7 @@ void test_insertionSortColsMatrixByColCriteria4() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria5() {
+void test_insertionSortColsMatrixByColCriteria_oneRow() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     4, 2, 3, 5, 1, 6,
@@ -414,7 +414,7 @@ void test_insertionSortColsMatrixByColCriteria5() {
     freeMemMatrix(m);
 }
 
-void test_isSquareMatrix1() {
+void test_isSquareMatrix_withoutMistakes() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -428,7 +428,7 @@ void test_isSquareMatrix1() {
     freeMemMatrix(m);
 }
 
-void test_isSquareMatrix2() {
+void test_isSquareMatrix_noSquare() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -442,7 +442,7 @@ void test_isSquareMatrix2() {
     freeMemMatrix(m);
 }
 
-void test_twoMatricesEqual1() {
+void test_twoMatricesEqual_withoutMistakes() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -465,7 +465,7 @@ void test_twoMatricesEqual1() {
     freeMemMatrix(matrix2);
 }
 
-void test_twoMatricesEqual2() {
+void test_twoMatricesEqual_atCorner() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -488,7 +488,7 @@ void test_twoMatricesEqual2() {
     freeMemMatrix(matrix2);
 }
 
-void test_twoMatricesEqual3() {
+void test_twoMatricesEqual_noEqualRows() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -510,7 +510,7 @@ void test_twoMatricesEqual3() {
     freeMemMatrix(matrix2);
 }
 
-void test_isEMatrix1() {
+void test_isEMatrix_withoutMistakes1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 0,
@@ -524,7 +524,7 @@ void test_isEMatrix1() {
     freeMemMatrix(m);
 }
 
-void test_isEMatrix2() {
+void test_isEMatrix_atCorner1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 1,
@@ -538,7 +538,7 @@ void test_isEMatrix2() {
     freeMemMatrix(m);
 }
 
-void test_isEMatrix3() {
+void test_isEMatrix_atCorner2() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 0, 1,
@@ -553,7 +553,7 @@ void test_isEMatrix3() {
     freeMemMatrix(m);
 }
 
-void test_isEMatrix4() {
+void test_isEMatrix_withoutMistakes2() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 0, 0,
@@ -568,7 +568,7 @@ void test_isEMatrix4() {
     freeMemMatrix(m);
 }
 
-void test_isEMatrix5() {
+void test_isEMatrix_noSquare() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 0, 1, 0, 0,
@@ -583,7 +583,7 @@ void test_isEMatrix5() {
     freeMemMatrix(m);
 }
 
-void test_isSymmetricMatrix1() {
+void test_isSymmetricMatrix_atBorders1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -597,7 +597,7 @@ void test_isSymmetricMatrix1() {
     freeMemMatrix(m);
 }
 
-void test_isSymmetricMatrix2() {
+void test_isSymmetricMatrix_atBorders2() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 5,
@@ -611,7 +611,7 @@ void test_isSymmetricMatrix2() {
     freeMemMatrix(m);
 }
 
-void test_isSymmetricMatrix3() {
+void test_isSymmetricMatrix_matrix1x1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1,
@@ -624,7 +624,7 @@ void test_isSymmetricMatrix3() {
     freeMemMatrix(m);
 }
 
-void test_isSymmetricMatrix4() {
+void test_isSymmetricMatrix_withoutMistakes() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 6, 7,
@@ -639,7 +639,7 @@ void test_isSymmetricMatrix4() {
     freeMemMatrix(m);
 }
 
-void test_isSymmetricMatrix5() {
+void test_isSymmetricMatrix_noSquare() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 6, 7,
@@ -653,7 +653,7 @@ void test_isSymmetricMatrix5() {
     freeMemMatrix(m);
 }
 
-void test_transposeSquareMatrix1() {
+void test_transposeSquareMatrix_matrix2x2() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 3,
@@ -674,7 +674,7 @@ void test_transposeSquareMatrix1() {
     freeMemMatrix(m);
 }
 
-void test_transposeSquareMatrix2() {
+void test_transposeSquareMatrix_matrix1x1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1,
@@ -689,7 +689,7 @@ void test_transposeSquareMatrix2() {
     freeMemMatrix(m);
 }
 
-void test_transposeSquareMatrix3() {
+void test_transposeSquareMatrix_matrix3x3() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -713,7 +713,7 @@ void test_transposeSquareMatrix3() {
     freeMemMatrix(m);
 }
 
-void test_getMinValuePos1() {
+void test_getMinValuePos_minAtBorders1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -728,7 +728,7 @@ void test_getMinValuePos1() {
     freeMemMatrix(m);
 }
 
-void test_getMinValuePos2() {
+void test_getMinValuePos_minAtBorders2() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     -1, 2,
@@ -743,7 +743,7 @@ void test_getMinValuePos2() {
     freeMemMatrix(m);
 }
 
-void test_getMinValuePos3() {
+void test_getMinValuePos_minInCenter() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 5,
@@ -759,7 +759,7 @@ void test_getMinValuePos3() {
     freeMemMatrix(m);
 }
 
-void test_getMinValuePos4() {
+void test_getMinValuePos_minInLargeMatrix() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 1, 4,
@@ -776,7 +776,7 @@ void test_getMinValuePos4() {
     freeMemMatrix(m);
 }
 
-void test_getMaxValuePos1() {
+void test_getMaxValuePos_maxAtBorders1() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2,
@@ -791,7 +791,7 @@ void test_getMaxValuePos1() {
     freeMemMatrix(m);
 }
 
-void test_getMaxValuePos2() {
+void test_getMaxValuePos_maxAtBorders2() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     65, 2,
@@ -806,7 +806,7 @@ void test_getMaxValuePos2() {
     freeMemMatrix(m);
 }
 
-void test_getMaxValuePos3() {
+void test_getMaxValuePos_maxAtCenter() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 5,
@@ -822,7 +822,7 @@ void test_getMaxValuePos3() {
     freeMemMatrix(m);
 }
 
-void test_getMaxValuePos4() {
+void test_getMaxValuePos_maxInLargeMatrix() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 1, 4,
@@ -840,89 +840,89 @@ void test_getMaxValuePos4() {
 }
 
 void test_getMaxValuePos() {
-    test_getMaxValuePos1();
-    test_getMaxValuePos2();
-    test_getMaxValuePos3();
-    test_getMaxValuePos4();
+    test_getMaxValuePos_maxAtBorders1();
+    test_getMaxValuePos_maxAtBorders2();
+    test_getMaxValuePos_maxAtCenter();
+    test_getMaxValuePos_maxInLargeMatrix();
 }
 
 void test_getMinValuePos() {
-    test_getMinValuePos1();
-    test_getMinValuePos2();
-    test_getMinValuePos3();
-    test_getMinValuePos4();
+    test_getMinValuePos_minAtBorders1();
+    test_getMinValuePos_minAtBorders2();
+    test_getMinValuePos_minInCenter();
+    test_getMinValuePos_minInLargeMatrix();
 }
 
 void test_transposeSquareMatrix() {
-    test_transposeSquareMatrix1();
-    test_transposeSquareMatrix2();
-    test_transposeSquareMatrix3();
+    test_transposeSquareMatrix_matrix2x2();
+    test_transposeSquareMatrix_matrix1x1();
+    test_transposeSquareMatrix_matrix3x3();
 }
 
 void test_isSymmetricMatrix() {
-    test_isSymmetricMatrix1();
-    test_isSymmetricMatrix2();
-    test_isSymmetricMatrix3();
-    test_isSymmetricMatrix4();
-    test_isSymmetricMatrix5();
+    test_isSymmetricMatrix_atBorders1();
+    test_isSymmetricMatrix_atBorders2();
+    test_isSymmetricMatrix_matrix1x1();
+    test_isSymmetricMatrix_withoutMistakes();
+    test_isSymmetricMatrix_noSquare();
 
 }
 
 void test_isEMatrix() {
-    test_isEMatrix1();
-    test_isEMatrix2();
-    test_isEMatrix3();
-    test_isEMatrix4();
-    test_isEMatrix5();
+    test_isEMatrix_withoutMistakes1();
+    test_isEMatrix_atCorner1();
+    test_isEMatrix_atCorner2();
+    test_isEMatrix_withoutMistakes2();
+    test_isEMatrix_noSquare();
 }
 
 void test_twoMatricesEqual() {
-    test_twoMatricesEqual1();
-    test_twoMatricesEqual2();
-    test_twoMatricesEqual3();
+    test_twoMatricesEqual_withoutMistakes();
+    test_twoMatricesEqual_atCorner();
+    test_twoMatricesEqual_noEqualRows();
 }
 
 void test_isSquareMatrix() {
-    test_isSquareMatrix1();
-    test_isSquareMatrix2();
-}
-
-void test_insertionSortRowsMatrixByRowCriteria() {
-    test_insertionSortColsMatrixByColCriteria1();
-    test_insertionSortColsMatrixByColCriteria2();
-    test_insertionSortColsMatrixByColCriteria3();
-    test_insertionSortColsMatrixByColCriteria4();
-    test_insertionSortColsMatrixByColCriteria5();
+    test_isSquareMatrix_withoutMistakes();
+    test_isSquareMatrix_noSquare();
 }
 
 void test_insertionSortColsMatrixByColCriteria() {
-    test_insertionSortRowsMatrixByRowCriteria1();
-    test_insertionSortRowsMatrixByRowCriteria2();
-    test_insertionSortRowsMatrixByRowCriteria3();
-    test_insertionSortRowsMatrixByRowCriteria4();
+    test_insertionSortColsMatrixByColCriteria_withoutMistakes();
+    test_insertionSortColsMatrixByColCriteria_maxColsAtBorder();
+    test_insertionSortColsMatrixByColCriteria_NonIncreasing();
+    test_insertionSortColsMatrixByColCriteria_minColAtBorder();
+    test_insertionSortColsMatrixByColCriteria_oneRow();
+}
+
+void test_insertionSortRowsMatrixByRowCriteria() {
+    test_insertionSortRowsMatrixByRowCriteria_allRowsDescending();
+    test_insertionSortRowsMatrixByRowCriteria_oneRows();
+    test_insertionSortRowsMatrixByRowCriteria_randomPositionRows();
+    test_insertionSortRowsMatrixByRowCriteria_maxRowsInBottom();
 }
 
 
 void test_swapColumns() {
-    test_swapColumns1();
-    test_swapColumns2();
-    test_swapColumns3();
-    test_swapColumns4();
+    test_swapColumns_neighboursCols();
+    test_swapColumns_colsAtBorders();
+    test_swapColumns_oneColAtBorder();
+    test_swapColumns_largeCounterRows();
 }
 
 
 void test_swapRows() {
-    test_swapRows1();
-    test_swapRows2();
-    test_swapRows3();
+    test_swapRows_neighbourRows();
+    test_swapRows_atBordes();
+    test_swapRows_oneRowAtBorder();
     test_swapRows4();
 }
 
 void test_matrix_function() {
     test_swapRows();
     test_swapColumns();
-    test_insertionSortRowsMatrixByRowCriteria();
     test_insertionSortColsMatrixByColCriteria();
+    test_insertionSortRowsMatrixByRowCriteria();
     test_isSquareMatrix();
     test_twoMatricesEqual();
     test_isEMatrix();
