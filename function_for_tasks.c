@@ -19,8 +19,9 @@ void transposeIfMatrixHasEqualSumOfRows(matrix m) {
         fprintf(stderr, "bad data");
         exit(1);
     }
+
     for (register size_t i = 0; i < m.nRows; ++i)
-        arraySum[i] += getSumArray(m.values[i], m.nCols);
+        arraySum[i] += getSumArrayLL(m.values[i], m.nCols);
 
     if (isUniqueArrayElements(arraySum, m.nRows))
         transposeSquareMatrix(m);
@@ -74,7 +75,7 @@ long long findSumOfMaxesOfPseudoDiagonal(const matrix m) {
         }
     }
 
-    long long sum = getSumArray(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
+    long long sum = getSumArrayLL(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
 
     free(arrayMaxElemsPseudoDiagonal);
 
@@ -109,7 +110,7 @@ unsigned countEqClassesByRowsSum(const matrix m) {
     assert(arraySumsRows != NULL);
 
     for (register size_t i = 0; i < m.nRows; ++i)
-        arraySumsRows[i] = getSumArray(m.values[i], m.nCols);
+        arraySumsRows[i] = getSumArrayLL(m.values[i], m.nCols);
 
     insertionSort(arraySumsRows, m.nRows, isIncreasing);
 
@@ -148,7 +149,7 @@ unsigned getCounterSpecialElement(const matrix m) {
         for (register size_t j = 0; j < m.nRows; ++j)
             arrayColumn[j] = m.values[j][i];
 
-        arraySumColumn[i] = getSumArray(arrayColumn, m.nRows);
+        arraySumColumn[i] = getSumArrayLL(arrayColumn, m.nRows);
         int maxElementColumn = getMaxElemArray(arrayColumn, m.nRows);
         if (arraySumColumn[i] - maxElementColumn < maxElementColumn)
             counterSpecial++;

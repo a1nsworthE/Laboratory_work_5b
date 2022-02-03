@@ -74,7 +74,7 @@ bool isEqualArray(const int *a, const size_t sizeA, const int *b, const size_t s
         return false;
 }
 
-long long getSumArray(const int *a, size_t n) {
+long long getSumArrayLL(const int *a, size_t n) {
     long long sum = 0;
     for (size_t i = 0; i < n; ++i)
         sum += a[i];

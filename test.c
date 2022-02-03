@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdbool.h>
 #include "includes/algorithms/matrix.h"
 #include "function_for_tasks.c"
 
@@ -225,7 +223,7 @@ void test_insertionSortRowsMatrixByRowCriteria_allRowsDescending() {
             3, 3
     );
 
-    insertionSortRowsMatrixByRowCriteria(m, getSumArray);
+    insertionSortRowsMatrixByRowCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {3, 2, 1}, 3, m.values[0], 3)
@@ -246,7 +244,7 @@ void test_insertionSortRowsMatrixByRowCriteria_oneRows() {
             1, 3
     );
 
-    insertionSortRowsMatrixByRowCriteria(m, getSumArray);
+    insertionSortRowsMatrixByRowCriteria(m, getSumArrayLL);
 
     assert(isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3));
 
@@ -263,7 +261,7 @@ void test_insertionSortRowsMatrixByRowCriteria_randomPositionRows() {
             3, 3
     );
 
-    insertionSortRowsMatrixByRowCriteria(m, getSumArray);
+    insertionSortRowsMatrixByRowCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 1, 1}, 3, m.values[0], 3)
@@ -287,7 +285,7 @@ void test_insertionSortRowsMatrixByRowCriteria_maxRowsInBottom() {
             4, 3
     );
 
-    insertionSortRowsMatrixByRowCriteria(m, getSumArray);
+    insertionSortRowsMatrixByRowCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 1, 1}, 3, m.values[0], 3)
@@ -312,7 +310,7 @@ void test_insertionSortColsMatrixByColCriteria_withoutMistakes() {
             3, 3
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArray);
+    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3)
@@ -335,7 +333,7 @@ void test_insertionSortColsMatrixByColCriteria_maxColsAtBorder() {
             3, 3
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArray);
+    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3)
@@ -358,7 +356,7 @@ void test_insertionSortColsMatrixByColCriteria_NonIncreasing() {
             3, 3
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArray);
+    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3)
@@ -382,7 +380,7 @@ void test_insertionSortColsMatrixByColCriteria_minColAtBorder() {
             4, 5
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArray);
+    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3, 4, 5}, 5, m.values[0], 5)
@@ -406,7 +404,7 @@ void test_insertionSortColsMatrixByColCriteria_oneRow() {
             1, 6
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArray);
+    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(isEqualArray((int[]) {1, 2, 3, 4, 5, 6}, 6, m.values[0], 6));
 
@@ -928,6 +926,7 @@ void test_matrixFunctions() {
     test_getMinValuePos();
     test_getMaxValuePos();
 }
+// --------------------------------------------------------------------------
 
 void test_sortRowsByMaxElement_maxInCenter() {
     matrix matrix1 = createMatrixFromArray(

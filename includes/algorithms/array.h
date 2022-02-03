@@ -30,7 +30,7 @@ int getMaxElemArray(const int *a, size_t n);
 
 bool isEqualArray(const int *a, size_t sizeA, const int *b, size_t sizeB);
 
-long long getSumArray(const int *a, size_t n);
+long long getSumArrayLL(const int *a, size_t n);
 
 int getMaxElement(const int *a, size_t n);
 
