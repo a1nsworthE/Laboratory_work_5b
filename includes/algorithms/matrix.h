@@ -69,6 +69,10 @@ position getMinValuePos(matrix m);
 
 position getMaxValuePos(matrix m);
 
+position getMinValuePosD(matrixD m);
+
+position getMaxValuePosD(matrixD m);
+
 double getMaxElementMatrixByAbsD(matrixD m);
 
 matrix createMatrixFromArray(const int *a, int nRows, int nCols);

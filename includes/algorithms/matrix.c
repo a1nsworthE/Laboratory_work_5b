@@ -321,6 +321,40 @@ position getMaxValuePos(const matrix m) {
     return indexMax;
 }
 
+/// Получает индекс минимального элемента
+/// \param m - матрица
+/// \return Возвращает индекс минимального элемента
+position getMinValuePosD(const matrixD m) {
+    double minValue = m.values[0][0];
+    position indexMin = {0, 0};
+    for (register size_t i = 0; i < m.nRows; ++i)
+        for (register size_t j = 0; j < m.nCols; ++j)
+            if (m.values[i][j] < minValue) {
+                minValue = m.values[i][j];
+                indexMin.rowIndex = i;
+                indexMin.colIndex = j;
+            }
+
+    return indexMin;
+}
+
+/// Получает индекс максимального элемента
+/// \param m - матрица
+/// \return Возвращает индекс максимального элемента
+position getMaxValuePosD(const matrixD m) {
+    double maxValue = m.values[0][0];
+    position indexMax = {0, 0};
+    for (size_t i = 0; i < m.nRows; ++i)
+        for (size_t j = 0; j < m.nCols; ++j)
+            if (m.values[i][j] > maxValue) {
+                maxValue = m.values[i][j];
+                indexMax.rowIndex = i;
+                indexMax.colIndex = j;
+            }
+
+    return indexMax;
+}
+
 /// Создает матрицу из массива
 /// \param a - адрес ячейки памяти
 /// \param nRows - кол - во строк

@@ -286,6 +286,8 @@ int main() {
 }
 */
 
+// 18 задача>>>
+/*
 int main() {
     size_t n, m;
     scanf("%zd %zd", &n, &m);
@@ -295,6 +297,37 @@ int main() {
     printf("%d", getCountSpecialElementsInMatrixRows(matrix1));
 
     freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+
+double getSpecialScalarProduct(matrixD m) {
+    // Получение вспомогательного массива и массива со значением в столбцах
+    double *arrayColumn = (double *) malloc(m.nRows * sizeof(double));
+    printExitCodeIfPtrIsNull(arrayColumn);
+
+    size_t minIndexCol = getMinValuePosD(m).colIndex;
+    for (register size_t i = 0; i < minIndexCol; ++i) {
+        for (register size_t j = 0; j < m.nRows; ++j)
+            arrayColumn[j] = m.values[j][i];
+    }
+
+    double scalarProduct = scalarProductTwoVectorsD(arrayColumn, m.nRows, m.values[getMaxValuePosD(m).rowIndex]);
+    free(arrayColumn);
+
+    return scalarProduct;
+}
+
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrixD matrix1 = getMemMatrixD(n, m);
+    inputMatrixD(matrix1);
+
+    printf("%lf", getSpecialScalarProduct(matrix1));
+
+    freeMemMatrixD(matrix1);
 
     return 0;
 }

@@ -308,4 +308,9 @@ size_t getVectorIndexWithMaxAngle(matrix m, const int *b) {
     return maxIndexRow;
 }
 
-
+double scalarProductTwoVectorsD(const double *a, const size_t n, const double *b) {
+    double product = 0;
+    for (register size_t i = 0; i < n; ++i)
+        product += a[i] * b[i];
+    return product;
+}
