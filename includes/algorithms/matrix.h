@@ -75,6 +75,8 @@ position getMaxValuePosD(matrixD m);
 
 double getMaxElementMatrixByAbsD(matrixD m);
 
+matrixD createMatrixFromArrayD(const double *a, int nRows, int nCols);
+
 matrix createMatrixFromArray(const int *a, int nRows, int nCols);
 
 matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols);

@@ -322,10 +322,8 @@ double getSpecialScalarProduct(matrixD m) {
     printExitCodeIfPtrIsNull(arrayColumn);
 
     size_t minIndexCol = getMinValuePosD(m).colIndex;
-    for (register size_t i = 0; i < minIndexCol; ++i) {
-        for (register size_t j = 0; j < m.nRows; ++j)
-            arrayColumn[j] = m.values[j][i];
-    }
+    for (register size_t j = 0; j < m.nRows; ++j)
+        arrayColumn[j] = m.values[j][minIndexCol];
 
     double scalarProduct = scalarProductTwoVectorsD(arrayColumn, m.nRows, m.values[getMaxValuePosD(m).rowIndex]);
     free(arrayColumn);

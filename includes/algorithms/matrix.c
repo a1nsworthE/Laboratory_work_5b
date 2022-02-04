@@ -370,6 +370,21 @@ matrix createMatrixFromArray(const int *a, const int nRows, const int nCols) {
     return m;
 }
 
+/// Создает матрицу из массива
+/// \param a - адрес ячейки памяти
+/// \param nRows - кол - во строк
+/// \param nCols - кол - во столбцов
+/// \return Возвращает матрицу
+matrixD createMatrixFromArrayD(const double *a, const int nRows, const int nCols) {
+    matrixD m = getMemMatrixD(nRows, nCols);
+    size_t k = 0;
+    for (register size_t i = 0; i < nRows; i++)
+        for (register size_t j = 0; j < nCols; j++)
+            m.values[i][j] = a[k++];
+
+    return m;
+}
+
 /// Создает матрицу матриц
 /// \param values - адрес ячейки памяти
 /// \param nMatrices - кол - во матриц
