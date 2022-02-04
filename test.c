@@ -2086,15 +2086,15 @@ void test_getCountSpecialElementsInMatrixRows_allElemsIsSpecial() {
     freeMemMatrix(matrix1);
 }
 
-void test_getCountSpecialElementsInMatrixRows_oneCols() {
+void test_getCountSpecialElementsInMatrixRows_equalElems() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    1,
-                    5,
-                    9
+                    1, 1, 1, 1,
+                    2, 2, 2, 2,
+                    2, 2, 2, 2
 
             },
-            3, 1
+            3, 4
     );
     assert(getCountSpecialElementsInMatrixRows(matrix1) == 0);
 
@@ -2106,7 +2106,7 @@ void test_getCountSpecialElementsInMatrixRows() {
     test_getCountSpecialElementsInMatrixRows_noSpecialElems();
     test_getCountSpecialElementsInMatrixRows_specialElemsAtBorders();
     test_getCountSpecialElementsInMatrixRows_allElemsIsSpecial();
-    test_getCountSpecialElementsInMatrixRows_oneCols();
+    test_getCountSpecialElementsInMatrixRows_equalElems();
 }
 
 void test_functionsTasks() {
