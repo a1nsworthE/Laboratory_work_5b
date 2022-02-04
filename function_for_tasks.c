@@ -303,7 +303,6 @@ size_t getVectorIndexWithMaxAngle(matrix m, const int *b) {
     for (register size_t i = 0; i < m.nRows; ++i)
         arrayCos[i] = valueCosBtwTwoVectors(m.values[i], m.nCols, b);
 
-
     size_t maxIndexRow = getMinIndexElemArrayD(arrayCos, m.nRows);
     free(arrayCos);
 
