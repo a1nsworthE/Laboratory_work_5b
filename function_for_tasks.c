@@ -100,7 +100,7 @@ int getMinInArea(const matrix m) {
 }
 
 void sortByDistancesByNonDecreasing(matrix m) {
-    insertionSortRowsMatrixByRowCriteriaD(m, getDistance);
+    insertionSortRowsMatrixByRowCriteriaD(m, getVectorLength);
 }
 
 unsigned countEqClassesByRowsSum(const matrix m) {
@@ -218,15 +218,70 @@ void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
 
 void printMinMatrixWithMaxAbsElement(const matrixD *ms, const size_t nMatrix) {
     double *arrayMaxAbsElemMatrix = (double *) malloc(nMatrix * sizeof(double));
-    for (size_t i = 0; i < nMatrix; ++i)
+    for (register size_t i = 0; i < nMatrix; ++i)
         arrayMaxAbsElemMatrix[i] = getMaxElementMatrixByAbsD(ms[i]);
     double minAbsElement = getMinElementD(arrayMaxAbsElemMatrix, nMatrix);
 
-    for (size_t i = 0; i < nMatrix; ++i)
-        if ((arrayMaxAbsElemMatrix[i] - minAbsElement) < DBL_EPSILON)
+    for (register size_t i = 0; i < nMatrix; ++i)
+        if (fabs(arrayMaxAbsElemMatrix[i] - minAbsElement) < DBL_EPSILON)
             outputMatrixD(ms[i]);
 
     free(arrayMaxAbsElemMatrix);
+}
+
+void getSpecialArrayMax(int *a, const size_t n, const int *b) {
+    memcpy(a, b, n * sizeof(int));
+    for (register size_t i = 1; i < n; ++i)
+        a[i] = max(a[i], a[i - 1]);
+}
+
+void getSpecialArrayMin(int *a, const size_t n, const int *b) {
+    memcpy(a, b, n * sizeof(int));
+    for (register int i = n - 2; i >= 0; --i)
+        a[i] = min(a[i], a[i + 1]);
+}
+
+unsigned getCountSpecialElementsInArray(const int *a, const size_t n, const int *aMax, const int *aMin) {
+    unsigned counterSpecialElements = 0;
+    for (register size_t i = 0; i < n; ++i) {
+        if (i == 0) {
+            if (a[i] < aMin[i + 1])
+                counterSpecialElements++;
+        } else if (i == n - 1) {
+            if (a[i] > aMax[i - 1])
+                counterSpecialElements++;
+        } else {
+            if (a[i] > aMax[i - 1] && a[i] < aMin[i + 1])
+                counterSpecialElements++;
+        }
+    }
+
+    return counterSpecialElements;
+}
+
+unsigned getCountSpecialElementsInMatrixRows(const matrix m) {
+    assert(m.nCols > 0 && m.nRows > 0);
+
+    if (m.nCols == 1)
+        return 0;
+
+    unsigned counterSpecialElements = 0;
+    int *arrayMax = (int *) malloc(m.nCols * sizeof(int));
+    printExitCodeIfPtrIsNull(arrayMax);
+    int *arrayMin = (int *) malloc(m.nCols * sizeof(int));
+    printExitCodeIfPtrIsNull(arrayMin);
+    for (register size_t i = 0; i < m.nRows; ++i) {
+        getSpecialArrayMax(arrayMax, m.nCols, m.values[i]);
+        outputArray(arrayMax, m.nCols);
+        getSpecialArrayMin(arrayMin, m.nCols, m.values[i]);
+        outputArray(arrayMin, m.nCols);
+
+        counterSpecialElements += getCountSpecialElementsInArray(m.values[i], m.nCols, arrayMax, arrayMin);
+    }
+    free(arrayMin);
+    free(arrayMax);
+
+    return counterSpecialElements;
 }
 
 

@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>
+#include <limits.h>
 
 #include "../structs/matrix.c"
 #include "array.h"

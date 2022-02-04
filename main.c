@@ -253,8 +253,56 @@ int main() {
 }
 */
 
+//Задачи со звездочкой***
+// 16 задача>>>
+/*
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+
+    printf("%d", getCountSpecialElementsInMatrixRows(matrix1));
+
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+
+int scalarProductTwoVectors(const int *a, const size_t n, const int *b) {
+    int product = 0;
+    for (register size_t i = 0; i < n; ++i)
+        product += a[i] * b[i];
+    return product;
+}
+
+double cosBtwTwoVectors(const int *a, const size_t n, const int *b) {
+    return acos(scalarProductTwoVectors(a, n, b) / getVectorLength(a, n) * getVectorLength(b, n));
+}
+
+size_t getVectorIndexWithMaxAngle(matrix m, const int *b) {
+    double *arrayCos = (double *) malloc(m.nRows * sizeof(int));
+    printExitCodeIfPtrIsNull(arrayCos);
+
+    for (register size_t i = 0; i < m.nRows; ++i)
+        arrayCos[i] = cosBtwTwoVectors(m.values[i], m.nRows, b);
+
+    size_t maxIndexRow = getMaxIndexArrayD(arrayCos, m.nRows);
+    free(arrayCos);
+
+    return maxIndexRow;
+}
 
 int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+
+    printf("%d", getCountSpecialElementsInMatrixRows(matrix1));
+
+    freeMemMatrix(matrix1);
 
     return 0;
 }

@@ -228,8 +228,8 @@ bool twoMatricesEqual(const matrix m1, const matrix m2) {
     if (m1.nRows != m2.nRows || m1.nCols != m2.nCols)
         return false;
     if (m1.nRows == m2.nRows && m1.nCols == m2.nCols) {
-        for (size_t i = 0; i < m1.nRows; ++i)
-            for (size_t j = 0; j < m2.nCols; ++j)
+        for (register size_t i = 0; i < m1.nRows; ++i)
+            for (register size_t j = 0; j < m2.nCols; ++j)
                 if (m1.values[i][j] != m2.values[i][j])
                     return false;
     } else
@@ -293,8 +293,8 @@ void transposeSquareMatrix(matrix m) {
 position getMinValuePos(const matrix m) {
     int minValue = m.values[0][0];
     position indexMin = {0, 0};
-    for (size_t i = 0; i < m.nRows; ++i)
-        for (size_t j = 0; j < m.nCols; ++j)
+    for (register size_t i = 0; i < m.nRows; ++i)
+        for (register size_t j = 0; j < m.nCols; ++j)
             if (m.values[i][j] < minValue) {
                 minValue = m.values[i][j];
                 indexMin.rowIndex = i;
