@@ -2026,6 +2026,89 @@ void test_getCountNonDescendingRowsMatrices() {
     test_getCountNonDescendingRowsMatrices_nonDescendingRows();
 }
 
+void test_getCountSpecialElementsInMatrixRows_specialElemsLocatedClose() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    2, 3, 5, 5, 4,
+                    6, 2, 3, 8, 12,
+                    12, 12, 2, 1, 2
+
+            },
+            3, 5
+    );
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 2);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCountSpecialElementsInMatrixRows_noSpecialElems() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    2, 3, 5, 5, -1,
+                    6, 2, 3, 8, -2,
+                    12, 12, 2, 1, -5
+
+            },
+            3, 5
+    );
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 0);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCountSpecialElementsInMatrixRows_specialElemsAtBorders() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    2, 5, 5, 5, 9,
+                    9, 5, 3, 8, 10,
+                    12, 11, 2, 1, 13
+
+            },
+            3, 5
+    );
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 6);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCountSpecialElementsInMatrixRows_allElemsIsSpecial() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3, 4,
+                    5, 6, 7, 8,
+                    9, 10, 11, 12
+
+            },
+            3, 4
+    );
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 12);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCountSpecialElementsInMatrixRows_oneCols() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1,
+                    5,
+                    9
+
+            },
+            3, 1
+    );
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 0);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getCountSpecialElementsInMatrixRows() {
+    test_getCountSpecialElementsInMatrixRows_specialElemsLocatedClose();
+    test_getCountSpecialElementsInMatrixRows_noSpecialElems();
+    test_getCountSpecialElementsInMatrixRows_specialElemsAtBorders();
+    test_getCountSpecialElementsInMatrixRows_allElemsIsSpecial();
+    test_getCountSpecialElementsInMatrixRows_oneCols();
+}
+
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
@@ -2039,6 +2122,8 @@ void test_functionsTasks() {
     test_getCounterSpecialElement();
     test_swapPenultimateRow();
     test_getCountNonDescendingRowsMatrices();
+    // тесты для задач со звездочкой***
+    test_getCountSpecialElementsInMatrixRows();
 }
 
 int main() {
