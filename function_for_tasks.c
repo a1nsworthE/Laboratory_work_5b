@@ -289,18 +289,22 @@ int scalarProductTwoVectors(const int *a, const size_t n, const int *b) {
     return product;
 }
 
-double cosBtwTwoVectors(const int *a, const size_t n, const int *b) {
-    return acos(scalarProductTwoVectors(a, n, b) / getVectorLength(a, n) * getVectorLength(b, n));
+double valueCosBtwTwoVectors(const int *a, const size_t n, const int *b) {
+    double scalProd = scalarProductTwoVectors(a, n, b);
+    double l1 = getVectorLength(a, n);
+    double l2 = getVectorLength(b, n);
+    return scalProd / (l1 * l2);
 }
 
 size_t getVectorIndexWithMaxAngle(matrix m, const int *b) {
-    double *arrayCos = (double *) malloc(m.nRows * sizeof(int));
+    double *arrayCos = (double *) malloc(m.nRows * sizeof(double));
     printExitCodeIfPtrIsNull(arrayCos);
 
     for (register size_t i = 0; i < m.nRows; ++i)
-        arrayCos[i] = cosBtwTwoVectors(m.values[i], m.nRows, b);
+        arrayCos[i] = valueCosBtwTwoVectors(m.values[i], m.nCols, b);
 
-    size_t maxIndexRow = getMaxIndexArrayD(arrayCos, m.nRows);
+
+    size_t maxIndexRow = getMinIndexElemArrayD(arrayCos, m.nRows);
     free(arrayCos);
 
     return maxIndexRow;

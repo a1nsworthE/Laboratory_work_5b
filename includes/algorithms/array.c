@@ -90,6 +90,18 @@ size_t getMaxIndexArrayD(const double *a, size_t n) {
     return indexMax;
 }
 
+size_t getMinIndexElemArrayD(const double *a, const size_t n) {
+    double elemMin = a[0];
+    size_t indexMin = 0;
+    for (register size_t i = 1; i < n; ++i)
+        if (a[i] < elemMin) {
+            elemMin = a[i];
+            indexMin = i;
+        }
+
+    return indexMin;
+}
+
 bool isEqualArray(const int *a, const size_t sizeA, const int *b, const size_t sizeB) {
     if (sizeA == sizeB) {
         return memcmp(a, b, sizeof(int) * sizeA) == 0;

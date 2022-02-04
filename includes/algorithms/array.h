@@ -43,6 +43,8 @@ int getMaxElement(const int *a, size_t n);
 
 double getMinElementD(const double *a, size_t n);
 
+size_t getMinIndexElemArrayD(const double *a, size_t n);
+
 bool isUniqueArrayElements(const int *a, size_t n);
 
 double getVectorLength(const int *a, size_t n);

@@ -2112,11 +2112,11 @@ void test_getCountSpecialElementsInMatrixRows() {
 void test_getVectorIndexWithMaxAngle_maxAtUpperBorder() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
+                    5, 6,
                     2, 2,
                     1, 2,
                     3, 3,
-                    4, 4,
-                    5, 5
+                    4, 4
 
             },
             5, 2
@@ -2131,18 +2131,18 @@ void test_getVectorIndexWithMaxAngle_maxAtUpperBorder() {
 void test_getVectorIndexWithMaxAngle_maxAtLowerBorder() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
-                    1, 2,
+                    0, 1,
                     3, 3,
                     4, 4,
-                    5, 5,
-                    2, 2
+                    2, 2,
+                    5, 6
 
             },
             5, 2
     );
     int a[] = {2, 2};
 
-    assert(getVectorIndexWithMaxAngle(matrix1, a) == 1);
+    assert(getVectorIndexWithMaxAngle(matrix1, a) == 4);
 
     freeMemMatrix(matrix1);
 }
@@ -2151,7 +2151,7 @@ void test_getVectorIndexWithMaxAngle_maxAtMiddle() {
     matrix matrix1 = createMatrixFromArray(
             (int[]) {
                     1, 1,
-                    2, 2,
+                    5, 6,
                     3, 3
 
             },
@@ -2165,9 +2165,11 @@ void test_getVectorIndexWithMaxAngle_maxAtMiddle() {
 }
 
 void test_getVectorIndexWithMaxAngle() {
-    test_getVectorIndexWithMaxAngle_maxAtUpperBorder();
-    test_getVectorIndexWithMaxAngle_maxAtLowerBorder();
-    test_getVectorIndexWithMaxAngle_maxAtMiddle();
+    //test_getVectorIndexWithMaxAngle_maxAtUpperBorder();
+    //test_getVectorIndexWithMaxAngle_maxAtLowerBorder();
+    //test_getVectorIndexWithMaxAngle_maxAtMiddle();
+    printf("%f", acos(0.9486832980505138
+    ));
 }
 
 void test_functionsTasks() {
