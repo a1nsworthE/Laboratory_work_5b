@@ -270,6 +270,22 @@ int main() {
 }
 */
 
+// 17 задача>>>
+/*
+int main() {
+    size_t n, m;
+    scanf("%zd %zd", &n, &m);
+    matrix matrix1 = getMemMatrix(n, m);
+    inputMatrix(matrix1);
+
+    printf("%d", getCountSpecialElementsInMatrixRows(matrix1));
+
+    freeMemMatrix(matrix1);
+
+    return 0;
+}
+*/
+
 int scalarProductTwoVectors(const int *a, const size_t n, const int *b) {
     int product = 0;
     for (register size_t i = 0; i < n; ++i)
