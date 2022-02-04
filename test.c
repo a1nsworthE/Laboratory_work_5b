@@ -2036,7 +2036,7 @@ void test_getCountSpecialElementsInMatrixRows_specialElemsLocatedClose() {
             },
             3, 5
     );
-    assert(getCountSpecialElementsInMatrixRows(matrix1) == 2);
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 4);
 
     freeMemMatrix(matrix1);
 }
@@ -2109,6 +2109,67 @@ void test_getCountSpecialElementsInMatrixRows() {
     test_getCountSpecialElementsInMatrixRows_equalElems();
 }
 
+void test_getVectorIndexWithMaxAngle_maxAtUpperBorder() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    2, 2,
+                    1, 2,
+                    3, 3,
+                    4, 4,
+                    5, 5
+
+            },
+            5, 2
+    );
+    int a[] = {2, 2};
+
+    assert(getVectorIndexWithMaxAngle(matrix1, a) == 0);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getVectorIndexWithMaxAngle_maxAtLowerBorder() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2,
+                    3, 3,
+                    4, 4,
+                    5, 5,
+                    2, 2
+
+            },
+            5, 2
+    );
+    int a[] = {2, 2};
+
+    assert(getVectorIndexWithMaxAngle(matrix1, a) == 1);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getVectorIndexWithMaxAngle_maxAtMiddle() {
+    matrix matrix1 = createMatrixFromArray(
+            (int[]) {
+                    1, 1,
+                    2, 2,
+                    3, 3
+
+            },
+            3, 2
+    );
+    int a[] = {2, 2};
+
+    assert(getVectorIndexWithMaxAngle(matrix1, a) == 1);
+
+    freeMemMatrix(matrix1);
+}
+
+void test_getVectorIndexWithMaxAngle() {
+    test_getVectorIndexWithMaxAngle_maxAtUpperBorder();
+    test_getVectorIndexWithMaxAngle_maxAtLowerBorder();
+    test_getVectorIndexWithMaxAngle_maxAtMiddle();
+}
+
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
@@ -2124,6 +2185,7 @@ void test_functionsTasks() {
     test_getCountNonDescendingRowsMatrices();
     // тесты для задач со звездочкой***
     test_getCountSpecialElementsInMatrixRows();
+    test_getVectorIndexWithMaxAngle();
 }
 
 int main() {
