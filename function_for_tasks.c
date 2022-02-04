@@ -314,3 +314,20 @@ double scalarProductTwoVectorsD(const double *a, const size_t n, const double *b
         product += a[i] * b[i];
     return product;
 }
+
+double getSpecialScalarProduct(matrixD m) {
+    // Получение вспомогательного массива и массива со значением в столбцах
+    double *arrayColumn = (double *) malloc(m.nRows * sizeof(double));
+    printExitCodeIfPtrIsNull(arrayColumn);
+
+    size_t minIndexCol = getMinValuePosD(m).colIndex;
+    for (register size_t i = 0; i < minIndexCol; ++i) {
+        for (register size_t j = 0; j < m.nRows; ++j)
+            arrayColumn[j] = m.values[j][i];
+    }
+
+    double scalarProduct = scalarProductTwoVectorsD(arrayColumn, m.nRows, m.values[getMaxValuePosD(m).rowIndex]);
+    free(arrayColumn);
+
+    return scalarProduct;
+}
