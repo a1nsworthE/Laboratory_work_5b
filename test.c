@@ -2066,7 +2066,7 @@ void test_getCountSpecialElementsInMatrixRows_specialElemsAtBorders() {
             },
             3, 5
     );
-    assert(getCountSpecialElementsInMatrixRows(matrix1) == 6);
+    assert(getCountSpecialElementsInMatrixRows(matrix1) == 4);
 
     freeMemMatrix(matrix1);
 }

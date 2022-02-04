@@ -272,9 +272,7 @@ unsigned getCountSpecialElementsInMatrixRows(const matrix m) {
     printExitCodeIfPtrIsNull(arrayMin);
     for (register size_t i = 0; i < m.nRows; ++i) {
         getSpecialArrayMax(arrayMax, m.nCols, m.values[i]);
-        outputArray(arrayMax, m.nCols);
         getSpecialArrayMin(arrayMin, m.nCols, m.values[i]);
-        outputArray(arrayMin, m.nCols);
 
         counterSpecialElements += getCountSpecialElementsInArray(m.values[i], m.nCols, arrayMax, arrayMin);
     }
