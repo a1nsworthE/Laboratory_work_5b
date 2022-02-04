@@ -2172,7 +2172,7 @@ void test_getVectorIndexWithMaxAngle() {
 
 void test_getSpecialScalarProduct_minAndMaxAtBorders1() {
     matrixD matrix1 = createMatrixFromArrayD(
-            (double []) {
+            (double[]) {
                     3.1, 1.2,
                     5.7, 6.9
 
@@ -2187,15 +2187,59 @@ void test_getSpecialScalarProduct_minAndMaxAtBorders1() {
 }
 
 void test_getSpecialScalarProduct_minAndMaxAtCenter() {
+    matrixD matrix1 = createMatrixFromArrayD(
+            (double[]) {
+                    3.1, 1.1, 1.3,
+                    5.7, 6.9, 2.1,
+                    5.3, 5.2, 3.3
 
+
+            },
+            3, 3
+    );
+
+    double e = 5.7 * 1.1 + 6.9 * 6.9 + 2.1 * 5.2;
+    assert(fabs(getSpecialScalarProduct(matrix1) - e) <= DBL_EPSILON);
+
+    freeMemMatrixD(matrix1);
 }
 
 void test_getSpecialScalarProduct_minAndMaxAtBorders2() {
+    matrixD matrix1 = createMatrixFromArrayD(
+            (double[]) {
+                    3.1, 1.1, -1,
+                    5.7, 6.9, 2.1,
+                    9, 5.2, 3.3
 
+
+            },
+            3, 3
+    );
+
+    double e = 9 * (-1) + 5.2 * 2.1 + 3.3 * 3.3;
+    assert(fabs(getSpecialScalarProduct(matrix1) - e) < DBL_EPSILON);
+
+    freeMemMatrixD(matrix1);
 }
 
 void test_getSpecialScalarProduct_largeMatrix() {
+    matrixD matrix1 = createMatrixFromArrayD(
+            (double[]) {
+                    1,2,3,4,5.4,
+                    1.1,2.1,3.1,4.1,5.1,
+                    1.2,2.2,3.2,4.2,5.2,
+                    1.3,2.3,3.3,4.3,5.3,
+                    1.4,2.4,3.4,4.4,5.0
 
+
+            },
+            5, 5
+    );
+
+    double e = 1 * 1 + 2 * 1.1 + 3 * 1.2 + 4 * 1.3 + 5.4 * 1.4;
+    assert(fabs(getSpecialScalarProduct(matrix1) - e) < DBL_EPSILON);
+
+    freeMemMatrixD(matrix1);
 }
 
 void test_getSpecialScalarProduct() {
