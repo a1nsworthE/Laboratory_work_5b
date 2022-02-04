@@ -2170,6 +2170,41 @@ void test_getVectorIndexWithMaxAngle() {
     test_getVectorIndexWithMaxAngle_maxAtMiddle();
 }
 
+void test_getSpecialScalarProduct_minAndMaxAtBorders1() {
+    matrixD matrix1 = createMatrixFromArrayD(
+            (double []) {
+                    3.1, 1.2,
+                    5.7, 6.9
+
+            },
+            2, 2
+    );
+
+    double e = 5.7 * 1.2 + 6.9 * 6.9;
+    assert(fabs(getSpecialScalarProduct(matrix1) - e) < DBL_EPSILON);
+
+    freeMemMatrixD(matrix1);
+}
+
+void test_getSpecialScalarProduct_minAndMaxAtCenter() {
+
+}
+
+void test_getSpecialScalarProduct_minAndMaxAtBorders2() {
+
+}
+
+void test_getSpecialScalarProduct_largeMatrix() {
+
+}
+
+void test_getSpecialScalarProduct() {
+    test_getSpecialScalarProduct_minAndMaxAtBorders1();
+    test_getSpecialScalarProduct_minAndMaxAtCenter();
+    test_getSpecialScalarProduct_minAndMaxAtBorders2();
+    test_getSpecialScalarProduct_largeMatrix();
+}
+
 void test_functionsTasks() {
     test_sortRowsByMaxElement();
     test_sortColsByMinElement();
@@ -2186,6 +2221,7 @@ void test_functionsTasks() {
     // тесты для задач со звездочкой***
     test_getCountSpecialElementsInMatrixRows();
     test_getVectorIndexWithMaxAngle();
+    test_getSpecialScalarProduct();
 }
 
 int main() {
