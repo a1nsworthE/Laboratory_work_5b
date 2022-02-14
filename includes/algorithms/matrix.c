@@ -8,18 +8,13 @@ matrix getMemMatrix(const int nRows, const int nCols) {
     assert(nRows > 0 && nCols > 0);
 
     int **values = (int **) malloc(nRows * sizeof(int *));
-    if (values == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(values);
 
     for (register size_t i = 0; i < nRows; ++i) {
         values[i] = (int *) malloc(nCols * sizeof(int));
-        if (values[i] == NULL) {
-            fprintf(stderr, "bad alloc");
-            exit(1);
-        }
+        printExitCodeIfPtrIsNull(values[i]);
     }
+
     return (matrix) {values, nRows, nCols};
 }
 
@@ -32,10 +27,7 @@ matrix *getMemArrayOfMatrices(const int nMatrices, const int nRows, const int nC
     assert(nMatrices > 0);
 
     matrix *ms = (matrix *) malloc(nMatrices * sizeof(matrix));
-    if (ms == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(ms);
 
     for (register size_t i = 0; i < nMatrices; ++i)
         ms[i] = getMemMatrix(nRows, nCols);
@@ -125,10 +117,7 @@ void swapColumns(matrix m, const int j1, const int j2) {
 /// \param criteria - критерий для сортировки
 void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nRows * sizeof(int));
-    if (arrayForSort == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arrayForSort);
 
     for (register size_t i = 0; i < m.nRows; ++i)
         arrayForSort[i] = criteria(m.values[i], m.nCols);
@@ -152,10 +141,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 /// \param criteria - критерий для сортировки
 void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t)) {
     double *arrayForSort = (double *) malloc(m.nRows * sizeof(double));
-    if (arrayForSort == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arrayForSort);
 
     for (size_t i = 0; i < m.nRows; ++i)
         arrayForSort[i] = criteria(m.values[i], m.nCols);
@@ -180,17 +166,11 @@ void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const in
 /// \param criteria - критерий для сортировки
 void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
-    if (arrayForSort == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arrayForSort);
 
     // Получение вспомогательного массива и массива со значением в столбцах
     int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
-    if (arrayColumn == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arrayColumn);
 
     for (register size_t i = 0; i < m.nCols; ++i) {
         for (register size_t j = 0; j < m.nRows; ++j)
@@ -217,7 +197,7 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *,
 /// \param m - матрица
 /// \return Возвращает true, если матрица квадратная, иначе false
 bool isSquareMatrix(const matrix m) {
-    return m.nRows == m.nCols ? true : false;
+    return m.nRows == m.nCols;
 }
 
 /// Проверка двух матриц на равенство
@@ -362,6 +342,8 @@ position getMaxValuePosD(const matrixD m) {
 /// \return Возвращает матрицу
 matrix createMatrixFromArray(const int *a, const int nRows, const int nCols) {
     matrix m = getMemMatrix(nRows, nCols);
+    printExitCodeIfPtrIsNull(m.values);
+
     size_t k = 0;
     for (register size_t i = 0; i < nRows; i++)
         for (register size_t j = 0; j < nCols; j++)
@@ -377,6 +359,8 @@ matrix createMatrixFromArray(const int *a, const int nRows, const int nCols) {
 /// \return Возвращает матрицу
 matrixD createMatrixFromArrayD(const double *a, const int nRows, const int nCols) {
     matrixD m = getMemMatrixD(nRows, nCols);
+    printExitCodeIfPtrIsNull(m.values);
+
     size_t k = 0;
     for (register size_t i = 0; i < nRows; i++)
         for (register size_t j = 0; j < nCols; j++)
@@ -394,6 +378,8 @@ matrixD createMatrixFromArrayD(const double *a, const int nRows, const int nCols
 matrix *
 createArrayOfMatrixFromArray(const int *values, const size_t nMatrices, const size_t nRows, const size_t nCols) {
     matrix *ms = getMemArrayOfMatrices(nMatrices, nRows, nCols);
+    printExitCodeIfPtrIsNull(ms);
+    printExitCodeIfPtrIsNull(ms->values);
 
     size_t l = 0;
     for (register size_t k = 0; k < nMatrices; k++)
@@ -412,6 +398,7 @@ matrix mulMatrices(const matrix m1, const matrix m2) {
     assert(m1.nCols == m2.nRows);
 
     matrix mulM1M2 = getMemMatrix(m1.nRows, m2.nCols);
+    printExitCodeIfPtrIsNull(mulM1M2.values);
     for (register size_t i = 0; i < m1.nRows; ++i)
         for (register size_t j = 0; j < m2.nCols; ++j) {
             mulM1M2.values[i][j] = 0;
@@ -470,10 +457,7 @@ matrixD getMemMatrixD(const int nRows, const int nCols) {
 
     for (register size_t i = 0; i < nRows; ++i) {
         values[i] = (double *) malloc(nCols * sizeof(double));
-        if (values[i] == NULL) {
-            fprintf(stderr, "bad alloc");
-            exit(1);
-        }
+        printExitCodeIfPtrIsNull(values[i]);
     }
     return (matrixD) {values, nRows, nCols};
 }
@@ -487,13 +471,12 @@ matrixD *getMemArrayOfMatricesD(const int nMatrices, const int nRows, const int 
     assert(nMatrices > 0);
 
     matrixD *ms = (matrixD *) malloc(nMatrices * sizeof(matrixD));
-    if (ms == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(ms);
 
-    for (register size_t i = 0; i < nMatrices; ++i)
+    for (register size_t i = 0; i < nMatrices; ++i) {
         ms[i] = getMemMatrixD(nRows, nCols);
+        printExitCodeIfPtrIsNull(ms[i].values);
+    }
     return ms;
 }
 
