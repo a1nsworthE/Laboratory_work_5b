@@ -15,10 +15,7 @@ void getSquareOfMatrixIfSymmetric(matrix *m) {
 
 void transposeIfMatrixHasEqualSumOfRows(matrix m) {
     int *arraySum = (int *) calloc(m.nRows, sizeof(int));
-    if (arraySum == NULL) {
-        fprintf(stderr, "bad data");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arraySum);
 
     for (register size_t i = 0; i < m.nRows; ++i)
         arraySum[i] += getSumArrayLL(m.values[i], m.nCols);
@@ -34,7 +31,6 @@ bool isMutuallyInverseMatrices(const matrix m1, const matrix m2) {
         return false;
 
     const matrix m3 = mulMatrices(m1, m2);
-
     if (isEMatrix(m3))
         return true;
     else
@@ -46,6 +42,7 @@ int findSumOfMaxesOfPseudoDiagonal(const matrix m) {
 
     // Массив максимумов из псевдогоналей матрицы
     int *arrayMaxElemsPseudoDiagonal = (int *) malloc((m.nRows + m.nCols - 2) * sizeof(int));
+    printExitCodeIfPtrIsNull(arrayMaxElemsPseudoDiagonal);
     size_t sizeArrayMaxElemsPseudoDiagonal = 0;
 
     // Поиск максимальных значений на псевдогоналях слева и справа от главной диагонали
@@ -107,10 +104,7 @@ unsigned countEqClassesByRowsSum(const matrix m) {
     assert(m.nRows > 0 && m.nCols > 0);
 
     int *arraySumsRows = (int *) malloc(m.nRows * sizeof(int));
-    if (arraySumsRows == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arraySumsRows);
 
     for (register size_t i = 0; i < m.nRows; ++i)
         arraySumsRows[i] = getSumArrayLL(m.values[i], m.nCols);
@@ -144,17 +138,11 @@ unsigned getCounterSpecialElement(const matrix m) {
 
     // Массив для хранения столбца
     int *arraySumColumn = (int *) malloc(m.nCols * sizeof(int));
-    if (arraySumColumn == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arraySumColumn);
 
     // Массив для хранения суммы стобца
     int *arrayColumn = (int *) (malloc(m.nRows * sizeof(int)));
-    if (arrayColumn == NULL) {
-        fprintf(stderr, "bad alloc");
-        exit(1);
-    }
+    printExitCodeIfPtrIsNull(arrayColumn);
 
     unsigned counterSpecial = 0;
     for (register size_t i = 0; i < m.nCols; ++i) {
@@ -176,28 +164,17 @@ void swapPenultimateRow(matrix m, const size_t indexColumn) {
     assert(m.nRows > 1 && m.nCols > 0);
 
     const size_t swapRowIndex = m.nRows - 2;
-    int swapColIndex;
-    int rowForMinColumn = 0;
-    if (indexColumn >= m.nCols / 2) {
-        swapColIndex = 0;
-        for (size_t i = 0; i < m.nRows; ++i) {
-            m.values[swapRowIndex][swapColIndex] = m.values[rowForMinColumn][indexColumn];
-            swapColIndex++;
-            rowForMinColumn++;
-        }
-    } else {
-        swapColIndex = m.nCols - 1;
-        for (size_t i = 0; i < m.nRows; ++i) {
-            m.values[swapRowIndex][swapColIndex] = m.values[rowForMinColumn][indexColumn];
-            swapColIndex--;
-            rowForMinColumn++;
-        }
+    const bool isLargeMiddle = indexColumn >= m.nCols / 2;
+    int swapColIndex = isLargeMiddle ? 0 : m.nCols - 1;
+    for (register size_t i = 0, rowForColumn = 0; i < m.nRows; ++i, rowForColumn++) {
+        m.values[swapRowIndex][swapColIndex] = m.values[rowForColumn][indexColumn];
+        swapColIndex = isLargeMiddle ? swapColIndex + 1 : swapColIndex - 1;
     }
 }
 
 unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatrix) {
     unsigned counterMatrix = 0;
-    for (size_t i = 0; i < nMatrix; ++i)
+    for (register size_t i = 0; i < nMatrix; ++i)
         if (hasAllSortByRows(ms[i], isNonDecreasing))
             counterMatrix++;
     return counterMatrix;
@@ -205,11 +182,13 @@ unsigned getCountNonDescendingRowsMatrices(const matrix *ms, const size_t nMatri
 
 void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
     int *arrayCounterZeroRows = (int *) malloc(nMatrix * sizeof(int));
-    for (size_t i = 0; i < nMatrix; ++i)
+    printExitCodeIfPtrIsNull(arrayCounterZeroRows);
+
+    for (register size_t i = 0; i < nMatrix; ++i)
         arrayCounterZeroRows[i] = getCounterZeroRows(ms[i]);
     int maxCounterZeroRows = getMaxElemArray(arrayCounterZeroRows, nMatrix);
 
-    for (size_t i = 0; i < nMatrix; ++i)
+    for (register size_t i = 0; i < nMatrix; ++i)
         if (arrayCounterZeroRows[i] == maxCounterZeroRows)
             outputMatrix(ms[i]);
 
@@ -218,6 +197,8 @@ void printMatrixWithMaxZeroRows(const matrix *ms, const size_t nMatrix) {
 
 void printMinMatrixWithMaxAbsElement(const matrixD *ms, const size_t nMatrix) {
     double *arrayMaxAbsElemMatrix = (double *) malloc(nMatrix * sizeof(double));
+    printExitCodeIfPtrIsNull(arrayMaxAbsElemMatrix);
+
     for (register size_t i = 0; i < nMatrix; ++i)
         arrayMaxAbsElemMatrix[i] = getMaxElementMatrixByAbsD(ms[i]);
     double minAbsElement = getMinElementD(arrayMaxAbsElemMatrix, nMatrix);
