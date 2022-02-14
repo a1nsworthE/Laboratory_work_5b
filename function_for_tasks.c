@@ -218,21 +218,21 @@ void getSpecialArrayMax(int *a, const size_t n, const int *b) {
 
 void getSpecialArrayMin(int *a, const size_t n, const int *b) {
     memcpy(a, b, n * sizeof(int));
-    for (register int i = n - 2; i >= 0; --i)
+    for (register int i = (int) n - 2; i >= 0; --i)
         a[i] = min(a[i], a[i + 1]);
 }
 
 unsigned getCountSpecialElementsInArray(const int *a, const size_t n, const int *aMax, const int *aMin) {
     unsigned counterSpecialElements = 0;
     for (register size_t i = 0; i < n; ++i) {
-        if (i == 0) {
+        if (i != 0 && i != n - 1) {
+            if (a[i] > aMax[i - 1] && a[i] < aMin[i + 1])
+                counterSpecialElements++;
+        } else if (i == 0) {
             if (a[i] < aMin[i + 1])
                 counterSpecialElements++;
         } else if (i == n - 1) {
             if (a[i] > aMax[i - 1])
-                counterSpecialElements++;
-        } else {
-            if (a[i] > aMax[i - 1] && a[i] < aMin[i + 1])
                 counterSpecialElements++;
         }
     }
@@ -243,7 +243,7 @@ unsigned getCountSpecialElementsInArray(const int *a, const size_t n, const int 
 unsigned getCountSpecialElementsInMatrixRows(const matrix m) {
     assert(m.nCols > 0 && m.nRows > 0);
 
-    if (m.nCols == 1)
+    if (m.nCols < 2)
         return 0;
 
     unsigned counterSpecialElements = 0;
@@ -251,6 +251,7 @@ unsigned getCountSpecialElementsInMatrixRows(const matrix m) {
     printExitCodeIfPtrIsNull(arrayMax);
     int *arrayMin = (int *) malloc(m.nCols * sizeof(int));
     printExitCodeIfPtrIsNull(arrayMin);
+
     for (register size_t i = 0; i < m.nRows; ++i) {
         getSpecialArrayMax(arrayMax, m.nCols, m.values[i]);
         getSpecialArrayMin(arrayMin, m.nCols, m.values[i]);
@@ -302,7 +303,7 @@ double getSpecialScalarProduct(matrixD m) {
     double *arrayColumn = (double *) malloc(m.nRows * sizeof(double));
     printExitCodeIfPtrIsNull(arrayColumn);
 
-    size_t minIndexCol = getMinValuePosD(m).colIndex;
+    const size_t minIndexCol = getMinValuePosD(m).colIndex;
     for (register size_t j = 0; j < m.nRows; ++j)
         arrayColumn[j] = m.values[j][minIndexCol];
 

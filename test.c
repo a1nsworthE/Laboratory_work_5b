@@ -2,6 +2,7 @@
 #include "function_for_tasks.c"
 
 void test_swapRows_oneRowAtBorder1() {
+    // Arrange
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -10,8 +11,10 @@ void test_swapRows_oneRowAtBorder1() {
             2, 3
     );
 
+    // Act
     swapRows(m, 0, 1);
 
+    // Assert
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[1], 3)
             &&
@@ -2225,11 +2228,11 @@ void test_getSpecialScalarProduct_minAndMaxAtBorders2() {
 void test_getSpecialScalarProduct_largeMatrix() {
     matrixD matrix1 = createMatrixFromArrayD(
             (double[]) {
-                    1,2,3,4,5.4,
-                    1.1,2.1,3.1,4.1,5.1,
-                    1.2,2.2,3.2,4.2,5.2,
-                    1.3,2.3,3.3,4.3,5.3,
-                    1.4,2.4,3.4,4.4,5.0
+                    1, 2, 3, 4, 5.4,
+                    1.1, 2.1, 3.1, 4.1, 5.1,
+                    1.2, 2.2, 3.2, 4.2, 5.2,
+                    1.3, 2.3, 3.3, 4.3, 5.3,
+                    1.4, 2.4, 3.4, 4.4, 5.0
 
 
             },
