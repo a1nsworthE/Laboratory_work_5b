@@ -246,16 +246,13 @@ bool isEMatrix(const matrix m) {
 bool isSymmetricMatrix(const matrix m) {
     if (isSquareMatrix(m) && m.nRows == 1)
         return true;
-
-    if (isSquareMatrix(m)) {
-        for (register size_t i = 0; i < m.nRows; ++i)
-            for (register size_t j = 0; j < m.nCols; ++j)
-                if (i != j) {
-                    if (m.values[i][j] != m.values[j][i])
-                        return false;
-                }
-    } else
+    else if (!isSquareMatrix(m))
         return false;
+
+    for (register size_t i = 0; i < m.nCols; ++i)
+        for (register size_t j = i + 1; j < m.nRows; ++j)
+            if (m.values[i][j] != m.values[j][i])
+                return false;
 
     return true;
 }
