@@ -164,7 +164,7 @@ void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const in
 /// Сортирует столбцы матрицы по неубыванию по критерию
 /// \param m - матрица
 /// \param criteria - критерий для сортировки
-void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
+void selectionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t)) {
     int *arrayForSort = (int *) malloc(m.nCols * sizeof(int));
     printExitCodeIfPtrIsNull(arrayForSort);
 
@@ -179,15 +179,19 @@ void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *,
     }
     free(arrayColumn);
 
-    for (register size_t i = 1; i < m.nCols; ++i) {
-        int tArray = arrayForSort[i];
-        register size_t j = i;
-        while (j > 0 && arrayForSort[j - 1] > tArray) {
-            arrayForSort[j] = arrayForSort[j - 1];
-            swapColumns(m, j, j - 1);
-            --j;
+    for (register size_t i = 0; i < m.nCols - 1; ++i) {
+        int minElem = arrayForSort[i];
+        size_t indexCol = i;
+        for (register size_t j = i + 1; j < m.nCols; ++j) {
+            if (arrayForSort[j] < minElem) {
+                minElem = arrayForSort[j];
+                indexCol = j;
+            }
         }
-        arrayForSort[j] = tArray;
+        if (arrayForSort[i] != minElem) {
+            swapColumns(m, i, indexCol);
+            swap(&arrayForSort[i], &arrayForSort[indexCol]);
+        }
     }
 
     free(arrayForSort);
@@ -203,17 +207,14 @@ bool isSquareMatrix(const matrix m) {
 /// Проверка двух матриц на равенство
 /// \param m1 - первая матрица
 /// \param m2 - вторая матрица
-/// \return Возращает true, если матрицы m1 и m2, иначе false
+/// \return Возвращает true, если матрицы m1 и m2, иначе false
 bool twoMatricesEqual(const matrix m1, const matrix m2) {
     if (m1.nRows != m2.nRows || m1.nCols != m2.nCols)
         return false;
-    if (m1.nRows == m2.nRows && m1.nCols == m2.nCols) {
-        for (register size_t i = 0; i < m1.nRows; ++i)
-            for (register size_t j = 0; j < m2.nCols; ++j)
-                if (m1.values[i][j] != m2.values[i][j])
-                    return false;
-    } else
-        return false;
+
+    for (register size_t i = 0; i < m1.nRows; ++i)
+        if (memcmp(m1.values[i], m2.values[i], m1.nCols * sizeof(int)) != 0)
+            return false;
 
     return true;
 }
@@ -222,19 +223,19 @@ bool twoMatricesEqual(const matrix m1, const matrix m2) {
 /// \param m - матрица
 /// \return - возвращает true, если матрица еденичная, иначе false
 bool isEMatrix(const matrix m) {
-    if (isSquareMatrix(m)) {
-        for (register size_t i = 0; i < m.nRows; ++i)
-            for (register size_t j = i; j < m.nCols; ++j) {
-                if (i == j) {
-                    if (m.values[i][j] != 1)
-                        return false;
-                } else if (i != j) {
-                    if (m.values[i][j] != 0)
-                        return false;
-                }
-            }
-    } else
+    if (!isSquareMatrix(m))
         return false;
+
+    for (register size_t i = 0; i < m.nRows; ++i)
+        for (register size_t j = i; j < m.nCols; ++j) {
+            if (i == j) {
+                if (m.values[i][j] != 1)
+                    return false;
+            } else if (i != j) {
+                if (m.values[i][j] != 0)
+                    return false;
+            }
+        }
 
     return true;
 }
@@ -245,6 +246,7 @@ bool isEMatrix(const matrix m) {
 bool isSymmetricMatrix(const matrix m) {
     if (isSquareMatrix(m) && m.nRows == 1)
         return true;
+
     if (isSquareMatrix(m)) {
         for (register size_t i = 0; i < m.nRows; ++i)
             for (register size_t j = 0; j < m.nCols; ++j)

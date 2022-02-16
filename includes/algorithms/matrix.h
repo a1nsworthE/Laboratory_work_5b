@@ -53,7 +53,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(const int *,
 
 void insertionSortRowsMatrixByRowCriteriaD(matrix m, double (*criteria)(const int *, size_t));
 
-void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t));
+void selectionSortColsMatrixByColCriteria(matrix m, int (*criteria)(const int *, size_t));
 
 bool isSquareMatrix(matrix m);
 

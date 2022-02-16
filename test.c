@@ -303,7 +303,7 @@ void test_insertionSortRowsMatrixByRowCriteria_maxRowsInBottom() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria_withoutMistakes() {
+void test_selectionSortColsMatrixByColCriteria_withoutMistakes() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     1, 2, 3,
@@ -313,7 +313,7 @@ void test_insertionSortColsMatrixByColCriteria_withoutMistakes() {
             3, 3
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
+    selectionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3)
@@ -326,7 +326,7 @@ void test_insertionSortColsMatrixByColCriteria_withoutMistakes() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria_maxColsAtBorder() {
+void test_selectionSortColsMatrixByColCriteria_maxColsAtBorder() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     2, 1, 3,
@@ -336,7 +336,7 @@ void test_insertionSortColsMatrixByColCriteria_maxColsAtBorder() {
             3, 3
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
+    selectionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3)
@@ -349,7 +349,7 @@ void test_insertionSortColsMatrixByColCriteria_maxColsAtBorder() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria_NonIncreasing() {
+void test_selectionSortColsMatrixByColCriteria_NonIncreasing() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     3, 2, 1,
@@ -359,7 +359,7 @@ void test_insertionSortColsMatrixByColCriteria_NonIncreasing() {
             3, 3
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
+    selectionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3}, 3, m.values[0], 3)
@@ -372,7 +372,7 @@ void test_insertionSortColsMatrixByColCriteria_NonIncreasing() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria_minColAtBorder() {
+void test_selectionSortColsMatrixByColCriteria_minColAtBorder() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     3, 2, 4, 5, 1,
@@ -383,7 +383,7 @@ void test_insertionSortColsMatrixByColCriteria_minColAtBorder() {
             4, 5
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
+    selectionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(
             isEqualArray((int[]) {1, 2, 3, 4, 5}, 5, m.values[0], 5)
@@ -398,7 +398,7 @@ void test_insertionSortColsMatrixByColCriteria_minColAtBorder() {
     freeMemMatrix(m);
 }
 
-void test_insertionSortColsMatrixByColCriteria_oneRow() {
+void test_selectionSortColsMatrixByColCriteria_oneRow() {
     matrix m = createMatrixFromArray(
             (int[]) {
                     4, 2, 3, 5, 1, 6,
@@ -407,7 +407,7 @@ void test_insertionSortColsMatrixByColCriteria_oneRow() {
             1, 6
     );
 
-    insertionSortColsMatrixByColCriteria(m, getSumArrayLL);
+    selectionSortColsMatrixByColCriteria(m, getSumArrayLL);
 
     assert(isEqualArray((int[]) {1, 2, 3, 4, 5, 6}, 6, m.values[0], 6));
 
@@ -887,12 +887,12 @@ void test_isSquareMatrix() {
     test_isSquareMatrix_noSquare();
 }
 
-void test_insertionSortColsMatrixByColCriteria() {
-    test_insertionSortColsMatrixByColCriteria_withoutMistakes();
-    test_insertionSortColsMatrixByColCriteria_maxColsAtBorder();
-    test_insertionSortColsMatrixByColCriteria_NonIncreasing();
-    test_insertionSortColsMatrixByColCriteria_minColAtBorder();
-    test_insertionSortColsMatrixByColCriteria_oneRow();
+void test_selectionSortColsMatrixByColCriteria() {
+    test_selectionSortColsMatrixByColCriteria_withoutMistakes();
+    test_selectionSortColsMatrixByColCriteria_maxColsAtBorder();
+    test_selectionSortColsMatrixByColCriteria_NonIncreasing();
+    test_selectionSortColsMatrixByColCriteria_minColAtBorder();
+    test_selectionSortColsMatrixByColCriteria_oneRow();
 }
 
 void test_insertionSortRowsMatrixByRowCriteria() {
@@ -919,7 +919,7 @@ void test_swapRows() {
 void test_matrixFunctions() {
     test_swapRows();
     test_swapColumns();
-    test_insertionSortColsMatrixByColCriteria();
+    test_selectionSortColsMatrixByColCriteria();
     test_insertionSortRowsMatrixByRowCriteria();
     test_isSquareMatrix();
     test_twoMatricesEqual();

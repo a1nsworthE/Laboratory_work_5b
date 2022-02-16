@@ -5,7 +5,7 @@ void sortRowsByMaxElement(matrix m) {
 }
 
 void sortColsByMinElement(matrix m) {
-    insertionSortColsMatrixByColCriteria(m, getMinElemArray);
+    selectionSortColsMatrixByColCriteria(m, getMinElemArray);
 }
 
 void getSquareOfMatrixIfSymmetric(matrix *m) {
