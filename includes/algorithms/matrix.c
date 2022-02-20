@@ -262,8 +262,9 @@ bool isSymmetricMatrix(const matrix m) {
 void transposeSquareMatrix(matrix m) {
     assert(isSquareMatrix(m));
 
-    for (size_t j = 1; j < m.nCols; ++j)
-        swap(&m.values[0][j], &m.values[j][0]);
+    for (register size_t i = 0; i < m.nCols; ++i)
+        for (register size_t j = i + 1; j < m.nRows; ++j)
+            swap(&m.values[i][j], &m.values[j][i]);
 }
 
 /// Получает индекс минимального элемента

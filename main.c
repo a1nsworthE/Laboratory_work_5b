@@ -303,14 +303,6 @@ int main() {
 */
 
 int main() {
-    size_t n, m;
-    scanf("%zd %zd", &n, &m);
-    matrixD matrix1 = getMemMatrixD(n, m);
-    inputMatrixD(matrix1);
-
-    printf("%lf", getSpecialScalarProduct(matrix1));
-
-    freeMemMatrixD(matrix1);
 
     return 0;
 }

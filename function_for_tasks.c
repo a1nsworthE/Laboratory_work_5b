@@ -41,38 +41,22 @@ int findSumOfMaxesOfPseudoDiagonal(const matrix m) {
     assert(m.nRows != 0 || m.nCols != 0);
 
     // Массив максимумов из псевдогоналей матрицы
-    int *arrayMaxElemsPseudoDiagonal = (int *) malloc((m.nRows + m.nCols - 2) * sizeof(int));
+    const int sizeArray = m.nRows + m.nCols - 1;
+    int *arrayMaxElemsPseudoDiagonal = (int *) malloc(sizeArray * sizeof(int));
     printExitCodeIfPtrIsNull(arrayMaxElemsPseudoDiagonal);
-    size_t sizeArrayMaxElemsPseudoDiagonal = 0;
+    for (register size_t i = 0; i < sizeArray; ++i)
+        arrayMaxElemsPseudoDiagonal[i] = INT_MIN;
 
-    // Поиск максимальных значений на псевдогоналях слева и справа от главной диагонали
-    position leftI = {1, 0};
-    position rightI = {0, 1};
-    while (leftI.rowIndex < m.nRows && leftI.colIndex < 1 ||
-           rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
-
-        // Поиск слева
-        if (leftI.rowIndex < m.nRows && leftI.colIndex < 1) {
-            int maxElemLeft = m.values[leftI.rowIndex][leftI.colIndex];
-            for (register size_t i = leftI.rowIndex + 1, j = leftI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
-                if (m.values[i][j] > maxElemLeft)
-                    maxElemLeft = m.values[i][j];
-            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemLeft);
-            leftI.rowIndex++;
-        }
-
-        // Поиск справа
-        if (rightI.colIndex < m.nCols && rightI.rowIndex < 1) {
-            int maxElemRight = m.values[rightI.rowIndex][rightI.colIndex];
-            for (register size_t i = rightI.rowIndex + 1, j = rightI.colIndex + 1; i < m.nRows && j < m.nCols; ++i, ++j)
-                if (m.values[i][j] > maxElemRight)
-                    maxElemRight = m.values[i][j];
-            append(arrayMaxElemsPseudoDiagonal, &sizeArrayMaxElemsPseudoDiagonal, maxElemRight);
-            rightI.colIndex++;
+    for (register size_t i = 0; i < m.nRows; ++i) {
+        for (register size_t j = 0; j < m.nCols; ++j) {
+            int indexArray = j + m.nRows - 1 - i;
+            if (m.values[i][j] > arrayMaxElemsPseudoDiagonal[indexArray])
+                arrayMaxElemsPseudoDiagonal[indexArray] = m.values[i][j];
         }
     }
+    arrayMaxElemsPseudoDiagonal[m.nRows - 1] = 0;
 
-    int sum = getSumArrayLL(arrayMaxElemsPseudoDiagonal, sizeArrayMaxElemsPseudoDiagonal);
+    int sum = getSumArrayLL(arrayMaxElemsPseudoDiagonal, sizeArray);
 
     free(arrayMaxElemsPseudoDiagonal);
 

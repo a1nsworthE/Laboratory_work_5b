@@ -704,9 +704,9 @@ void test_transposeSquareMatrix_matrix3x3() {
     assert(
             isEqualArray((int[]) {1, 4, 6}, 3, m.values[0], 3)
             &&
-            isEqualArray((int[]) {2, 1, 1}, 3, m.values[1], 3)
+            isEqualArray((int[]) {2, 1, 2}, 3, m.values[1], 3)
             &&
-            isEqualArray((int[]) {3, 2, 1}, 3, m.values[2], 3)
+            isEqualArray((int[]) {3, 1, 1}, 3, m.values[2], 3)
 
     );
 
@@ -1293,8 +1293,8 @@ void test_transposeIfMatrixHasntEqualSumOfRows_haventEqualSums1() {
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
                     1, 4, 7,
-                    2, 5, 6,
-                    3, 8, 9
+                    2, 5, 8,
+                    3, 6, 9
             },
             3, 3
     );
@@ -1319,8 +1319,8 @@ void test_transposeIfMatrixHasntEqualSumOfRows_haventEqualSums2() {
     matrix matrix2 = createMatrixFromArray(
             (int[]) {
                     1, 0, 7,
-                    2, 5, 6,
-                    0, 8, 9
+                    2, 5, 8,
+                    0, 6, 9
             },
             3, 3
     );

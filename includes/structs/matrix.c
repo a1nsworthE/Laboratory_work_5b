@@ -17,3 +17,4 @@ typedef struct position {
     size_t rowIndex;
     size_t colIndex;
 } position;
+
